@@ -1,0 +1,10 @@
+# Goal: 수행할 작업의 이름과 파라미터
+string task_name      # e.g., "patrol", "go_home", "move_point", "start_mapping"
+string task_params    # e.g., JSON 형식의 문자열로 파라미터 전달 "{'x': 1.0, 'y': 2.5}"
+---
+# Result: 작업 성공 여부
+bool success
+string message
+---
+# Feedback: 현재 진행 상황
+string current_status

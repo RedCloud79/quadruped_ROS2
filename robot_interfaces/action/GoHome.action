@@ -1,0 +1,7 @@
+# Goal (비워두거나, 여러 홈 위치를 지정할 경우 id 추가)
+---
+# Result
+bool success
+---
+# Feedback
+string status
