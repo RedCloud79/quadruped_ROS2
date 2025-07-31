@@ -1,54 +1,109 @@
 import os
-from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument, LogInfo
 from launch_ros.actions import Node
-import launch
-
-################### user configure parameters for ros2 start ###################
-xfer_format   = 1    # 0-Pointcloud2(PointXYZRTL), 1-customized pointcloud format
-multi_topic   = 0    # 0-All LiDARs share the same topic, 1-One LiDAR one topic
-data_src      = 0    # 0-lidar, others-Invalid data src
-publish_freq  = 10.0 # freqency of publish, 5.0, 10.0, 20.0, 50.0, etc.
-output_type   = 0
-frame_id      = 'livox_frame'
-lvx_file_path = '/home/livox/livox_test.lvx'
-cmdline_bd_code = 'livox0000000001'
-
-cur_path = os.path.split(os.path.realpath(__file__))[0] + '/'
-cur_config_path = cur_path + '../config'
-user_config_path = os.path.join(cur_config_path, 'MID360_config.json')
-################### user configure parameters for ros2 end #####################
-
-livox_ros2_params = [
-    {"xfer_format": xfer_format},
-    {"multi_topic": multi_topic},
-    {"data_src": data_src},
-    {"publish_freq": publish_freq},
-    {"output_data_type": output_type},
-    {"frame_id": frame_id},
-    {"lvx_file_path": lvx_file_path},
-    {"user_config_path": user_config_path},
-    {"cmdline_input_bd_code": cmdline_bd_code}
-]
-
+from launch.substitutions import LaunchConfiguration
+from launch.conditions import IfCondition
 
 def generate_launch_description():
-    livox_driver = Node(
-        package='livox_ros_driver2',
-        executable='livox_ros_driver2_node',
-        name='livox_lidar_publisher',
-        output='screen',
-        parameters=livox_ros2_params
-        )
-
+    # Declare launch arguments (equivalent to <arg> in ROS1)
     return LaunchDescription([
-        livox_driver,
-        # launch.actions.RegisterEventHandler(
-        #     event_handler=launch.event_handlers.OnProcessExit(
-        #         target_action=livox_rviz,
-        #         on_exit=[
-        #             launch.actions.EmitEvent(event=launch.events.Shutdown()),
-        #         ]
-        #     )
-        # )
+        DeclareLaunchArgument('lvx_file_path', default_value='livox_test.lvx', description='Path to LVX file'),
+        DeclareLaunchArgument('bd_list', default_value='100000000000000', description='Board ID list'),
+        DeclareLaunchArgument('xfer_format', default_value='0', description='Transfer format'),
+        DeclareLaunchArgument('multi_topic', default_value='0', description='Multi-topic mode'),
+        DeclareLaunchArgument('data_src', default_value='0', description='Data source'),
+        DeclareLaunchArgument('publish_freq', default_value='10.0', description='Publish frequency'),
+        DeclareLaunchArgument('output_type', default_value='0', description='Output type'),
+        DeclareLaunchArgument('rviz_enable', default_value='false', description='Enable RViz'),
+        DeclareLaunchArgument('rosbag_enable', default_value='false', description='Enable rosbag recording'),
+        DeclareLaunchArgument('cmdline_arg', default_value=LaunchConfiguration('bd_list'), description='Board ID'),
+        DeclareLaunchArgument('msg_frame_id', default_value='livox_frame', description='Frame ID for messages'),
+        DeclareLaunchArgument('lidar_bag', default_value='true', description='Enable lidar bag recording'),
+        DeclareLaunchArgument('imu_bag', default_value='true', description='Enable imu bag recording'),
+
+        # Parameters for livox driver node
+        Node(
+            package='livox_ros_driver2',
+            executable='livox_ros_driver2_node',
+            name='livox_lidar_publisher2',
+            output='screen',
+            parameters=[{
+                'xfer_format': LaunchConfiguration('xfer_format'),
+                'multi_topic': LaunchConfiguration('multi_topic'),
+                'data_src': LaunchConfiguration('data_src'),
+                'publish_freq': LaunchConfiguration('publish_freq'),
+                'output_data_type': LaunchConfiguration('output_type'),
+                'cmdline_str': LaunchConfiguration('bd_list'),
+                'cmdline_file_path': LaunchConfiguration('lvx_file_path'),
+                'user_config_path': os.path.join(get_package_share_directory('livox_ros_driver2'), 'config', 'MID360_config.json'),
+                'frame_id': LaunchConfiguration('msg_frame_id'),
+                'enable_lidar_bag': LaunchConfiguration('lidar_bag'),
+                'enable_imu_bag': LaunchConfiguration('imu_bag')
+            }],
+            remappings=[
+                ('/livox/lidar', '/rslidar_points')
+            ]
+        ),
+
+        # Static transform publisher for original livox transform
+        Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            name='base2livox',
+            output='screen',
+            arguments=['0', '0', '0', '0', '0.35', '0', '/base_link', '/livox_frame']
+        ),
+
+        # Static transform publisher for new flat lidar frame
+        Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            name='base2flat_lidar',
+            output='screen',
+            arguments=['0', '0', '0', '0', '0', '0', '1', '/base_link', '/flat_lidar_frame']
+        ),
+
+        # Relay lidar raw data to lidar_point_cloud
+        Node(
+            package='topic_tools',
+            executable='relay',
+            name='relay_lidar_to_pointcloud',
+            output='screen',
+            arguments=['/rslidar_points', '/lidar_point_cloud']
+        ),
+
+        # Pointcloud to LaserScan node
+        Node(
+            package='pointcloud_to_laserscan',
+            executable='pointcloud_to_laserscan_node',
+            name='pc2_to_scan',
+            parameters=[
+                {'target_frame': 'flat_lidar_frame'},
+                {'transform_tolerance': 0.1},
+                {'min_height': -0.1},
+                {'max_height': 0.9},
+                {'angle_min': -3.14},
+                {'angle_max': 3.14},
+                {'angle_increment': 0.0087},
+                {'scan_time': 0.1},
+                {'range_min': 0.1},
+                {'range_max': 30.0},
+                {'use_inf': True}
+            ],
+            remappings=[
+                ('cloud_in', '/lidar_point_cloud'),
+                ('scan', '/scan')
+            ]
+        ),
+
+        # Optional rosbag recording
+        Node(
+            package='rosbag2',
+            executable='record',
+            name='record',
+            output='screen',
+            condition=IfCondition(LaunchConfiguration('rosbag_enable')),
+            arguments=['-a']
+        )
     ])
