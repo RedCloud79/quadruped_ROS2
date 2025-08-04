@@ -1,4 +1,5 @@
 import os
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, LogInfo
 from launch_ros.actions import Node
@@ -41,9 +42,7 @@ def generate_launch_description():
                 'enable_lidar_bag': LaunchConfiguration('lidar_bag'),
                 'enable_imu_bag': LaunchConfiguration('imu_bag')
             }],
-            remappings=[
-                ('/livox/lidar', '/rslidar_points')
-            ]
+            remappings=[('/livox/lidar', '/rslidar_points')]
         ),
 
         # Static transform publisher for original livox transform
@@ -56,13 +55,13 @@ def generate_launch_description():
         ),
 
         # Static transform publisher for new flat lidar frame
-        Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            name='base2flat_lidar',
-            output='screen',
-            arguments=['0', '0', '0', '0', '0', '0', '1', '/base_link', '/flat_lidar_frame']
-        ),
+        # Node(
+        #     package='tf2_ros',
+        #     executable='static_transform_publisher',
+        #     name='base2flat_lidar',
+        #     output='screen',
+        #     arguments=['0', '0', '0', '0', '0', '0', '1', '/base_link', '/flat_lidar_frame']
+        # ),
 
         # Relay lidar raw data to lidar_point_cloud
         Node(
@@ -91,10 +90,7 @@ def generate_launch_description():
                 {'range_max': 30.0},
                 {'use_inf': True}
             ],
-            remappings=[
-                ('cloud_in', '/lidar_point_cloud'),
-                ('scan', '/scan')
-            ]
+            remappings=[('cloud_in', '/lidar_point_cloud'), ('scan', '/scan')]
         ),
 
         # Optional rosbag recording

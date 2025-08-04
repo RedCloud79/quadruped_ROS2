@@ -8,8 +8,8 @@
     gpsTopic: "odometry/gpsz"                    # GPS odometry topic from navsat, see module_navsat.launch file
 
     # Frames
-    lidarFrame: "lidar_link"
-    baselinkFrame: "base_link"
+    lidarFrame: "TORSO" # base_link, lidar_link 일치화 및 urdf 변경 및 추가 작업 필요
+    baselinkFrame: "TORSO"
     odometryFrame: "odom"
     mapFrame: "map"
 
