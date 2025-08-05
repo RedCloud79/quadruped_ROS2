@@ -1,7 +1,0 @@
-# Goal (경로를 미리 노드에 저장해두고, Goal은 비워둘 수 있음)
----
-# Result
-bool finished
----
-# Feedback
-uint32 current_waypoint_index
