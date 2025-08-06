@@ -1,0 +1,8 @@
+# Goal
+bool undock  # true이면 언도킹, false이면 도킹
+---
+# Result
+bool success
+---
+# Feedback
+string status # e.g., "Aligning", "Charging"
