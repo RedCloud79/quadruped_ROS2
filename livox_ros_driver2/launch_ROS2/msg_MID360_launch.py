@@ -46,13 +46,13 @@ def generate_launch_description():
         ),
 
         # Static transform publisher for original livox transform
-        Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            name='base2livox',
-            output='screen',
-            arguments=['0', '0', '0', '0', '0.35', '0', '/base_link', '/livox_frame']
-        ),
+        # Node(
+        #     package='tf2_ros',
+        #     executable='static_transform_publisher',
+        #     name='base2livox',
+        #     output='screen',
+        #     arguments=['0.16', '0', '0.13', '0', '0.35', '0', '/base_link', '/livox_frame']
+        # ),
 
         # Static transform publisher for new flat lidar frame
         #Node(
@@ -64,13 +64,13 @@ def generate_launch_description():
         #),
 
         # Relay lidar raw data to lidar_point_cloud
-        Node(
-            package='topic_tools',
-            executable='relay',
-            name='relay_lidar_to_pointcloud',
-            output='screen',
-            arguments=['/rslidar_points', '/lidar_point_cloud']
-        ),
+        # Node(
+        #     package='topic_tools',
+        #     executable='relay',
+        #     name='relay_lidar_to_pointcloud',
+        #     output='screen',
+        #     arguments=['/rslidar_points', '/lidar_point_cloud']
+        # ),
 
         # Pointcloud to LaserScan node
         Node(

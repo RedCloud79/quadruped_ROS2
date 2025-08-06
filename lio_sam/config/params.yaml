@@ -2,8 +2,9 @@
   ros__parameters:
 
     # Topics
-    pointCloudTopic: "/rslidar_points"                   # Point cloud data
-    imuTopic: "/imu/data"                        # IMU data
+    pointCloudTopic: "/livox/lidar"                   # Point cloud data
+    imuTopic: "/livox/imu"                        # IMU data
+    # imuTopic: "/imu/data" 
     odomTopic: "odometry/imu"                    # IMU pre-preintegration odometry, same frequency as IMU
     gpsTopic: "odometry/gpsz"                    # GPS odometry topic from navsat, see module_navsat.launch file
 
@@ -14,7 +15,7 @@
     mapFrame: "map"
 
     # GPS Settings
-    useImuHeadingInitialization: false           # if using GPS data, set to "true"
+    useImuHeadingInitialization: true           # if using GPS data, set to "true"
     useGpsElevation: false                       # if GPS elevation is bad, set to "false"
     gpsCovThreshold: 2.0                         # m^2, threshold for using GPS data
     poseCovThreshold: 25.0                       # m^2, threshold for using GPS data
@@ -32,22 +33,36 @@
     lidarMinRange: 1.0                           # default: 1.0, minimum lidar range to be used
     lidarMaxRange: 1000.0                        # default: 1000.0, maximum lidar range to be used
 
-    # IMU Settings
-    imuAccNoise: 3.9939570888238808e-03
-    imuGyrNoise: 1.5636343949698187e-03
-    imuAccBiasN: 6.4356659353532566e-05
-    imuGyrBiasN: 3.5640318696367613e-05
+    # # IMU Settings
+    # imuAccNoise: 3.9939570888238808e-03
+    # imuGyrNoise: 1.5636343949698187e-03
+    # imuAccBiasN: 6.4356659353532566e-05
+    # imuGyrBiasN: 3.5640318696367613e-05
+
+    # IMU Settings (Livox MID-360 tuned)
+    imuAccNoise: 0.05
+    imuGyrNoise: 0.005
+    imuAccBiasN: 0.0001
+    imuGyrBiasN: 0.0001
 
     imuGravity: 9.80511
     imuRPYWeight: 0.01
 
-    extrinsicTrans:  [ 0.0,  0.0,  0.0 ]  #robot lidar seting pose
-    extrinsicRot:    [-1.0,  0.0,  0.0,
-                       0.0,  1.0,  0.0,
-                       0.0,  0.0, -1.0 ]  #lidar and imu x,y,z
-    extrinsicRPY: [ 0.0,  1.0,  0.0,
-                   -1.0,  0.0,  0.0,
-                    0.0,  0.0,  1.0 ]
+    # extrinsicTrans:  [ 0.16,  0.0,  0.13 ]  #robot lidar seting pose
+    # extrinsicRot:    [ 1.0,  0.0,  0.0,
+    #                0.0,  0.9393727,  -0.3428978,
+    #                 0.0,  0.3428978,  0.9393727 ]  #lidar and imu x,y,z
+    # extrinsicRPY: [ 1.0,  0.0,  0.0,
+    #                0.0,  0.9393727,  -0.3428978,
+    #                 0.0,  0.3428978,  0.9393727 ]
+
+    extrinsicTrans: [0.0, 0.0, 0.0]
+    extrinsicRot:   [1.0, 0.0, 0.0,
+                     0.0, 1.0, 0.0,
+                     0.0, 0.0, 1.0]
+    extrinsicRPY:   [1.0, 0.0, 0.0,
+                     0.0, 1.0, 0.0,
+                     0.0, 0.0, 1.0]
 
     # LOAM feature threshold
     edgeThreshold: 1.0

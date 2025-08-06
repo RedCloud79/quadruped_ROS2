@@ -293,7 +293,13 @@ public:
             {
                 if (sensor == SensorType::VELODYNE) {
                     ringFlag = 2;
-                } else {
+                } 
+                else if (sensor == SensorType::LIVOX) {
+                    // Livox는 ring 필드 없음 → rowIdn = 0으로 처리
+                    ringFlag = 3; 
+                    RCLCPP_WARN(get_logger(), "No ring channel in Livox data, using rowIdn = 0");
+                }
+                else {
                     RCLCPP_ERROR(get_logger(), "Point cloud ring channel not available, please configure your point cloud data!");
                     rclcpp::shutdown();
                 }
@@ -306,7 +312,7 @@ public:
             deskewFlag = -1;
             for (auto &field : currentCloudMsg.fields)
             {
-                if (field.name == "time" || field.name == "t")
+                if (field.name == "time" || field.name == "t" || field.name == "timestamp")
                 {
                     deskewFlag = 1;
                     break;
@@ -566,12 +572,20 @@ public:
             thisPoint.y = laserCloudIn->points[i].y;
             thisPoint.z = laserCloudIn->points[i].z;
             thisPoint.intensity = laserCloudIn->points[i].intensity;
-
+            
             float range = pointDistance(thisPoint);
             if (range < lidarMinRange || range > lidarMaxRange)
                 continue;
 
-            int rowIdn = laserCloudIn->points[i].ring;
+            // int rowIdn = laserCloudIn->points[i].ring;
+
+            int rowIdn;
+            if (ringFlag == 3) { // Livox
+                rowIdn = 0; // ring 없이 하나의 라인으로 처리
+            } else {
+                rowIdn = laserCloudIn->points[i].ring;
+            }
+
             // if sensor is a velodyne (ringFlag = 2) calculate rowIdn based on number of scans
             if (ringFlag == 2) { 
                 float verticalAngle =

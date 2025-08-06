@@ -39,6 +39,7 @@ struct PointXYZIRT {
     PCL_ADD_POINT4D;                // quad-word XYZ
     float intensity;                // laser intensity
     uint16_t ring;                  // laser ring index
+    uint16_t padding;
     float time;                      // time in seconds
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 } EIGEN_ALIGN16;

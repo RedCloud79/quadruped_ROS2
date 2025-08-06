@@ -263,78 +263,42 @@ void Lddc::InitPointcloud2MsgHeader(PointCloud2& cloud) {
   cloud.header.frame_id.assign(frame_id_);
   cloud.height = 1;
   cloud.width = 0;
-  // cloud.fields.resize(7);
-  // cloud.fields[0].offset = 0;
-  // cloud.fields[0].name = "x";
-  // cloud.fields[0].count = 1;
-  // cloud.fields[0].datatype = PointField::FLOAT32;
-  // cloud.fields[1].offset = 4;
-  // cloud.fields[1].name = "y";
-  // cloud.fields[1].count = 1;
-  // cloud.fields[1].datatype = PointField::FLOAT32;
-  // cloud.fields[2].offset = 8;
-  // cloud.fields[2].name = "z";
-  // cloud.fields[2].count = 1;
-  // cloud.fields[2].datatype = PointField::FLOAT32;
-  // cloud.fields[3].offset = 12;
-  // cloud.fields[3].name = "intensity";
-  // cloud.fields[3].count = 1;
-  // cloud.fields[3].datatype = PointField::FLOAT32;
-  // cloud.fields[4].offset = 16;
-  // cloud.fields[4].name = "tag";
-  // cloud.fields[4].count = 1;
-  // cloud.fields[4].datatype = PointField::UINT8;
-  // cloud.fields[5].offset = 17;
-  // cloud.fields[5].name = "line";
-  // cloud.fields[5].count = 1;
-  // cloud.fields[5].datatype = PointField::UINT8;
-  // cloud.fields[6].offset = 18;
-  // cloud.fields[6].name = "timestamp";
-  // cloud.fields[6].count = 1;
-  // cloud.fields[6].datatype = PointField::FLOAT64;
-  // cloud.point_step = sizeof(LivoxPointXyzrtlt);
-
-  cloud.fields.resize(6);
-
-  cloud.fields[0].name = "x";
+  cloud.fields.resize(7);
   cloud.fields[0].offset = 0;
-  cloud.fields[0].datatype = PointField::FLOAT32;
+  cloud.fields[0].name = "x";
   cloud.fields[0].count = 1;
-
-  cloud.fields[1].name = "y";
+  cloud.fields[0].datatype = PointField::FLOAT32;
   cloud.fields[1].offset = 4;
-  cloud.fields[1].datatype = PointField::FLOAT32;
+  cloud.fields[1].name = "y";
   cloud.fields[1].count = 1;
-
-  cloud.fields[2].name = "z";
+  cloud.fields[1].datatype = PointField::FLOAT32;
   cloud.fields[2].offset = 8;
-  cloud.fields[2].datatype = PointField::FLOAT32;
+  cloud.fields[2].name = "z";
   cloud.fields[2].count = 1;
-
-  cloud.fields[3].name = "intensity";
+  cloud.fields[2].datatype = PointField::FLOAT32;
   cloud.fields[3].offset = 12;
-  cloud.fields[3].datatype = PointField::FLOAT32;
+  cloud.fields[3].name = "intensity";
   cloud.fields[3].count = 1;
-
-  cloud.fields[4].name = "ring";
+  cloud.fields[3].datatype = PointField::FLOAT32;
   cloud.fields[4].offset = 16;
-  cloud.fields[4].datatype = PointField::UINT16;
+  cloud.fields[4].name = "tag";
   cloud.fields[4].count = 1;
-
-  cloud.fields[5].name = "time";
-  cloud.fields[5].offset = 20;
-  cloud.fields[5].datatype = PointField::FLOAT32;
+  cloud.fields[4].datatype = PointField::UINT8;
+  cloud.fields[5].offset = 17;
+  cloud.fields[5].name = "line";
   cloud.fields[5].count = 1;
-
-  cloud.is_bigendian = false;
-  cloud.point_step = sizeof(PointXYZIRT);
+  cloud.fields[5].datatype = PointField::UINT8;
+  cloud.fields[6].offset = 18;
+  cloud.fields[6].name = "timestamp";
+  cloud.fields[6].count = 1;
+  cloud.fields[6].datatype = PointField::FLOAT64;
+  cloud.point_step = sizeof(LivoxPointXyzrtlt);
 }
 
 void Lddc::InitPointcloud2Msg(const StoragePacket& pkg, PointCloud2& cloud, uint64_t& timestamp) {
   InitPointcloud2MsgHeader(cloud);
 
-  // cloud.point_step = sizeof(LivoxPointXyzrtlt);
-  // cloud.point_step - sizeof(PointXYZIRT);
+  cloud.point_step = sizeof(LivoxPointXyzrtlt);
 
   cloud.width = pkg.points_num;
   cloud.row_step = cloud.width * cloud.point_step;
@@ -352,43 +316,20 @@ void Lddc::InitPointcloud2Msg(const StoragePacket& pkg, PointCloud2& cloud, uint
       cloud.header.stamp = rclcpp::Time(timestamp);
   #endif
 
-  double first_point_time = static_cast<double>(pkg.points[0].offset_time);
-  // std::vector<LivoxPointXyzrtlt> points;
-  std::vector<PointXYZIRT> points;
-  points.reserve(pkg.points_num);
+  std::vector<LivoxPointXyzrtlt> points;
   for (size_t i = 0; i < pkg.points_num; ++i) {
-    // LivoxPointXyzrtlt point;
-    PointXYZIRT point;
+    LivoxPointXyzrtlt point;
     point.x = pkg.points[i].x;
     point.y = pkg.points[i].y;
     point.z = pkg.points[i].z;
-    // point.reflectivity = pkg.points[i].intensity;
-    point.intensity = pkg.points[i].intensity;
-    // point.tag = pkg.points[i].tag;
-    // point.line = pkg.points[i].line;
-    point.ring = static_cast<uint16_t>(pkg.points[i].line);
-    
-    // point.timestamp = static_cast<double>(pkg.points[i].offset_time);
-    // point.time = pkg.points[i].offset_time * 1e-6f;
-    
-    // if (i < 5) {
-    //     printf("point[%zu] offset_time raw: %u\n", i, pkg.points[i].offset_time);
-    // }
-
-    point.time = static_cast<float>(
-        (static_cast<double>(pkg.points[i].offset_time) - first_point_time) * 1e-6
-    );
-    if (point.time < 0.0f) {
-        point.time += 0.1f;
-    }
-    // point.time = static_cast<float>(pkg.points[i].offset_time * 1e-6f);
-    // points.push_back(std::move(point));
-    points.push_back(point);
+    point.reflectivity = pkg.points[i].intensity;
+    point.tag = pkg.points[i].tag;
+    point.line = pkg.points[i].line;
+    point.timestamp = static_cast<double>(pkg.points[i].offset_time);
+    points.push_back(std::move(point));
   }
-  // cloud.data.resize(pkg.points_num * sizeof(LivoxPointXyzrtlt));
-  // memcpy(cloud.data.data(), points.data(), pkg.points_num * sizeof(LivoxPointXyzrtlt));
-  cloud.data.resize(points.size() * sizeof(PointXYZIRT));
-  memcpy(cloud.data.data(), points.data(), cloud.data.size());
+  cloud.data.resize(pkg.points_num * sizeof(LivoxPointXyzrtlt));
+  memcpy(cloud.data.data(), points.data(), pkg.points_num * sizeof(LivoxPointXyzrtlt));
 }
 
 void Lddc::PublishPointcloud2Data(const uint8_t index, const uint64_t timestamp, const PointCloud2& cloud) {

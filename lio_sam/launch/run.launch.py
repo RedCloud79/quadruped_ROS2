@@ -10,7 +10,7 @@ def generate_launch_description():
 
     share_dir = get_package_share_directory('lio_sam')
     parameter_file = LaunchConfiguration('params_file')
-    xacro_path = os.path.join(share_dir, 'config', 'robot.urdf.xacro')
+    urdf_file  = os.path.join(share_dir, 'config', 'Lite3.urdf')
     rviz_config_file = os.path.join(share_dir, 'config', 'rviz2.rviz')
 
     params_declare = DeclareLaunchArgument(
@@ -19,7 +19,8 @@ def generate_launch_description():
             share_dir, 'config', 'params.yaml'),
         description='FPath to the ROS2 parameters file to use.')
 
-    print("urdf_file_name : {}".format(xacro_path))
+    with open(urdf_file, 'r') as infp:
+        robot_desc = infp.read()
 
     return LaunchDescription([
         params_declare,
@@ -30,36 +31,12 @@ def generate_launch_description():
             parameters=[parameter_file],
             output='screen'
             ),
-        # map -> TORSO
-        Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            name='map_to_torso',
-            arguments=['0', '0', '0', '0', '0', '0', 'map', 'TORSO'],
-            output='screen'
-        ),
-
-        # TORSO -> livox_frame
-        Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            name='torso_to_livox',
-            arguments=['0', '0', '0', '0', '0', '0', 'TORSO', 'livox_frame'],
-            output='screen'
-        ),
-        Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            arguments=['0', '0', '0', '0', '0', '0', 'TORSO', 'base_link']
-        ),
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
             name='robot_state_publisher',
             output='screen',
-            parameters=[{
-                'robot_description': Command(['xacro', ' ', xacro_path])
-            }]
+            parameters=[{'robot_description': robot_desc}]
         ),
         Node(
             package='lio_sam',
