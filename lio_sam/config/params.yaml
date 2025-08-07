@@ -4,7 +4,6 @@
     # Topics
     pointCloudTopic: "/livox/lidar"                   # Point cloud data
     imuTopic: "/livox/imu"                        # IMU data
-    # imuTopic: "/imu/data" 
     odomTopic: "odometry/imu"                    # IMU pre-preintegration odometry, same frequency as IMU
     gpsTopic: "odometry/gpsz"                    # GPS odometry topic from navsat, see module_navsat.launch file
 
@@ -33,7 +32,7 @@
     lidarMinRange: 1.0                           # default: 1.0, minimum lidar range to be used
     lidarMaxRange: 1000.0                        # default: 1000.0, maximum lidar range to be used
 
-    # # IMU Settings
+    # IMU Settings
     # imuAccNoise: 3.9939570888238808e-03
     # imuGyrNoise: 1.5636343949698187e-03
     # imuAccBiasN: 6.4356659353532566e-05

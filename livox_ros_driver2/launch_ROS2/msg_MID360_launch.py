@@ -41,19 +41,19 @@ def generate_launch_description():
                 'frame_id': LaunchConfiguration('msg_frame_id'),
                 'enable_lidar_bag': LaunchConfiguration('lidar_bag'),
                 'enable_imu_bag': LaunchConfiguration('imu_bag'),
-                'use_ros_time': True,
-                'ros_time_override': True
+                'use_ros_time' : True,
+                'ros_time_override' : True
             }],
-            # remappings=[('/livox/lidar', '/rslidar_points')]
+            #remappings=[('/livox/lidar', '/rslidar_points')]
         ),
 
         # Static transform publisher for original livox transform
         # Node(
-        #     package='tf2_ros',
-        #     executable='static_transform_publisher',
-        #     name='base2livox',
-        #     output='screen',
-        #     arguments=['0.16', '0', '0.13', '0', '0.35', '0', '/base_link', '/livox_frame']
+            # package='tf2_ros',
+            # executable='static_transform_publisher',
+            # name='base2livox',
+            # output='screen',
+            # arguments=['0.16', '0', '0.13', '0', '0.35', '0', '/base_link', '/livox_frame']
         # ),
 
         # Static transform publisher for new flat lidar frame
