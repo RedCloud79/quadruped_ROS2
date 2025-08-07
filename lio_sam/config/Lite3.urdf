@@ -9,10 +9,12 @@
 
     <!-- Base link for LIO-SAM TF compatibility -->
     <link name="base_link"/>
+
+    <!-- Connect base_link (dummy root) to actual torso -->
     <joint name="base_to_torso" type="fixed">
         <parent link="base_link"/>
         <child link="TORSO"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>  <!-- 필요 시 값 조정 -->
     </joint>
 
     <!-- LiDAR frame -->
