@@ -325,22 +325,46 @@ public:
         return true;
     }
 
+    // bool deskewInfo()
+    // {
+    //     std::lock_guard<std::mutex> lock1(imuLock);
+    //     std::lock_guard<std::mutex> lock2(odoLock);
+
+    //     // make sure IMU data available for the scan
+    //     if (imuQueue.empty() ||
+    //         stamp2Sec(imuQueue.front().header.stamp) > timeScanCur ||
+    //         stamp2Sec(imuQueue.back().header.stamp) < timeScanEnd)
+    //     {
+    //         RCLCPP_INFO(get_logger(), "Waiting for IMU data ...");
+    //         return false;
+    //     }
+
+    //     imuDeskewInfo();
+
+    //     odomDeskewInfo();
+
+    //     return true;
+    // }
+
     bool deskewInfo()
     {
         std::lock_guard<std::mutex> lock1(imuLock);
         std::lock_guard<std::mutex> lock2(odoLock);
 
-        // make sure IMU data available for the scan
-        if (imuQueue.empty() ||
-            stamp2Sec(imuQueue.front().header.stamp) > timeScanCur ||
-            stamp2Sec(imuQueue.back().header.stamp) < timeScanEnd)
-        {
-            RCLCPP_INFO(get_logger(), "Waiting for IMU data ...");
+        if (imuQueue.empty()) {
+            RCLCPP_INFO(get_logger(), "Waiting for IMU data ... (queue empty)");
+            return false;
+        }
+
+        double imuBegin = rclcpp::Time(imuQueue.front().header.stamp).seconds();
+        double imuEnd   = rclcpp::Time(imuQueue.back().header.stamp).seconds();
+
+        if (imuBegin > timeScanCur + 0.05 || imuEnd < timeScanEnd - 0.05) {
+            RCLCPP_INFO(get_logger(), "Waiting for IMU data ... (not enough coverage)");
             return false;
         }
 
         imuDeskewInfo();
-
         odomDeskewInfo();
 
         return true;

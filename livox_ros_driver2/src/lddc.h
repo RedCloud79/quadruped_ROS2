@@ -29,31 +29,6 @@
 
 #include "driver_node.h"
 #include "lds.h"
-#include <pcl/point_types.h>
-#include <pcl/point_cloud.h>
-
-namespace livox_ros {
-
-/** Livox → LIO-SAM 호환 포인트 타입 */
-struct PointXYZIRT {
-    PCL_ADD_POINT4D;                // quad-word XYZ
-    float intensity;                // laser intensity
-    uint16_t ring;                  // laser ring index
-    uint16_t padding;
-    float time;                      // time in seconds
-    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
-} EIGEN_ALIGN16;
-
-} // namespace livox_ros
-
-POINT_CLOUD_REGISTER_POINT_STRUCT(livox_ros::PointXYZIRT,
-    (float, x, x)
-    (float, y, y)
-    (float, z, z)
-    (float, intensity, intensity)
-    (uint16_t, ring, ring)
-    (float, time, time)
-)
 
 namespace livox_ros {
 

@@ -40,9 +40,11 @@ def generate_launch_description():
                 'user_config_path': os.path.join(get_package_share_directory('livox_ros_driver2'), 'config', 'MID360_config.json'),
                 'frame_id': LaunchConfiguration('msg_frame_id'),
                 'enable_lidar_bag': LaunchConfiguration('lidar_bag'),
-                'enable_imu_bag': LaunchConfiguration('imu_bag')
+                'enable_imu_bag': LaunchConfiguration('imu_bag'),
+                'use_ros_time': True,
+                'ros_time_override': True
             }],
-            remappings=[('/livox/lidar', '/rslidar_points')]
+            # remappings=[('/livox/lidar', '/rslidar_points')]
         ),
 
         # Static transform publisher for original livox transform
