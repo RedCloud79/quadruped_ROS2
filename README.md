@@ -257,67 +257,115 @@ ros2_ws/
 <img width="800" height="917" alt="Screenshot from 2025-08-12 09-59-52" src="https://github.com/user-attachments/assets/e87783a0-17b3-4cb3-ad2c-059c88841e09" />
 
 ```
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-[INFO] [1754961141.534522378] [view_frames]: Generating graph in frames.pdf file...
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "default_authority" because frame_id not set
-         at line 226 in ./src/buffer_core.cpp
-[INFO] [1754961141.547447234] [view_frames]: Result:tf2_msgs.srv.FrameGraph_Response(frame_yaml="odom: \n  parent: 'map'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nFL_FOOT: \n  parent: 'FL_SHANK'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nFR_FOOT: \n  parent: 'FR_SHANK'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nHL_FOOT: \n  parent: 'HL_SHANK'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nHR_FOOT: \n  parent: 'HR_SHANK'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nlivox_frame: \n  parent: 'base_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nTORSO: \n  parent: 'base_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nlidar_link: \n  parent: 'odom'\n  broadcaster: 'default_authority'\n  rate: 5.251\n  most_recent_transform: 1754961141.053801\n  oldest_transform: 1754961137.054348\n  buffer_length: 3.999\n")
+rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+
+
+```
+
+```
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_mapOptimization odometryFrame 
+String value is: odom
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_mapOptimization mapFrame
+String value is: map
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 run tf2_tools view_frames 
+[INFO] [1754972808.653615784] [view_frames]: Listening to tf data for 5.0 seconds...
+[INFO] [1754972813.717963557] [view_frames]: Generating graph in frames.pdf file...
+[INFO] [1754972813.723014058] [view_frames]: Result:tf2_msgs.srv.FrameGraph_Response(frame_yaml="chassis_link: \n  parent: 'base_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nimu_link: \n  parent: 'chassis_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nlaser_sensor_frame: \n  parent: 'imu_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nlidar_link: \n  parent: 'odom'\n  broadcaster: 'default_authority'\n  rate: 4.670\n  most_recent_transform: 1754972813.405127\n  oldest_transform: 1754972808.908762\n  buffer_length: 4.496\nnavsat_link: \n  parent: 'chassis_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\n")
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /livox/lidar --once | head -n 40
+header:
+  stamp:
+    sec: 1754972833
+    nanosec: 504569120
+  frame_id: livox_frame
+height: 1
+width: 19968
+fields:
+- name: x
+  offset: 0
+  datatype: 7
+  count: 1
+- name: y
+  offset: 4
+  datatype: 7
+  count: 1
+- name: z
+  offset: 8
+  datatype: 7
+  count: 1
+- name: intensity
+  offset: 12
+  datatype: 7
+  count: 1
+- name: tag
+  offset: 16
+  datatype: 2
+  count: 1
+- name: line
+  offset: 17
+  datatype: 2
+  count: 1
+- name: timestamp
+  offset: 18
+  datatype: 8
+  count: 1
+is_bigendian: false
+point_step: 26
+row_step: 519168
+data:
+
+
+
+```
+```
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
 
 ```
