@@ -369,3 +369,15 @@ data:
 [rviz2-6]          at line 226 in ./src/buffer_core.cpp
 
 ```
+```
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_imuPreintegration odometryFrame
+String value is: odom
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_imuPreintegration baselinkFrame
+String value is: livox_frame
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_imuPreintegration lidarFrame
+String value is: livox_frame
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /tf --once | grep -B5 -A3 'child_frame_id: "livox_frame"'
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /tf_static --once | egrep -A2 'child_frame_id: "(livox_frame|base_link)"'
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# 
+
+```
