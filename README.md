@@ -340,3 +340,32 @@ data:
 
 
 ```
+```
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+
+```
