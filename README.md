@@ -257,96 +257,32 @@ ros2_ws/
 <img width="800" height="917" alt="Screenshot from 2025-08-12 09-59-52" src="https://github.com/user-attachments/assets/e87783a0-17b3-4cb3-ad2c-059c88841e09" />
 
 ```
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic info /tf -v
-Type: tf2_msgs/msg/TFMessage
+rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
+[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
+[rviz2-6]          at line 226 in ./src/buffer_core.cpp
 
-Publisher count: 3
-
-Node name: robot_state_publisher
-Node namespace: /
-Topic type: tf2_msgs/msg/TFMessage
-Endpoint type: PUBLISHER
-GID: 01.0f.56.c4.09.1e.9c.9b.00.00.00.00.00.00.12.03.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Node name: lio_sam_imuPreintegration
-Node namespace: /
-Topic type: tf2_msgs/msg/TFMessage
-Endpoint type: PUBLISHER
-GID: 01.0f.56.c4.0b.1e.34.eb.00.00.00.00.00.00.2b.03.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Node name: lio_sam_mapOptimization
-Node namespace: /
-Topic type: tf2_msgs/msg/TFMessage
-Endpoint type: PUBLISHER
-GID: 01.0f.56.c4.11.1e.bf.4c.00.00.00.00.00.00.17.03.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Subscription count: 3
-
-Node name: transform_listener_impl_aaaaca4ddd00
-Node namespace: /
-Topic type: tf2_msgs/msg/TFMessage
-Endpoint type: SUBSCRIPTION
-GID: 01.0f.56.c4.0b.1e.34.eb.00.00.00.00.00.00.25.04.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Node name: transform_listener_impl_aaaaf147c4a0
-Node namespace: /
-Topic type: tf2_msgs/msg/TFMessage
-Endpoint type: SUBSCRIPTION
-GID: 01.0f.56.c4.13.1e.b9.ab.00.00.00.00.00.00.23.04.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Node name: transform_listener_impl_aaaaf168fd50
-Node namespace: /
-Topic type: tf2_msgs/msg/TFMessage
-Endpoint type: SUBSCRIPTION
-GID: 01.0f.56.c4.de.1d.ae.4e.00.00.00.00.00.00.15.04.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
 
 ```
 
