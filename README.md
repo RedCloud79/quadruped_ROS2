@@ -351,8 +351,8 @@ QoS profile:
 ```
 
 ```
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 run tf2_ros tf2_echo livox_frame base_link
-[INFO] [1754966654.272274930] [tf2_echo]: Waiting for transform livox_frame ->  base_link: Invalid frame ID "livox_frame" passed to canTransform argument target_frame - frame does not exist
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 run tf2_ros tf2_echo base_link livox_frame
+[INFO] [1754966809.187694916] [tf2_echo]: Waiting for transform base_link ->  livox_frame: Invalid frame ID "base_link" passed to canTransform argument target_frame - frame does not exist
 At time 0.0
 - Translation: [0.000, 0.000, 0.000]
 - Rotation: in Quaternion [0.000, 0.000, 0.000, 1.000]
@@ -383,5 +383,10 @@ At time 0.0
   0.000  1.000  0.000  0.000
   0.000  0.000  1.000  0.000
   0.000  0.000  0.000  1.000
+^C[INFO] [1754966813.202555558] [rclcpp]: signal_handler(signum=2)
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 node list | grep robot_state_publisher
+WARNING: Be aware that are nodes in the graph that share an exact name, this can have unintended side effects.
+/robot_state_publisher
+
 
 ```
