@@ -9,7 +9,7 @@
 
     # Frames
     lidarFrame: "livox_frame" # base_link, lidar_link 일치화 및 urdf 변경 및 추가 작업 필요
-    baselinkFrame: "base_link"
+    baselinkFrame: "livox_frame"
     odometryFrame: "odom"
     mapFrame: "map"
 

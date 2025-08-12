@@ -23,7 +23,7 @@
         <parent link="base_link"/>
         <child link="livox_frame"/>
         <!-- Extrinsic values from MID360_config.json (mm → m) -->
-        <origin xyz="0.16 0 0.13" rpy="0 0.35 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
 
     <link name="TORSO">
