@@ -287,42 +287,56 @@ rviz2-6]          at line 226 in ./src/buffer_core.cpp
 ```
 
 ```
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 run tf2_ros tf2_echo base_link livox_frame
-[INFO] [1754966809.187694916] [tf2_echo]: Waiting for transform base_link ->  livox_frame: Invalid frame ID "base_link" passed to canTransform argument target_frame - frame does not exist
-At time 0.0
-- Translation: [0.000, 0.000, 0.000]
-- Rotation: in Quaternion [0.000, 0.000, 0.000, 1.000]
-- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
-- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
-- Matrix:
-  1.000  0.000  0.000  0.000
-  0.000  1.000  0.000  0.000
-  0.000  0.000  1.000  0.000
-  0.000  0.000  0.000  1.000
-At time 0.0
-- Translation: [0.000, 0.000, 0.000]
-- Rotation: in Quaternion [0.000, 0.000, 0.000, 1.000]
-- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
-- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
-- Matrix:
-  1.000  0.000  0.000  0.000
-  0.000  1.000  0.000  0.000
-  0.000  0.000  1.000  0.000
-  0.000  0.000  0.000  1.000
-At time 0.0
-- Translation: [0.000, 0.000, 0.000]
-- Rotation: in Quaternion [0.000, 0.000, 0.000, 1.000]
-- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
-- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
-- Matrix:
-  1.000  0.000  0.000  0.000
-  0.000  1.000  0.000  0.000
-  0.000  0.000  1.000  0.000
-  0.000  0.000  0.000  1.000
-^C[INFO] [1754966813.202555558] [rclcpp]: signal_handler(signum=2)
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 node list | grep robot_state_publisher
-WARNING: Be aware that are nodes in the graph that share an exact name, this can have unintended side effects.
-/robot_state_publisher
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_mapOptimization odometryFrame 
+String value is: odom
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_mapOptimization mapFrame
+String value is: map
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 run tf2_tools view_frames 
+[INFO] [1754972808.653615784] [view_frames]: Listening to tf data for 5.0 seconds...
+[INFO] [1754972813.717963557] [view_frames]: Generating graph in frames.pdf file...
+[INFO] [1754972813.723014058] [view_frames]: Result:tf2_msgs.srv.FrameGraph_Response(frame_yaml="chassis_link: \n  parent: 'base_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nimu_link: \n  parent: 'chassis_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nlaser_sensor_frame: \n  parent: 'imu_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nlidar_link: \n  parent: 'odom'\n  broadcaster: 'default_authority'\n  rate: 4.670\n  most_recent_transform: 1754972813.405127\n  oldest_transform: 1754972808.908762\n  buffer_length: 4.496\nnavsat_link: \n  parent: 'chassis_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\n")
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /livox/lidar --once | head -n 40
+header:
+  stamp:
+    sec: 1754972833
+    nanosec: 504569120
+  frame_id: livox_frame
+height: 1
+width: 19968
+fields:
+- name: x
+  offset: 0
+  datatype: 7
+  count: 1
+- name: y
+  offset: 4
+  datatype: 7
+  count: 1
+- name: z
+  offset: 8
+  datatype: 7
+  count: 1
+- name: intensity
+  offset: 12
+  datatype: 7
+  count: 1
+- name: tag
+  offset: 16
+  datatype: 2
+  count: 1
+- name: line
+  offset: 17
+  datatype: 2
+  count: 1
+- name: timestamp
+  offset: 18
+  datatype: 8
+  count: 1
+is_bigendian: false
+point_step: 26
+row_step: 519168
+data:
+
 
 
 ```
