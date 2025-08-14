@@ -253,19 +253,11 @@ ros2_ws/
 ```
 
 ```
-/home/user/ros2_ws/src/livox_custommsg_adapter/src/adapter.cpp: In member function ‘void livox_custommsg_adapter::AdapterNode::cb(livox_interfaces::msg::CustomMsg_<std::allocator<void> >::SharedPtr)’:
-/home/user/ros2_ws/src/livox_custommsg_adapter/src/adapter.cpp:32:45: error: operands to ‘?:’ have different types ‘std_msgs::msg::Header_<std::allocator<void> >::_stamp_type’ {aka ‘builtin_interfaces::msg::Time_<std::allocator<void> >’} and ‘rclcpp::Time’
-   32 | cloud.header.stamp = use_msg_header_time_ ? msg->header.stamp : this->now();
-      |                      ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-/home/user/ros2_ws/src/livox_custommsg_adapter/src/adapter.cpp:32:45: note:   and each type can be converted to the other
-/home/user/ros2_ws/src/livox_custommsg_adapter/src/adapter.cpp:54:27: error: ‘class sensor_msgs::PointCloud2Modifier’ has no member named ‘getPointSize’
-   54 |   ring_field.offset = mod.getPointSize();
-      |                           ^~~~~~~~~~~~
-gmake[2]: *** [CMakeFiles/adapter_node.dir/build.make:76: CMakeFiles/adapter_node.dir/src/adapter.cpp.o] Error 1
-gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/adapter_node.dir/all] Error 2
-gmake: *** [Makefile:146: all] Error 2
----
-Failed   <<< livox_custommsg_adapter [13.3s, exited with code 2]
-Aborted  <<< lio_sam [3min 3s]        
+root@lite3:/home/user/ros2_ws/src/livox_custommsg_adapter/launch# ros2 launch adapter.launch.py 
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-08-14-05-01-46-410644-lite3-3187
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [livox_custommsg_adapter-1]: process started with pid [3188]
+[livox_custommsg_adapter-1] /home/user/ros2_ws/install/livox_custommsg_adapter/lib/livox_custommsg_adapter/livox_custommsg_adapter: error while loading shared libraries: libadapter_node.so: cannot open shared object file: No such file or directory
+[ERROR] [livox_custommsg_adapter-1]: process has died [pid 3188, exit code 127, cmd '/home/user/ros2_ws/install/livox_custommsg_adapter/lib/livox_custommsg_adapter/livox_custommsg_adapter --ros-args -r __node:=livox_custommsg_adapter --params-file /tmp/launch_params_3lt5htua'].
+   
 ```
