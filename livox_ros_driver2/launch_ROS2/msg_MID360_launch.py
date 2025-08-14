@@ -5,20 +5,22 @@ from launch.actions import DeclareLaunchArgument
 from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration, PythonExpression
-from launch_ros.parameter_descriptions import ParameterValue
+
+# 안전한 캐스팅 헬퍼
+INT   = lambda name:  PythonExpression(["int(",  LaunchConfiguration(name), ")"])      # e.g., INT('output_data_type')
+FLOAT = lambda name:  PythonExpression(["float(",LaunchConfiguration(name), ")"])      # e.g., FLOAT('publish_freq')
+BOOL  = lambda name:  PythonExpression(["str(",  LaunchConfiguration(name), ").lower() in ['1','true','yes']"])  # e.g., BOOL('lidar_bag')
 
 
 def generate_launch_description():
     return LaunchDescription([
-
-        DeclareLaunchArgument('lvx_file_path', default_value='livox_test.lvx', description='Path to LVX file'),
-        DeclareLaunchArgument('bd_list',       default_value='100000000000000', description='Device/Hub ID(s)'),
-        DeclareLaunchArgument('xfer_format',   default_value='0', description='0: Livox Custom, 1+: other'),
-        DeclareLaunchArgument('multi_topic',   default_value='0', description='0: single, 1: multi-topic'),
-        DeclareLaunchArgument('data_src',      default_value='0', description='0: LiDAR, 1: LVX file'),
-        DeclareLaunchArgument('publish_freq',  default_value='10.0', description='Publish frequency (Hz)'),
-
-        DeclareLaunchArgument('output_data_type', default_value='0', description='0: CustomMsg, 1: PointCloud2'),
+        DeclareLaunchArgument('lvx_file_path', default_value='livox_test.lvx'),
+        DeclareLaunchArgument('bd_list',       default_value='100000000000000'),
+        DeclareLaunchArgument('xfer_format',   default_value='0'),  # 0: Livox Custom
+        DeclareLaunchArgument('multi_topic',   default_value='0'),
+        DeclareLaunchArgument('data_src',      default_value='0'),
+        DeclareLaunchArgument('publish_freq',  default_value='10.0'),
+        DeclareLaunchArgument('output_data_type', default_value='0'),  # 0: CustomMsg, 1: PointCloud2
         DeclareLaunchArgument('rviz_enable',      default_value='false'),
         DeclareLaunchArgument('rosbag_enable',    default_value='false'),
         DeclareLaunchArgument('msg_frame_id',     default_value='livox_frame'),
@@ -32,20 +34,20 @@ def generate_launch_description():
             name='livox_lidar_publisher2',
             output='screen',
             condition=UnlessCondition(PythonExpression([
-                "'", LaunchConfiguration('output_data_type'), "' == '1'"
+                "int(", LaunchConfiguration('output_data_type'), ") == 1"
             ])),
             parameters=[{
-                'xfer_format':       ParameterValue(LaunchConfiguration('xfer_format'),   value_type=int),
-                'multi_topic':       ParameterValue(LaunchConfiguration('multi_topic'),   value_type=int),
-                'data_src':          ParameterValue(LaunchConfiguration('data_src'),      value_type=int),
-                'publish_freq':      ParameterValue(LaunchConfiguration('publish_freq'),  value_type=float),
-                'output_data_type':  ParameterValue('0', value_type=int),  # 🔒 강제: CustomMsg
+                'xfer_format':       INT('xfer_format'),
+                'multi_topic':       INT('multi_topic'),
+                'data_src':          INT('data_src'),
+                'publish_freq':      FLOAT('publish_freq'),
+                'output_data_type':  INT('output_data_type'),  # 기대값 0
                 'cmdline_str':       LaunchConfiguration('bd_list'),
                 'cmdline_file_path': LaunchConfiguration('lvx_file_path'),
                 'user_config_path':  os.path.join(get_package_share_directory('livox_ros_driver2'), 'config', 'MID360_config.json'),
                 'frame_id':          LaunchConfiguration('msg_frame_id'),
-                'enable_lidar_bag':  ParameterValue(LaunchConfiguration('lidar_bag'), value_type=bool),
-                'enable_imu_bag':    ParameterValue(LaunchConfiguration('imu_bag'),   value_type=bool),
+                'enable_lidar_bag':  BOOL('lidar_bag'),
+                'enable_imu_bag':    BOOL('imu_bag'),
                 'use_ros_time':      True,
                 'ros_time_override': True,
             }],
@@ -57,55 +59,23 @@ def generate_launch_description():
             name='livox_lidar_publisher2_pc2',
             output='screen',
             condition=IfCondition(PythonExpression([
-                "'", LaunchConfiguration('output_data_type'), "' == '1'"
+                "int(", LaunchConfiguration('output_data_type'), ") == 1"
             ])),
             parameters=[{
-                'xfer_format':       ParameterValue(LaunchConfiguration('xfer_format'),   value_type=int),
-                'multi_topic':       ParameterValue(LaunchConfiguration('multi_topic'),   value_type=int),
-                'data_src':          ParameterValue(LaunchConfiguration('data_src'),      value_type=int),
-                'publish_freq':      ParameterValue(LaunchConfiguration('publish_freq'),  value_type=float),
-                'output_data_type':  ParameterValue('1', value_type=int),  # 🔒 강제: PointCloud2
+                'xfer_format':       INT('xfer_format'),
+                'multi_topic':       INT('multi_topic'),
+                'data_src':          INT('data_src'),
+                'publish_freq':      FLOAT('publish_freq'),
+                'output_data_type':  INT('output_data_type'),  # 기대값 1
                 'cmdline_str':       LaunchConfiguration('bd_list'),
                 'cmdline_file_path': LaunchConfiguration('lvx_file_path'),
                 'user_config_path':  os.path.join(get_package_share_directory('livox_ros_driver2'), 'config', 'MID360_config.json'),
                 'frame_id':          LaunchConfiguration('msg_frame_id'),
-                'enable_lidar_bag':  ParameterValue(LaunchConfiguration('lidar_bag'), value_type=bool),
-                'enable_imu_bag':    ParameterValue(LaunchConfiguration('imu_bag'),   value_type=bool),
+                'enable_lidar_bag':  BOOL('lidar_bag'),
+                'enable_imu_bag':    BOOL('imu_bag'),
                 'use_ros_time':      True,
                 'ros_time_override': True,
             }],
             remappings=[('/livox/lidar', LaunchConfiguration('pc2_topic'))],
         ),
-
-        Node(
-            package='pointcloud_to_laserscan',
-            executable='pointcloud_to_laserscan_node',
-            name='pc2_to_scan',
-            condition=IfCondition(PythonExpression([
-                "'", LaunchConfiguration('output_data_type'), "' == '1'"
-            ])),
-            parameters=[
-                {'target_frame': 'flat_lidar_frame'},
-                {'transform_tolerance': 0.1},
-                {'min_height': -0.1},
-                {'max_height': 0.9},
-                {'angle_min': -3.14},
-                {'angle_max': 3.14},
-                {'angle_increment': 0.0087},
-                {'scan_time': 0.1},
-                {'range_min': 0.1},
-                {'range_max': 30.0},
-                {'use_inf': True},
-            ],
-            remappings=[('cloud_in', LaunchConfiguration('pc2_topic')), ('scan', '/scan')]
-        ),
-
-        # Node(
-        #     package='rosbag2',
-        #     executable='record',
-        #     name='record',
-        #     output='screen',
-        #     condition=IfCondition(LaunchConfiguration('rosbag_enable')),
-        #     arguments=['-a']
-        # ),
     ])
