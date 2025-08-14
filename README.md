@@ -251,90 +251,47 @@ ros2_ws/
             └── ExecuteTask.action
 
 ```
-Finished <<< robot_navigation [0.74s] 
---- stderr: livox_custommsg_adapter   
-CMake Error at CMakeLists.txt:11 (find_package):
-  By not providing "Findlivox_interfaces.cmake" in CMAKE_MODULE_PATH this
-  project has asked CMake to find a package configuration file provided by
-  "livox_interfaces", but CMake did not find one.
-
-  Could not find a package configuration file provided by "livox_interfaces"
-  with any of the following names:
-
-    livox_interfacesConfig.cmake
-    livox_interfaces-config.cmake
-
-  Add the installation prefix of "livox_interfaces" to CMAKE_PREFIX_PATH or
-  set "livox_interfaces_DIR" to a directory containing one of the above
-  files.  If "livox_interfaces" provides a separate development package or
-  SDK, be sure it has been installed.
-
-
+--- stderr: lio_sam                     
+In file included from /home/user/ros2_ws/src/lio_sam/src/imuPreintegration.cpp:1:
+/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
+   35 | #include <pcl_conversions/pcl_conversions.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/lio_sam_imuPreintegration.dir/build.make:76: CMakeFiles/lio_sam_imuPreintegration.dir/src/imuPreintegration.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:658: CMakeFiles/lio_sam_imuPreintegration.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+In file included from /home/user/ros2_ws/src/lio_sam/src/simpleGpsOdom.cpp:18:
+/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
+   35 | #include <pcl_conversions/pcl_conversions.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/lio_sam_simpleGpsOdom.dir/build.make:76: CMakeFiles/lio_sam_simpleGpsOdom.dir/src/simpleGpsOdom.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:714: CMakeFiles/lio_sam_simpleGpsOdom.dir/all] Error 2
+In file included from /home/user/ros2_ws/src/lio_sam/src/imageProjection.cpp:1:
+/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
+   35 | #include <pcl_conversions/pcl_conversions.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/lio_sam_imageProjection.dir/build.make:76: CMakeFiles/lio_sam_imageProjection.dir/src/imageProjection.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:630: CMakeFiles/lio_sam_imageProjection.dir/all] Error 2
+In file included from /home/user/ros2_ws/src/lio_sam/src/featureExtraction.cpp:1:
+/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
+   35 | #include <pcl_conversions/pcl_conversions.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/lio_sam_featureExtraction.dir/build.make:76: CMakeFiles/lio_sam_featureExtraction.dir/src/featureExtraction.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:602: CMakeFiles/lio_sam_featureExtraction.dir/all] Error 2
+In file included from /home/user/ros2_ws/src/lio_sam/src/mapOptmization.cpp:1:
+/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
+   35 | #include <pcl_conversions/pcl_conversions.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/lio_sam_mapOptimization.dir/build.make:76: CMakeFiles/lio_sam_mapOptimization.dir/src/mapOptmization.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:686: CMakeFiles/lio_sam_mapOptimization.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
 ---
-Failed   <<< livox_custommsg_adapter [2.86s, exited with code 1]
-Aborted  <<< robot_interfaces [2.93s]
-Aborted  <<< manager_intergaces [2.94s]          
-Aborted  <<< transfer_interfaces [3.03s]
-Aborted  <<< lio_sam [10.5s]                                  
-
-Summary: 4 packages finished [11.0s]
-  1 package failed: livox_custommsg_adapter
-  4 packages aborted: lio_sam manager_intergaces robot_interfaces transfer_interfaces
-  2 packages had stderr output: lio_sam livox_custommsg_adapter
-  3 packages not processed
-
-
-```
-```
-FROM arm64v8/ros:humble
-
-RUN apt update && apt install -y \
-    software-properties-common \
-    sudo \
-    git \
-    curl \
-    wget \
-    build-essential \
-    cmake \
-    python3-colcon-common-extensions \
-    python3-pip \
-    libpcap-dev \
-    ros-humble-navigation2 \
-    ros-humble-nav2-bringup \
-    ros-humble-rviz2 \
-    ros-humble-tf2-geometry-msgs \
-    ros-humble-realsense2-camera \
-    ros-humble-perception-pcl \
-    ros-humble-pcl-msgs \
-    ros-humble-vision-opencv \
-    ros-humble-xacro \
-    ros-humble-topic-tools\
-    ros-humble-pointcloud-to-laserscan\
-    ros-humble-ament-cmake-auto \
-    ros-humble-rqt-tf-tree \
-    nano \
-    x11-apps\
-    && rm -rf /var/lib/apt/lists/*
-
-RUN add-apt-repository -y ppa:borglab/gtsam-release-4.1 && \
-    apt update && apt install -y \
-    libgtsam-dev \
-    libgtsam-unstable-dev
-    
-# Livox-SDK2 Download
-WORKDIR /home/user/ros2_ws/src
-RUN git clone https://github.com/Livox-SDK/Livox-SDK2.git
-
-WORKDIR /home/user/ros2_ws/src/Livox-SDK2
-RUN mkdir build && cd build && cmake .. && make -j$(nproc) && make install
-
-COPY ./ros2_ws/src/livox_ros_driver2 /home/user/ros2_ws/src/livox_ros_driver2
-SHELL ["/bin/bash", "-lc"]
-# build livox_lidar2
-WORKDIR /home/user/ros2_ws/src/livox_ros_driver2
-RUN ./build.sh humble
-
-RUN echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc && \
-    echo 'source /home/user/ros2_ws/install/setup.bash' >> ~/.bashrc
+Failed   <<< lio_sam [11.3s, exited with code 2]
+Aborted  <<< livox_custommsg_adapter [15.9s]       
+Aborted  <<< livox_ros_driver2 [26.9s] 
 
 ```
