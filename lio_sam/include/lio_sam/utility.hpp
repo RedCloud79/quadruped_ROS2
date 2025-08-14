@@ -62,7 +62,7 @@ using namespace std;
 
 typedef pcl::PointXYZI PointType;
 
-enum class SensorType { VELODYNE, OUSTER, LIVOX, ROBOSENSE };
+enum class SensorType { VELODYNE, OUSTER, LIVOX };
 
 class ParamServer : public rclcpp::Node
 {
@@ -74,7 +74,6 @@ public:
     string imuTopic;
     string odomTopic;
     string gpsTopic;
-    string gpsOdomTopic;
 
     //Frames
     string lidarFrame;
@@ -163,8 +162,6 @@ public:
         get_parameter("odomTopic", odomTopic);
         declare_parameter("gpsTopic", "lio_sam/odometry/gps");
         get_parameter("gpsTopic", gpsTopic);
-        declare_parameter("gpsOdomTopic", "lio_sam/gps_odom");
-        get_parameter("gpsOdomTopic", gpsOdomTopic);
 
         declare_parameter("lidarFrame", "laser_data_frame");
         get_parameter("lidarFrame", lidarFrame);
@@ -204,15 +201,11 @@ public:
         {
             sensor = SensorType::LIVOX;
         }
-        else if (sensorStr == "robosense")
-        {
-            sensor = SensorType::ROBOSENSE;
-        }
         else
         {
             RCLCPP_ERROR_STREAM(
                 get_logger(),
-                "Invalid sensor type (must be either 'velodyne' or 'ouster' or 'livox' or 'robosense'): " << sensorStr);
+                "Invalid sensor type (must be either 'velodyne' or 'ouster' or 'livox'): " << sensorStr);
             rclcpp::shutdown();
         }
 
@@ -335,8 +328,7 @@ public:
         imu_out.angular_velocity.z = gyr.z();
         // rotate roll pitch yaw
         Eigen::Quaterniond q_from(imu_in.orientation.w, imu_in.orientation.x, imu_in.orientation.y, imu_in.orientation.z);
-        // Eigen::Quaterniond q_final = q_from * extQRPY;
-        Eigen::Quaterniond q_final = extQRPY;
+        Eigen::Quaterniond q_final = q_from * extQRPY;
         imu_out.orientation.x = q_final.x();
         imu_out.orientation.y = q_final.y();
         imu_out.orientation.z = q_final.z();

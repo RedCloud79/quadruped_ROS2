@@ -1,4 +1,4 @@
-#include "lio_sam/utility.hpp"
+#include "utility.hpp"
 #include "lio_sam/msg/cloud_info.hpp"
 
 struct VelodynePointXYZIRT
@@ -29,18 +29,6 @@ POINT_CLOUD_REGISTER_POINT_STRUCT(OusterPointXYZIRT,
     (uint32_t, t, t) (uint16_t, reflectivity, reflectivity)
     (uint8_t, ring, ring) (uint16_t, noise, noise) (uint32_t, range, range)
 )
-
-struct RobosensePointXYZIRT {
-     PCL_ADD_POINT4D;
-     PCL_ADD_INTENSITY;
-     uint16_t ring;
-     float time;
-     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
- } EIGEN_ALIGN16;
- POINT_CLOUD_REGISTER_POINT_STRUCT (RobosensePointXYZIRT,
-     (float, x, x) (float, y, y) (float, z, z) (float, intensity, intensity)
-     (uint16_t, ring, ring) (float, time, time)
- )
 
 // Use the Velodyne point format as a common representation
 using PointXYZIRT = VelodynePointXYZIRT;
@@ -83,10 +71,10 @@ private:
 
     pcl::PointCloud<PointXYZIRT>::Ptr laserCloudIn;
     pcl::PointCloud<OusterPointXYZIRT>::Ptr tmpOusterCloudIn;
-    pcl::PointCloud<RobosensePointXYZIRT>::Ptr tmpRobosenseCloudIn;
     pcl::PointCloud<PointType>::Ptr   fullCloud;
     pcl::PointCloud<PointType>::Ptr   extractedCloud;
 
+    int ringFlag = 0;
     int deskewFlag;
     cv::Mat rangeMat;
 
@@ -149,7 +137,6 @@ public:
     {
         laserCloudIn.reset(new pcl::PointCloud<PointXYZIRT>());
         tmpOusterCloudIn.reset(new pcl::PointCloud<OusterPointXYZIRT>());
-        tmpRobosenseCloudIn.reset(new pcl::PointCloud<RobosensePointXYZIRT>());
         fullCloud.reset(new pcl::PointCloud<PointType>());
         extractedCloud.reset(new pcl::PointCloud<PointType>());
 
@@ -182,6 +169,7 @@ public:
             imuRotY[i] = 0;
             imuRotZ[i] = 0;
         }
+        columnIdnCountVec.assign(N_SCAN, 0);
     }
 
     ~ImageProjection(){}
@@ -204,9 +192,9 @@ public:
         //       ", y: " << thisImu.angular_velocity.y << 
         //       ", z: " << thisImu.angular_velocity.z << endl;
         // double imuRoll, imuPitch, imuYaw;
-        // tf::Quaternion orientation;
-        // tf::quaternionMsgToTF(thisImu.orientation, orientation);
-        // tf::Matrix3x3(orientation).getRPY(imuRoll, imuPitch, imuYaw);
+        // tf2::Quaternion orientation;
+        // tf2::fromMsg(thisImu.orientation, orientation);
+        // tf2::Matrix3x3(orientation).getRPY(imuRoll, imuPitch, imuYaw);
         // cout << "IMU roll pitch yaw: " << endl;
         // cout << "roll: " << imuRoll << ", pitch: " << imuPitch << ", yaw: " << imuYaw << endl << endl;
     }
@@ -246,7 +234,7 @@ public:
         cloudQueue.pop_front();
         if (sensor == SensorType::VELODYNE || sensor == SensorType::LIVOX)
         {
-            pcl::moveFromROSMsg(currentCloudMsg, *laserCloudIn);
+            pcl::moveFromROSMsg(currentCloudMsg, *laserCloudIn);  
         }
         else if (sensor == SensorType::OUSTER)
         {
@@ -266,24 +254,6 @@ public:
                 dst.time = src.t * 1e-9f;
             }
         }
-        else if(sensor==SensorType::ROBOSENSE)
-        {
-            // Convert to Velodyne format
-            pcl::moveFromROSMsg(currentCloudMsg, *tmpRobosenseCloudIn);
-            laserCloudIn->points.resize(tmpRobosenseCloudIn->size());
-            laserCloudIn->is_dense = tmpRobosenseCloudIn->is_dense;
-            for (size_t i = 0; i < tmpRobosenseCloudIn->size(); i++)
-            {
-                auto &src = tmpRobosenseCloudIn->points[i];
-                auto &dst = laserCloudIn->points[i];
-                dst.x = src.x;
-                dst.y = src.y;
-                dst.z = src.z;
-                dst.intensity = src.intensity;
-                dst.ring = src.ring;
-                dst.time = src.time * 1e-9f;
-            }
-        }
         else
         {
             RCLCPP_ERROR_STREAM(get_logger(), "Unknown sensor type: " << int(sensor));
@@ -294,6 +264,10 @@ public:
         cloudHeader = currentCloudMsg.header;
         timeScanCur = stamp2Sec(cloudHeader.stamp);
         timeScanEnd = timeScanCur + laserCloudIn->points.back().time;
+    
+        // remove Nan
+        vector<int> indices;
+        pcl::removeNaNFromPointCloud(*laserCloudIn, *laserCloudIn, indices);
 
         // check dense flag
         if (laserCloudIn->is_dense == false)
@@ -303,7 +277,7 @@ public:
         }
 
         // check ring channel
-        static int ringFlag = 0;
+        // we will skip the ring check in case of velodyne - as we calculate the ring value downstream (line 572)
         if (ringFlag == 0)
         {
             ringFlag = -1;
@@ -317,8 +291,12 @@ public:
             }
             if (ringFlag == -1)
             {
-                RCLCPP_ERROR(get_logger(), "Point cloud ring channel not available, please configure your point cloud data!");
-                rclcpp::shutdown();
+                if (sensor == SensorType::VELODYNE) {
+                    ringFlag = 2;
+                } else {
+                    RCLCPP_ERROR(get_logger(), "Point cloud ring channel not available, please configure your point cloud data!");
+                    rclcpp::shutdown();
+                }
             }
         }
 
@@ -594,6 +572,15 @@ public:
                 continue;
 
             int rowIdn = laserCloudIn->points[i].ring;
+            // if sensor is a velodyne (ringFlag = 2) calculate rowIdn based on number of scans
+            if (ringFlag == 2) { 
+                float verticalAngle =
+                    atan2(thisPoint.z,
+                        sqrt(thisPoint.x * thisPoint.x + thisPoint.y * thisPoint.y)) *
+                    180 / M_PI;
+                rowIdn = (verticalAngle + (N_SCAN - 1)) / 2.0;
+            }
+
             if (rowIdn < 0 || rowIdn >= N_SCAN)
                 continue;
 
@@ -601,7 +588,7 @@ public:
                 continue;
 
             int columnIdn = -1;
-            if (sensor == SensorType::VELODYNE || sensor == SensorType::OUSTER || sensor == SensorType::ROBOSENSE)
+            if (sensor == SensorType::VELODYNE || sensor == SensorType::OUSTER)
             {
                 float horizonAngle = atan2(thisPoint.x, thisPoint.y) * 180 / M_PI;
                 static float ang_res_x = 360.0/float(Horizon_SCAN);
