@@ -253,22 +253,46 @@ ros2_ws/
 ```
 
 ```
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic list | grep lio_sam/points
-/lio_sam/points
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic info /lio_sam/points 
-Type: sensor_msgs/msg/PointCloud2
-Publisher count: 1
-Subscription count: 2
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /lio_sam/points 
-^Croot@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic list | grep livox
-/livox/imu
-/livox/lidar
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic info /livox/lidar
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic hz /lio_sam/points 
+^Croot@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /lio_sam/points --once
+^Croot@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic info -v /livox/lidar 
 Type: ['livox_interfaces/msg/CustomMsg', 'sensor_msgs/msg/PointCloud2']
+
 Publisher count: 1
+
+Node name: livox_lidar_publisher2
+Node namespace: /
+Topic type: sensor_msgs/msg/PointCloud2
+Endpoint type: PUBLISHER
+GID: 01.0f.52.fc.25.11.0a.92.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
 Subscription count: 1
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /livox/lidar
-Cannot echo topic '/livox/lidar', as it contains more than one type: [livox_interfaces/msg/CustomMsg, sensor_msgs/msg/PointCloud2]
+
+Node name: livox_custommsg_adapter
+Node namespace: /
+Topic type: livox_interfaces/msg/CustomMsg
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.52.fc.46.11.4a.8d.00.00.00.00.00.00.12.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: BEST_EFFORT
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic list -t | grep livox/lidar
+/livox/lidar [livox_interfaces/msg/CustomMsg, sensor_msgs/msg/PointCloud2]
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# 
 
    
 ```
