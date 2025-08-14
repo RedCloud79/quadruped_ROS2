@@ -253,11 +253,22 @@ ros2_ws/
 ```
 
 ```
-root@lite3:/home/user/ros2_ws/src/livox_custommsg_adapter/launch# ros2 launch adapter.launch.py 
-[INFO] [launch]: All log files can be found below /root/.ros/log/2025-08-14-05-01-46-410644-lite3-3187
-[INFO] [launch]: Default logging verbosity is set to INFO
-[INFO] [livox_custommsg_adapter-1]: process started with pid [3188]
-[livox_custommsg_adapter-1] /home/user/ros2_ws/install/livox_custommsg_adapter/lib/livox_custommsg_adapter/livox_custommsg_adapter: error while loading shared libraries: libadapter_node.so: cannot open shared object file: No such file or directory
-[ERROR] [livox_custommsg_adapter-1]: process has died [pid 3188, exit code 127, cmd '/home/user/ros2_ws/install/livox_custommsg_adapter/lib/livox_custommsg_adapter/livox_custommsg_adapter --ros-args -r __node:=livox_custommsg_adapter --params-file /tmp/launch_params_3lt5htua'].
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic list | grep lio_sam/points
+/lio_sam/points
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic info /lio_sam/points 
+Type: sensor_msgs/msg/PointCloud2
+Publisher count: 1
+Subscription count: 2
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /lio_sam/points 
+^Croot@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic list | grep livox
+/livox/imu
+/livox/lidar
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic info /livox/lidar
+Type: ['livox_interfaces/msg/CustomMsg', 'sensor_msgs/msg/PointCloud2']
+Publisher count: 1
+Subscription count: 1
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /livox/lidar
+Cannot echo topic '/livox/lidar', as it contains more than one type: [livox_interfaces/msg/CustomMsg, sensor_msgs/msg/PointCloud2]
+
    
 ```
