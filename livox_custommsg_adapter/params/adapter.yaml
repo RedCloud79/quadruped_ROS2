@@ -1,4 +1,4 @@
-livox_custommsg_adapter:
+vlivox_custommsg_adapter:
   ros__parameters:
     in_topic: "/livox/lidar"
     out_topic: "/lio_sam/points"
