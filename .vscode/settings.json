@@ -6,6 +6,13 @@
         "vector": "cpp",
         "xstring": "cpp",
         "array": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "bitset": "cpp",
+        "initializer_list": "cpp",
+        "queue": "cpp",
+        "regex": "cpp",
+        "utility": "cpp",
+        "xhash": "cpp",
+        "xtree": "cpp"
     }
 }
