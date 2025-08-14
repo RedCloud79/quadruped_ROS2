@@ -253,16 +253,94 @@ ros2_ws/
 ```
 
 ```
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2/launch_ROS2# ros2 launch msg_MID360_launch.py 
-[INFO] [launch]: All log files can be found below /root/.ros/log/2025-08-14-05-34-42-552759-lite3-6420
-[INFO] [launch]: Default logging verbosity is set to INFO
-[ERROR] [launch]: Caught exception in launch (see debug for traceback): Caught multiple exceptions when trying to load file of format [py]:
- - TypeError: value='0' is not an instance of <class 'int'>
- - InvalidFrontendLaunchFileError: The launch file may have a syntax error, or its format is unknown
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2/launch_ROS2# ros2 launch msg_MID360_launch.py 
-[INFO] [launch]: All log files can be found below /root/.ros/log/2025-08-14-06-01-20-956795-lite3-7317
-[INFO] [launch]: Default logging verbosity is set to INFO
-[ERROR] [launch]: Caught exception in launch (see debug for traceback): name 'true' is not defined
+^Croot@lite3:/home/user/ros2_ws# ros2 topic info -vlio_sam/points 
+Type: sensor_msgs/msg/PointCloud2
+
+Publisher count: 1
+
+Node name: livox_custommsg_adapter
+Node namespace: /
+Topic type: sensor_msgs/msg/PointCloud2
+Endpoint type: PUBLISHER
+GID: 01.0f.52.fc.2a.20.7f.67.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: BEST_EFFORT
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 2
+
+Node name: lio_sam_imageProjection
+Node namespace: /
+Topic type: sensor_msgs/msg/PointCloud2
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.52.fc.3d.20.b0.06.00.00.00.00.00.00.14.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: BEST_EFFORT
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Node name: rviz2
+Node namespace: /
+Topic type: sensor_msgs/msg/PointCloud2
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.52.fc.43.20.9b.d1.00.00.00.00.00.00.29.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+root@lite3:/home/user/ros2_ws# ros2 topic info -v /livox/lidar 
+Type: ['livox_interfaces/msg/CustomMsg', 'sensor_msgs/msg/PointCloud2']
+
+Publisher count: 1
+
+Node name: livox_lidar_publisher2
+Node namespace: /
+Topic type: sensor_msgs/msg/PointCloud2
+Endpoint type: PUBLISHER
+GID: 01.0f.52.fc.17.20.b8.be.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 1
+
+Node name: livox_custommsg_adapter
+Node namespace: /
+Topic type: livox_interfaces/msg/CustomMsg
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.52.fc.2a.20.7f.67.00.00.00.00.00.00.12.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: BEST_EFFORT
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+root@lite3:/home/user/ros2_ws# ros2 topic info /livox/lidar
+Type: ['livox_interfaces/msg/CustomMsg', 'sensor_msgs/msg/PointCloud2']
+Publisher count: 1
+Subscription count: 1
 
 
    
