@@ -254,17 +254,15 @@ ros2_ws/
 
 ```
 root@lite3:/home/user/ros2_ws/src/livox_ros_driver2/launch_ROS2# ros2 launch msg_MID360_launch.py 
-[INFO] [launch]: All log files can be found below /root/.ros/log/2025-08-14-05-34-34-506421-lite3-6407
-[INFO] [launch]: Default logging verbosity is set to INFO
-[ERROR] [launch]: Caught exception in launch (see debug for traceback): Caught multiple exceptions when trying to load file of format [py]:
- - TypeError: value='0' is not an instance of <class 'int'>
- - InvalidFrontendLaunchFileError: The launch file may have a syntax error, or its format is unknown
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2/launch_ROS2# ros2 launch msg_MID360_launch.py 
 [INFO] [launch]: All log files can be found below /root/.ros/log/2025-08-14-05-34-42-552759-lite3-6420
 [INFO] [launch]: Default logging verbosity is set to INFO
 [ERROR] [launch]: Caught exception in launch (see debug for traceback): Caught multiple exceptions when trying to load file of format [py]:
  - TypeError: value='0' is not an instance of <class 'int'>
  - InvalidFrontendLaunchFileError: The launch file may have a syntax error, or its format is unknown
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2/launch_ROS2# ros2 launch msg_MID360_launch.py 
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-08-14-06-01-20-956795-lite3-7317
+[INFO] [launch]: Default logging verbosity is set to INFO
+[ERROR] [launch]: Caught exception in launch (see debug for traceback): name 'true' is not defined
 
 
    
