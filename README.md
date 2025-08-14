@@ -253,46 +253,15 @@ ros2_ws/
 ```
 
 ```
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic hz /lio_sam/points 
-^Croot@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /lio_sam/points --once
-^Croot@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic info -v /livox/lidar 
-Type: ['livox_interfaces/msg/CustomMsg', 'sensor_msgs/msg/PointCloud2']
 
-Publisher count: 1
-
-Node name: livox_lidar_publisher2
-Node namespace: /
-Topic type: sensor_msgs/msg/PointCloud2
-Endpoint type: PUBLISHER
-GID: 01.0f.52.fc.25.11.0a.92.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Subscription count: 1
-
-Node name: livox_custommsg_adapter
-Node namespace: /
-Topic type: livox_interfaces/msg/CustomMsg
-Endpoint type: SUBSCRIPTION
-GID: 01.0f.52.fc.46.11.4a.8d.00.00.00.00.00.00.12.04.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: BEST_EFFORT
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic list -t | grep livox/lidar
-/livox/lidar [livox_interfaces/msg/CustomMsg, sensor_msgs/msg/PointCloud2]
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# 
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2/launch_ROS2# ros2 launch msg_MID360_launch.py 
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-08-14-05-29-47-234668-lite3-5499
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [livox_ros_driver2_node-1]: process started with pid [5500]
+[livox_ros_driver2_node-1] [INFO] [1755149387.359027802] [livox_lidar_publisher2]: Livox Ros Driver2 Version: 1.2.4
+[livox_ros_driver2_node-1] terminate called after throwing an instance of 'rclcpp::exceptions::InvalidParameterTypeException'
+[livox_ros_driver2_node-1]   what():  parameter 'output_data_type' has invalid type: Wrong parameter type, parameter {output_data_type} is of type {integer}, setting it to {string} is not allowed.
+[ERROR] [livox_ros_driver2_node-1]: process has died [pid 5500, exit code -6, cmd '/home/user/ros2_ws/install/livox_ros_driver2/lib/livox_ros_driver2/livox_ros_driver2_node --ros-args -r __node:=livox_lidar_publisher2 --params-file /tmp/launch_params_qmmco3wu'].
 
    
 ```
