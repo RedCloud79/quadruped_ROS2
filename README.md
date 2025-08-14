@@ -369,3 +369,109 @@ data:
 [rviz2-6]          at line 226 in ./src/buffer_core.cpp
 
 ```
+```
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_imuPreintegration odometryFrame
+String value is: odom
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_imuPreintegration baselinkFrame
+String value is: livox_frame
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_imuPreintegration lidarFrame
+String value is: livox_frame
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /tf --once | grep -B5 -A3 'child_frame_id: "livox_frame"'
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /tf_static --once | egrep -A2 'child_frame_id: "(livox_frame|base_link)"'
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# 
+
+```
+```
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic info /tf -v
+Type: tf2_msgs/msg/TFMessage
+
+Publisher count: 3
+
+Node name: robot_state_publisher
+Node namespace: /
+Topic type: tf2_msgs/msg/TFMessage
+Endpoint type: PUBLISHER
+GID: 01.0f.e0.b6.57.37.57.30.00.00.00.00.00.00.12.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Node name: lio_sam_imuPreintegration
+Node namespace: /
+Topic type: tf2_msgs/msg/TFMessage
+Endpoint type: PUBLISHER
+GID: 01.0f.e0.b6.59.37.2b.fd.00.00.00.00.00.00.2b.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Node name: lio_sam_mapOptimization
+Node namespace: /
+Topic type: tf2_msgs/msg/TFMessage
+Endpoint type: PUBLISHER
+GID: 01.0f.e0.b6.5f.37.c6.1d.00.00.00.00.00.00.17.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 3
+
+Node name: transform_listener_impl_aaab06145670
+Node namespace: /
+Topic type: tf2_msgs/msg/TFMessage
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.e0.b6.37.37.6b.dd.00.00.00.00.00.00.15.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Node name: transform_listener_impl_aaaae9cc0240
+Node namespace: /
+Topic type: tf2_msgs/msg/TFMessage
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.e0.b6.59.37.2b.fd.00.00.00.00.00.00.25.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Node name: transform_listener_impl_aaab1b5703d0
+Node namespace: /
+Topic type: tf2_msgs/msg/TFMessage
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.e0.b6.61.37.c2.aa.00.00.00.00.00.00.23.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+
+```
