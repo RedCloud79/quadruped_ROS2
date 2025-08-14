@@ -253,56 +253,11 @@ ros2_ws/
 ```
 
 ```
-^Croot@lite3:/home/user/ros2_ws# ros2 topic info -vlio_sam/points 
-Type: sensor_msgs/msg/PointCloud2
-
+root@lite3:/home/user/ros2_ws# ros2 topic info /livox/lidar
+Type: ['livox_interfaces/msg/CustomMsg', 'sensor_msgs/msg/PointCloud2']
 Publisher count: 1
-
-Node name: livox_custommsg_adapter
-Node namespace: /
-Topic type: sensor_msgs/msg/PointCloud2
-Endpoint type: PUBLISHER
-GID: 01.0f.52.fc.2a.20.7f.67.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: BEST_EFFORT
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Subscription count: 2
-
-Node name: lio_sam_imageProjection
-Node namespace: /
-Topic type: sensor_msgs/msg/PointCloud2
-Endpoint type: SUBSCRIPTION
-GID: 01.0f.52.fc.3d.20.b0.06.00.00.00.00.00.00.14.04.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: BEST_EFFORT
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Node name: rviz2
-Node namespace: /
-Topic type: sensor_msgs/msg/PointCloud2
-Endpoint type: SUBSCRIPTION
-GID: 01.0f.52.fc.43.20.9b.d1.00.00.00.00.00.00.29.04.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-root@lite3:/home/user/ros2_ws# ros2 topic info -v /livox/lidar 
+Subscription count: 1
+root@lite3:/home/user/ros2_ws# ros2 topic info -v /livox/lidar
 Type: ['livox_interfaces/msg/CustomMsg', 'sensor_msgs/msg/PointCloud2']
 
 Publisher count: 1
@@ -311,7 +266,7 @@ Node name: livox_lidar_publisher2
 Node namespace: /
 Topic type: sensor_msgs/msg/PointCloud2
 Endpoint type: PUBLISHER
-GID: 01.0f.52.fc.17.20.b8.be.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
+GID: 01.0f.52.fc.a9.28.14.03.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
 QoS profile:
   Reliability: RELIABLE
   History (Depth): UNKNOWN
@@ -327,7 +282,42 @@ Node name: livox_custommsg_adapter
 Node namespace: /
 Topic type: livox_interfaces/msg/CustomMsg
 Endpoint type: SUBSCRIPTION
-GID: 01.0f.52.fc.2a.20.7f.67.00.00.00.00.00.00.12.04.00.00.00.00.00.00.00.00
+GID: 01.0f.52.fc.bc.28.8a.07.00.00.00.00.00.00.12.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+root@lite3:/home/user/ros2_ws# ros2 topic info -v /lio_sam/points
+Type: sensor_msgs/msg/PointCloud2
+
+Publisher count: 1
+
+Node name: livox_custommsg_adapter
+Node namespace: /
+Topic type: sensor_msgs/msg/PointCloud2
+Endpoint type: PUBLISHER
+GID: 01.0f.52.fc.bc.28.8a.07.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 2
+
+Node name: lio_sam_imageProjection
+Node namespace: /
+Topic type: sensor_msgs/msg/PointCloud2
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.52.fc.cf.28.97.0f.00.00.00.00.00.00.14.04.00.00.00.00.00.00.00.00
 QoS profile:
   Reliability: BEST_EFFORT
   History (Depth): UNKNOWN
@@ -337,10 +327,23 @@ QoS profile:
   Liveliness: AUTOMATIC
   Liveliness lease duration: Infinite
 
-root@lite3:/home/user/ros2_ws# ros2 topic info /livox/lidar
-Type: ['livox_interfaces/msg/CustomMsg', 'sensor_msgs/msg/PointCloud2']
-Publisher count: 1
-Subscription count: 1
+Node name: rviz2
+Node namespace: /
+Topic type: sensor_msgs/msg/PointCloud2
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.52.fc.d5.28.19.e7.00.00.00.00.00.00.28.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+
+root@lite3:/home/user/ros2_ws# ros2 topic hz /lio_sam/points 
+^Croot@lite3:/home/user/ros2_ws# 
 
 
    
