@@ -253,40 +253,8 @@ ros2_ws/
 ```
 
 ```
-root@lite3:/home/user/ros2_ws# ros2 node list
-WARNING: Be aware that are nodes in the graph that share an exact name, this can have unintended side effects.
-/lio_sam_featureExtraction
-/lio_sam_imageProjection
-/lio_sam_imuPreintegration
-/lio_sam_imuPreintegration
-/lio_sam_mapOptimization
-/livox_custommsg_adapter
-/livox_lidar_publisher2
-/robot_state_publisher
-/rviz2
-/static_transform_publisher_7w4FSWenhDfPGhYl
-/transform_listener_impl_aaaaf8e52a70
-/transform_listener_impl_aaab03f59e30
-root@lite3:/home/user/ros2_ws# ros2 node list
-/livox_custommsg_adapter
-/livox_lidar_publisher2
-/rviz2
-/transform_listener_impl_aaaaf8e52a70
-root@lite3:/home/user/ros2_ws# 
-
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2/launch_ROS2# ros2 run livox_ros_driver2 livox_ros_driver2_node --ros-args \
-> -r __node:=livox_lidar_publisher2\
-> -p output_data_type:=0 \
-> -p xfer_format:=0 \
-> -p multi_topic:=0 \
-> -p data_src:=0 \
-> -p publish_freq:=10.0 \
-> -p frame_id:=livox_frame
-[ERROR] [1755154045.572548430] [rcl]: Failed to parse global arguments
-terminate called after throwing an instance of 'rclcpp::exceptions::RCLInvalidROSArgsError'
-  what():  failed to initialize rcl: Couldn't parse remap rule: '-r __node:=livox_lidar_publisher2-p'. Error: Expected lexeme type (1) not found, search ended at index 30, at ./src/rcl/lexer_lookahead.c:239, at ./src/rcl/arguments.c:371
-[ros2run]: Aborted
-
+ros2 run livox_ros_driver2 livox_ros_driver2_node --ros-args -r __node:=livox_lidar_publisher2 \
+  -p output_data_type:=0 -p xfer_format:=0 -p multi_topic:=0 -p data_src:=0 -p publish_freq:=10.0 -p frame_id:=livox_frame
 
 
 
