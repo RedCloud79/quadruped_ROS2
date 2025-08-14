@@ -251,37 +251,46 @@ ros2_ws/
             └── ExecuteTask.action
 
 ```
-Finished <<< robot_navigation [0.74s] 
---- stderr: livox_custommsg_adapter   
-CMake Error at CMakeLists.txt:11 (find_package):
-  By not providing "Findlivox_interfaces.cmake" in CMAKE_MODULE_PATH this
-  project has asked CMake to find a package configuration file provided by
-  "livox_interfaces", but CMake did not find one.
+Finished <<< robot_manager [3.25s]    
+--- stderr: lio_sam                    
+In file included from /home/user/ros2_ws/src/lio_sam/src/featureExtraction.cpp:1:
+/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
+   35 | #include <pcl_conversions/pcl_conversions.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/lio_sam_featureExtraction.dir/build.make:76: CMakeFiles/lio_sam_featureExtraction.dir/src/featureExtraction.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:602: CMakeFiles/lio_sam_featureExtraction.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+In file included from /home/user/ros2_ws/src/lio_sam/src/imuPreintegration.cpp:1:
+/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
+   35 | #include <pcl_conversions/pcl_conversions.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/lio_sam_imuPreintegration.dir/build.make:76: CMakeFiles/lio_sam_imuPreintegration.dir/src/imuPreintegration.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:658: CMakeFiles/lio_sam_imuPreintegration.dir/all] Error 2
+In file included from /home/user/ros2_ws/src/lio_sam/src/mapOptmization.cpp:1:
+/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
+   35 | #include <pcl_conversions/pcl_conversions.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+In file included from /home/user/ros2_ws/src/lio_sam/src/simpleGpsOdom.cpp:18:
+/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
+   35 | #include <pcl_conversions/pcl_conversions.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/lio_sam_mapOptimization.dir/build.make:76: CMakeFiles/lio_sam_mapOptimization.dir/src/mapOptmization.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:686: CMakeFiles/lio_sam_mapOptimization.dir/all] Error 2
+gmake[2]: *** [CMakeFiles/lio_sam_simpleGpsOdom.dir/build.make:76: CMakeFiles/lio_sam_simpleGpsOdom.dir/src/simpleGpsOdom.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:714: CMakeFiles/lio_sam_simpleGpsOdom.dir/all] Error 2
+In file included from /home/user/ros2_ws/src/lio_sam/src/imageProjection.cpp:1:
+/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
+   35 | #include <pcl_conversions/pcl_conversions.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/lio_sam_imageProjection.dir/build.make:76: CMakeFiles/lio_sam_imageProjection.dir/src/imageProjection.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:630: CMakeFiles/lio_sam_imageProjection.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
 
-  Could not find a package configuration file provided by "livox_interfaces"
-  with any of the following names:
-
-    livox_interfacesConfig.cmake
-    livox_interfaces-config.cmake
-
-  Add the installation prefix of "livox_interfaces" to CMAKE_PREFIX_PATH or
-  set "livox_interfaces_DIR" to a directory containing one of the above
-  files.  If "livox_interfaces" provides a separate development package or
-  SDK, be sure it has been installed.
-
-
----
-Failed   <<< livox_custommsg_adapter [2.86s, exited with code 1]
-Aborted  <<< robot_interfaces [2.93s]
-Aborted  <<< manager_intergaces [2.94s]          
-Aborted  <<< transfer_interfaces [3.03s]
-Aborted  <<< lio_sam [10.5s]                                  
-
-Summary: 4 packages finished [11.0s]
-  1 package failed: livox_custommsg_adapter
-  4 packages aborted: lio_sam manager_intergaces robot_interfaces transfer_interfaces
-  2 packages had stderr output: lio_sam livox_custommsg_adapter
-  3 packages not processed
 
 
 ```
