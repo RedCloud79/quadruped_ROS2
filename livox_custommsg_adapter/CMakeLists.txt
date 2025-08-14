@@ -8,24 +8,23 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
-find_package(livox_interfaces REQUIRED)  # ROS2는 livox_interfaces
-find_package(builtin_interfaces REQUIRED)
+find_package(livox_interfaces REQUIRED)
 
 include_directories(include)
 
-add_library(adapter_node SHARED
+add_executable(livox_custommsg_adapter
   src/adapter.cpp
+  src/main.cpp
 )
-ament_target_dependencies(adapter_node rclcpp sensor_msgs std_msgs livox_interfaces)
+ament_target_dependencies(livox_custommsg_adapter
+  rclcpp sensor_msgs std_msgs livox_interfaces
+)
 
-target_compile_options(adapter_node PRIVATE -O3 -Wall -Wextra)
+target_compile_options(livox_custommsg_adapter PRIVATE -O3 -Wall -Wextra)
 
-add_executable(livox_custommsg_adapter src/main.cpp)
-target_link_libraries(livox_custommsg_adapter adapter_node)
-ament_target_dependencies(livox_custommsg_adapter rclcpp sensor_msgs std_msgs livox_interfaces)
-
-install(TARGETS adapter_node livox_custommsg_adapter
-  DESTINATION lib/${PROJECT_NAME})
+install(TARGETS livox_custommsg_adapter
+  RUNTIME DESTINATION lib/${PROJECT_NAME}
+)
 
 install(DIRECTORY include/
   DESTINATION include)
