@@ -14,19 +14,19 @@ AdapterNode::AdapterNode(const rclcpp::NodeOptions &options)
 : rclcpp::Node("livox_custommsg_adapter", options) {
   frame_id_ = this->declare_parameter<std::string>("frame_id", "livox_frame");
   out_topic_ = this->declare_parameter<std::string>("out_topic", "/lio_sam/points");
-  time_scale_ = this->declare_parameter<double>("time_scale", 1e-6); // default µs → s
+  time_scale_ = this->declare_parameter<double>("time_scale", 1e-6);
   use_msg_header_time_ = this->declare_parameter<bool>("use_msg_header_time", true);
 
   auto in_topic = this->declare_parameter<std::string>("in_topic", "/livox/lidar");
 
-  // ✅ QoS 정렬: 드라이버 Publisher가 보통 RELIABLE이므로, 구독도 RELIABLE로 맞춤
+  // 구독: RELIABLE
   rclcpp::QoS sub_qos(rclcpp::KeepLast(100));
   sub_qos.reliable();
   sub_ = this->create_subscription<livox_interfaces::msg::CustomMsg>(
       in_topic, sub_qos,
       std::bind(&AdapterNode::cb, this, std::placeholders::_1));
 
-  // ✅ 퍼블리셔도 RELIABLE로 — RViz/echo 기본 QoS와 매칭
+  // 퍼블: RELIABLE
   rclcpp::QoS pub_qos(rclcpp::KeepLast(10));
   pub_qos.reliable();
   pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>(out_topic_, pub_qos);
@@ -41,7 +41,6 @@ void AdapterNode::cb(const livox_interfaces::msg::CustomMsg::SharedPtr msg) {
   if (n == 0) return;
 
   sensor_msgs::msg::PointCloud2 cloud;
-  // 헤더 타임스탬프 설정
   if (use_msg_header_time_) {
     cloud.header.stamp = msg->header.stamp;
   } else {
@@ -54,7 +53,6 @@ void AdapterNode::cb(const livox_interfaces::msg::CustomMsg::SharedPtr msg) {
   cloud.is_bigendian = false;
   cloud.is_dense = false;
 
-  // 필드 정의 (x,y,z,intensity,time,ring)
   sensor_msgs::PointCloud2Modifier mod(cloud);
   mod.setPointCloud2Fields(6,
     "x", 1, sensor_msgs::msg::PointField::FLOAT32,
@@ -79,12 +77,11 @@ void AdapterNode::cb(const livox_interfaces::msg::CustomMsg::SharedPtr msg) {
     *iy = p.y;
     *iz = p.z;
     *it = static_cast<float>(p.reflectivity);
-    *itime = static_cast<float>(p.offset_time) * static_cast<float>(time_scale_); // µs/ns → s
-    *iring = static_cast<uint16_t>(p.line); // line → ring
+    *itime = static_cast<float>(p.offset_time) * static_cast<float>(time_scale_);
+    *iring = static_cast<uint16_t>(p.line);
   }
 
   pub_->publish(cloud);
-  RCLCPP_DEBUG(get_logger(), "Published %zu points to %s", n, out_topic_.c_str());
 }
 
 } // namespace livox_custommsg_adapter
