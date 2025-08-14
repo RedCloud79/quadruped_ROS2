@@ -251,227 +251,32 @@ ros2_ws/
             └── ExecuteTask.action
 
 ```
+--- stderr: lio_sam                   
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
 
-<img width="799" height="910" alt="Screenshot from 2025-08-12 09-55-06" src="https://github.com/user-attachments/assets/a4c5e5d3-90f0-4047-ab03-4e34fd81096b" />
-
-<img width="800" height="917" alt="Screenshot from 2025-08-12 09-59-52" src="https://github.com/user-attachments/assets/e87783a0-17b3-4cb3-ad2c-059c88841e09" />
-
-```
-rviz2-6]          at line 226 in ./src/buffer_core.cpp
-[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
-[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
-[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
-[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
-[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
-[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
 
 
-```
+CMake Error at CMakeLists.txt:9 (find_package):
+  By not providing "Findcatkin.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "catkin", but
+  CMake did not find one.
 
-```
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_mapOptimization odometryFrame 
-String value is: odom
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_mapOptimization mapFrame
-String value is: map
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 run tf2_tools view_frames 
-[INFO] [1754972808.653615784] [view_frames]: Listening to tf data for 5.0 seconds...
-[INFO] [1754972813.717963557] [view_frames]: Generating graph in frames.pdf file...
-[INFO] [1754972813.723014058] [view_frames]: Result:tf2_msgs.srv.FrameGraph_Response(frame_yaml="chassis_link: \n  parent: 'base_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nimu_link: \n  parent: 'chassis_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nlaser_sensor_frame: \n  parent: 'imu_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nlidar_link: \n  parent: 'odom'\n  broadcaster: 'default_authority'\n  rate: 4.670\n  most_recent_transform: 1754972813.405127\n  oldest_transform: 1754972808.908762\n  buffer_length: 4.496\nnavsat_link: \n  parent: 'chassis_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\n")
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /livox/lidar --once | head -n 40
-header:
-  stamp:
-    sec: 1754972833
-    nanosec: 504569120
-  frame_id: livox_frame
-height: 1
-width: 19968
-fields:
-- name: x
-  offset: 0
-  datatype: 7
-  count: 1
-- name: y
-  offset: 4
-  datatype: 7
-  count: 1
-- name: z
-  offset: 8
-  datatype: 7
-  count: 1
-- name: intensity
-  offset: 12
-  datatype: 7
-  count: 1
-- name: tag
-  offset: 16
-  datatype: 2
-  count: 1
-- name: line
-  offset: 17
-  datatype: 2
-  count: 1
-- name: timestamp
-  offset: 18
-  datatype: 8
-  count: 1
-is_bigendian: false
-point_step: 26
-row_step: 519168
-data:
+  Could not find a package configuration file provided by "catkin" with any
+  of the following names:
+
+    catkinConfig.cmake
+    catkin-config.cmake
+
+  Add the installation prefix of "catkin" to CMAKE_PREFIX_PATH or set
+  "catkin_DIR" to a directory containing one of the above files.  If "catkin"
+  provides a separate development package or SDK, be sure it has been
+  installed.
 
 
-
-```
-```
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
-[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
-[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
-[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
-[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
-[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
-[lio_sam_imuPreintegration-2] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[lio_sam_imuPreintegration-2]          at line 226 in ./src/buffer_core.cpp
-[rviz2-6] Error:   TF_NO_FRAME_ID: Ignoring transform with child_frame_id "livox_frame"  from authority "Authority undetectable" because frame_id not set
-[rviz2-6]          at line 226 in ./src/buffer_core.cpp
-
-```
-```
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_imuPreintegration odometryFrame
-String value is: odom
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_imuPreintegration baselinkFrame
-String value is: livox_frame
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 param get /lio_sam_imuPreintegration lidarFrame
-String value is: livox_frame
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /tf --once | grep -B5 -A3 'child_frame_id: "livox_frame"'
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic echo /tf_static --once | egrep -A2 'child_frame_id: "(livox_frame|base_link)"'
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# 
-
-```
-```
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2# ros2 topic info /tf -v
-Type: tf2_msgs/msg/TFMessage
-
-Publisher count: 3
-
-Node name: robot_state_publisher
-Node namespace: /
-Topic type: tf2_msgs/msg/TFMessage
-Endpoint type: PUBLISHER
-GID: 01.0f.e0.b6.57.37.57.30.00.00.00.00.00.00.12.03.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Node name: lio_sam_imuPreintegration
-Node namespace: /
-Topic type: tf2_msgs/msg/TFMessage
-Endpoint type: PUBLISHER
-GID: 01.0f.e0.b6.59.37.2b.fd.00.00.00.00.00.00.2b.03.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Node name: lio_sam_mapOptimization
-Node namespace: /
-Topic type: tf2_msgs/msg/TFMessage
-Endpoint type: PUBLISHER
-GID: 01.0f.e0.b6.5f.37.c6.1d.00.00.00.00.00.00.17.03.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Subscription count: 3
-
-Node name: transform_listener_impl_aaab06145670
-Node namespace: /
-Topic type: tf2_msgs/msg/TFMessage
-Endpoint type: SUBSCRIPTION
-GID: 01.0f.e0.b6.37.37.6b.dd.00.00.00.00.00.00.15.04.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Node name: transform_listener_impl_aaaae9cc0240
-Node namespace: /
-Topic type: tf2_msgs/msg/TFMessage
-Endpoint type: SUBSCRIPTION
-GID: 01.0f.e0.b6.59.37.2b.fd.00.00.00.00.00.00.25.04.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Node name: transform_listener_impl_aaab1b5703d0
-Node namespace: /
-Topic type: tf2_msgs/msg/TFMessage
-Endpoint type: SUBSCRIPTION
-GID: 01.0f.e0.b6.61.37.c2.aa.00.00.00.00.00.00.23.04.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
 
 
 ```
