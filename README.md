@@ -257,5 +257,10 @@ ros2_ws/
 
 [livox_custommsg_adapter-1] 2025-08-14 07:03:04.110 [RTPS_TRANSPORT_SHM Error] Failed init_port fastrtps_port7411: open_and_lock_file failed -> Function open_port_internal
 
+
+Could not determine the type for the passed topic
+root@lite3:/home/user/ros2_ws# ros2 topic echo /livox/lidar
+Cannot echo topic '/livox/lidar', as it contains more than one type: [livox_interfaces/msg/CustomMsg, sensor_msgs/msg/PointCloud2]
+
    
 ```
