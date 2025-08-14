@@ -251,205 +251,37 @@ ros2_ws/
             └── ExecuteTask.action
 
 ```
-Finished <<< livox_sdk2 [1min 8s]
---- stderr: livox_sdk2
-CMake Warning:
-  Manually-specified variables were not used by the project:
+Finished <<< robot_navigation [0.74s] 
+--- stderr: livox_custommsg_adapter   
+CMake Error at CMakeLists.txt:11 (find_package):
+  By not providing "Findlivox_interfaces.cmake" in CMAKE_MODULE_PATH this
+  project has asked CMake to find a package configuration file provided by
+  "livox_interfaces", but CMake did not find one.
 
-    HUMBLE_ROS
-    ROS_EDITION
+  Could not find a package configuration file provided by "livox_interfaces"
+  with any of the following names:
+
+    livox_interfacesConfig.cmake
+    livox_interfaces-config.cmake
+
+  Add the installation prefix of "livox_interfaces" to CMAKE_PREFIX_PATH or
+  set "livox_interfaces_DIR" to a directory containing one of the above
+  files.  If "livox_interfaces" provides a separate development package or
+  SDK, be sure it has been installed.
 
 
-In file included from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/stream.h:19,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/memorystream.h:22,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/encodedstream.h:22,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/document.h:26,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/command_handler/parse_lidar_state_info.h:38,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/command_handler/hap_command_handler.cpp:37:
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:542:29: warning: unknown option after ‘#pragma GCC diagnostic’ kind [-Wpragmas]
-  542 | #define RAPIDJSON_PRAGMA(x) _Pragma(RAPIDJSON_STRINGIFY(x))
-      |                             ^~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:543:34: note: in expansion of macro ‘RAPIDJSON_PRAGMA’
-  543 | #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(GCC diagnostic x)
-      |                                  ^~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:545:3: note: in expansion of macro ‘RAPIDJSON_DIAG_PRAGMA’
-  545 |   RAPIDJSON_DIAG_PRAGMA(ignored RAPIDJSON_STRINGIFY(RAPIDJSON_JOIN(-W, x)))
-      |   ^~~~~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/internal/dtoa.h:36:1: note: in expansion of macro ‘RAPIDJSON_DIAG_OFF’
-   36 | RAPIDJSON_DIAG_OFF(array - bounds)  // some gcc versions generate wrong warnings
-      | ^~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:542:29: note: did you mean ‘-Warray-bounds’?
-  542 | #define RAPIDJSON_PRAGMA(x) _Pragma(RAPIDJSON_STRINGIFY(x))
-      |                             ^~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:543:34: note: in expansion of macro ‘RAPIDJSON_PRAGMA’
-  543 | #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(GCC diagnostic x)
-      |                                  ^~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:545:3: note: in expansion of macro ‘RAPIDJSON_DIAG_PRAGMA’
-  545 |   RAPIDJSON_DIAG_PRAGMA(ignored RAPIDJSON_STRINGIFY(RAPIDJSON_JOIN(-W, x)))
-      |   ^~~~~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/internal/dtoa.h:36:1: note: in expansion of macro ‘RAPIDJSON_DIAG_OFF’
-   36 | RAPIDJSON_DIAG_OFF(array - bounds)  // some gcc versions generate wrong warnings
-      | ^~~~~~~~~~~~~~~~~~
-In file included from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/stream.h:19,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/memorystream.h:22,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/encodedstream.h:22,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/document.h:26,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/command_handler/parse_lidar_state_info.h:38,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/command_handler/mid360_command_handler.cpp:37:
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:542:29: warning: unknown option after ‘#pragma GCC diagnostic’ kind [-Wpragmas]
-  542 | #define RAPIDJSON_PRAGMA(x) _Pragma(RAPIDJSON_STRINGIFY(x))
-      |                             ^~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:543:34: note: in expansion of macro ‘RAPIDJSON_PRAGMA’
-  543 | #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(GCC diagnostic x)
-      |                                  ^~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:545:3: note: in expansion of macro ‘RAPIDJSON_DIAG_PRAGMA’
-  545 |   RAPIDJSON_DIAG_PRAGMA(ignored RAPIDJSON_STRINGIFY(RAPIDJSON_JOIN(-W, x)))
-      |   ^~~~~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/internal/dtoa.h:36:1: note: in expansion of macro ‘RAPIDJSON_DIAG_OFF’
-   36 | RAPIDJSON_DIAG_OFF(array - bounds)  // some gcc versions generate wrong warnings
-      | ^~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:542:29: note: did you mean ‘-Warray-bounds’?
-  542 | #define RAPIDJSON_PRAGMA(x) _Pragma(RAPIDJSON_STRINGIFY(x))
-      |                             ^~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:543:34: note: in expansion of macro ‘RAPIDJSON_PRAGMA’
-  543 | #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(GCC diagnostic x)
-      |                                  ^~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:545:3: note: in expansion of macro ‘RAPIDJSON_DIAG_PRAGMA’
-  545 |   RAPIDJSON_DIAG_PRAGMA(ignored RAPIDJSON_STRINGIFY(RAPIDJSON_JOIN(-W, x)))
-      |   ^~~~~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/internal/dtoa.h:36:1: note: in expansion of macro ‘RAPIDJSON_DIAG_OFF’
-   36 | RAPIDJSON_DIAG_OFF(array - bounds)  // some gcc versions generate wrong warnings
-      | ^~~~~~~~~~~~~~~~~~
-In file included from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/stream.h:19,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/memorystream.h:22,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/encodedstream.h:22,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/document.h:26,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/command_handler/parse_lidar_state_info.h:38,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/command_handler/parse_lidar_state_info.cpp:2:
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:542:29: warning: unknown option after ‘#pragma GCC diagnostic’ kind [-Wpragmas]
-  542 | #define RAPIDJSON_PRAGMA(x) _Pragma(RAPIDJSON_STRINGIFY(x))
-      |                             ^~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:543:34: note: in expansion of macro ‘RAPIDJSON_PRAGMA’
-  543 | #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(GCC diagnostic x)
-      |                                  ^~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:545:3: note: in expansion of macro ‘RAPIDJSON_DIAG_PRAGMA’
-  545 |   RAPIDJSON_DIAG_PRAGMA(ignored RAPIDJSON_STRINGIFY(RAPIDJSON_JOIN(-W, x)))
-      |   ^~~~~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/internal/dtoa.h:36:1: note: in expansion of macro ‘RAPIDJSON_DIAG_OFF’
-   36 | RAPIDJSON_DIAG_OFF(array - bounds)  // some gcc versions generate wrong warnings
-      | ^~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:542:29: note: did you mean ‘-Warray-bounds’?
-  542 | #define RAPIDJSON_PRAGMA(x) _Pragma(RAPIDJSON_STRINGIFY(x))
-      |                             ^~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:543:34: note: in expansion of macro ‘RAPIDJSON_PRAGMA’
-  543 | #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(GCC diagnostic x)
-      |                                  ^~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:545:3: note: in expansion of macro ‘RAPIDJSON_DIAG_PRAGMA’
-  545 |   RAPIDJSON_DIAG_PRAGMA(ignored RAPIDJSON_STRINGIFY(RAPIDJSON_JOIN(-W, x)))
-      |   ^~~~~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/internal/dtoa.h:36:1: note: in expansion of macro ‘RAPIDJSON_DIAG_OFF’
-   36 | RAPIDJSON_DIAG_OFF(array - bounds)  // some gcc versions generate wrong warnings
-      | ^~~~~~~~~~~~~~~~~~
-In file included from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/stream.h:19,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/memorystream.h:22,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/encodedstream.h:22,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/document.h:26,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/command_handler/parse_lidar_state_info.h:38,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/command_handler/mid360_command_handler.cpp:37:
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:542:29: warning: unknown option after ‘#pragma GCC diagnostic’ kind [-Wpragmas]
-  542 | #define RAPIDJSON_PRAGMA(x) _Pragma(RAPIDJSON_STRINGIFY(x))
-      |                             ^~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:543:34: note: in expansion of macro ‘RAPIDJSON_PRAGMA’
-  543 | #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(GCC diagnostic x)
-      |                                  ^~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:545:3: note: in expansion of macro ‘RAPIDJSON_DIAG_PRAGMA’
-  545 |   RAPIDJSON_DIAG_PRAGMA(ignored RAPIDJSON_STRINGIFY(RAPIDJSON_JOIN(-W, x)))
-      |   ^~~~~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/internal/dtoa.h:36:1: note: in expansion of macro ‘RAPIDJSON_DIAG_OFF’
-   36 | RAPIDJSON_DIAG_OFF(array - bounds)  // some gcc versions generate wrong warnings
-      | ^~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:542:29: note: did you mean ‘-Warray-bounds’?
-  542 | #define RAPIDJSON_PRAGMA(x) _Pragma(RAPIDJSON_STRINGIFY(x))
-      |                             ^~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:543:34: note: in expansion of macro ‘RAPIDJSON_PRAGMA’
-  543 | #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(GCC diagnostic x)
-      |                                  ^~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:545:3: note: in expansion of macro ‘RAPIDJSON_DIAG_PRAGMA’
-  545 |   RAPIDJSON_DIAG_PRAGMA(ignored RAPIDJSON_STRINGIFY(RAPIDJSON_JOIN(-W, x)))
-      |   ^~~~~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/internal/dtoa.h:36:1: note: in expansion of macro ‘RAPIDJSON_DIAG_OFF’
-   36 | RAPIDJSON_DIAG_OFF(array - bounds)  // some gcc versions generate wrong warnings
-      | ^~~~~~~~~~~~~~~~~~
-In file included from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/stream.h:19,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/memorystream.h:22,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/encodedstream.h:22,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/document.h:26,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/command_handler/parse_lidar_state_info.h:38,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/command_handler/hap_command_handler.cpp:37:
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:542:29: warning: unknown option after ‘#pragma GCC diagnostic’ kind [-Wpragmas]
-  542 | #define RAPIDJSON_PRAGMA(x) _Pragma(RAPIDJSON_STRINGIFY(x))
-      |                             ^~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:543:34: note: in expansion of macro ‘RAPIDJSON_PRAGMA’
-  543 | #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(GCC diagnostic x)
-      |                                  ^~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:545:3: note: in expansion of macro ‘RAPIDJSON_DIAG_PRAGMA’
-  545 |   RAPIDJSON_DIAG_PRAGMA(ignored RAPIDJSON_STRINGIFY(RAPIDJSON_JOIN(-W, x)))
-      |   ^~~~~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/internal/dtoa.h:36:1: note: in expansion of macro ‘RAPIDJSON_DIAG_OFF’
-   36 | RAPIDJSON_DIAG_OFF(array - bounds)  // some gcc versions generate wrong warnings
-      | ^~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:542:29: note: did you mean ‘-Warray-bounds’?
-  542 | #define RAPIDJSON_PRAGMA(x) _Pragma(RAPIDJSON_STRINGIFY(x))
-      |                             ^~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:543:34: note: in expansion of macro ‘RAPIDJSON_PRAGMA’
-  543 | #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(GCC diagnostic x)
-      |                                  ^~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:545:3: note: in expansion of macro ‘RAPIDJSON_DIAG_PRAGMA’
-  545 |   RAPIDJSON_DIAG_PRAGMA(ignored RAPIDJSON_STRINGIFY(RAPIDJSON_JOIN(-W, x)))
-      |   ^~~~~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/internal/dtoa.h:36:1: note: in expansion of macro ‘RAPIDJSON_DIAG_OFF’
-   36 | RAPIDJSON_DIAG_OFF(array - bounds)  // some gcc versions generate wrong warnings
-      | ^~~~~~~~~~~~~~~~~~
-In file included from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/stream.h:19,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/memorystream.h:22,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/encodedstream.h:22,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/document.h:26,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/command_handler/parse_lidar_state_info.h:38,
-                 from /home/user/ros2_ws/src/Livox-SDK2/sdk_core/command_handler/parse_lidar_state_info.cpp:2:
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:542:29: warning: unknown option after ‘#pragma GCC diagnostic’ kind [-Wpragmas]
-  542 | #define RAPIDJSON_PRAGMA(x) _Pragma(RAPIDJSON_STRINGIFY(x))
-      |                             ^~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:543:34: note: in expansion of macro ‘RAPIDJSON_PRAGMA’
-  543 | #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(GCC diagnostic x)
-      |                                  ^~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:545:3: note: in expansion of macro ‘RAPIDJSON_DIAG_PRAGMA’
-  545 |   RAPIDJSON_DIAG_PRAGMA(ignored RAPIDJSON_STRINGIFY(RAPIDJSON_JOIN(-W, x)))
-      |   ^~~~~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/internal/dtoa.h:36:1: note: in expansion of macro ‘RAPIDJSON_DIAG_OFF’
-   36 | RAPIDJSON_DIAG_OFF(array - bounds)  // some gcc versions generate wrong warnings
-      | ^~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:542:29: note: did you mean ‘-Warray-bounds’?
-  542 | #define RAPIDJSON_PRAGMA(x) _Pragma(RAPIDJSON_STRINGIFY(x))
-      |                             ^~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:543:34: note: in expansion of macro ‘RAPIDJSON_PRAGMA’
-  543 | #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(GCC diagnostic x)
-      |                                  ^~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/rapidjson.h:545:3: note: in expansion of macro ‘RAPIDJSON_DIAG_PRAGMA’
-  545 |   RAPIDJSON_DIAG_PRAGMA(ignored RAPIDJSON_STRINGIFY(RAPIDJSON_JOIN(-W, x)))
-      |   ^~~~~~~~~~~~~~~~~~~~~
-/home/user/ros2_ws/src/Livox-SDK2/sdk_core/../3rdparty/rapidjson/internal/dtoa.h:36:1: note: in expansion of macro ‘RAPIDJSON_DIAG_OFF’
-   36 | RAPIDJSON_DIAG_OFF(array - bounds)  // some gcc versions generate wrong warnings
-      | ^~~~~~~~~~~~~~~~~~
 ---
+Failed   <<< livox_custommsg_adapter [2.86s, exited with code 1]
+Aborted  <<< robot_interfaces [2.93s]
+Aborted  <<< manager_intergaces [2.94s]          
+Aborted  <<< transfer_interfaces [3.03s]
+Aborted  <<< lio_sam [10.5s]                                  
 
-Summary: 2 packages finished [1min 9s]
-  1 package had stderr output: livox_sdk2
- ---> Removed intermediate container 251cfb39831f
- ---> c1d3379b2d5b
-Step 12/12 : RUN echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc &&     echo 'source /home/user/ros2_ws/install/setup.bash' >> ~/.bashrc
-
-
-
+Summary: 4 packages finished [11.0s]
+  1 package failed: livox_custommsg_adapter
+  4 packages aborted: lio_sam manager_intergaces robot_interfaces transfer_interfaces
+  2 packages had stderr output: lio_sam livox_custommsg_adapter
+  3 packages not processed
 
 
 ```
