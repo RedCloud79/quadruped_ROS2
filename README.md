@@ -253,97 +253,19 @@ ros2_ws/
 ```
 
 ```
-root@lite3:/home/user/ros2_ws# ros2 topic info /livox/lidar
-Type: ['livox_interfaces/msg/CustomMsg', 'sensor_msgs/msg/PointCloud2']
-Publisher count: 1
-Subscription count: 1
-root@lite3:/home/user/ros2_ws# ros2 topic info -v /livox/lidar
-Type: ['livox_interfaces/msg/CustomMsg', 'sensor_msgs/msg/PointCloud2']
-
-Publisher count: 1
-
-Node name: livox_lidar_publisher2
-Node namespace: /
-Topic type: sensor_msgs/msg/PointCloud2
-Endpoint type: PUBLISHER
-GID: 01.0f.52.fc.a9.28.14.03.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Subscription count: 1
-
-Node name: livox_custommsg_adapter
-Node namespace: /
-Topic type: livox_interfaces/msg/CustomMsg
-Endpoint type: SUBSCRIPTION
-GID: 01.0f.52.fc.bc.28.8a.07.00.00.00.00.00.00.12.04.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-root@lite3:/home/user/ros2_ws# ros2 topic info -v /lio_sam/points
-Type: sensor_msgs/msg/PointCloud2
-
-Publisher count: 1
-
-Node name: livox_custommsg_adapter
-Node namespace: /
-Topic type: sensor_msgs/msg/PointCloud2
-Endpoint type: PUBLISHER
-GID: 01.0f.52.fc.bc.28.8a.07.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Subscription count: 2
-
-Node name: lio_sam_imageProjection
-Node namespace: /
-Topic type: sensor_msgs/msg/PointCloud2
-Endpoint type: SUBSCRIPTION
-GID: 01.0f.52.fc.cf.28.97.0f.00.00.00.00.00.00.14.04.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: BEST_EFFORT
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
-
-Node name: rviz2
-Node namespace: /
-Topic type: sensor_msgs/msg/PointCloud2
-Endpoint type: SUBSCRIPTION
-GID: 01.0f.52.fc.d5.28.19.e7.00.00.00.00.00.00.28.04.00.00.00.00.00.00.00.00
-QoS profile:
-  Reliability: RELIABLE
-  History (Depth): UNKNOWN
-  Durability: VOLATILE
-  Lifespan: Infinite
-  Deadline: Infinite
-  Liveliness: AUTOMATIC
-  Liveliness lease duration: Infinite
+ros2 run livox_ros_driver2 livox_ros_driver2_node --ros-args -r __node:=livox_lidar_publisher2 \
+  -p output_data_type:=0 -p xfer_format:=0 -p multi_topic:=0 -p data_src:=0 -p publish_freq:=10.0 -p frame_id:=livox_frame
 
 
-root@lite3:/home/user/ros2_ws# ros2 topic hz /lio_sam/points 
-^Croot@lite3:/home/user/ros2_ws# 
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2/launch_ROS2# ros2 run livox_ros_driver2 livox_ros_driver2_node --ros-args -r __node:=livox_lidar_publisher2   -p output_data_type:=0 -p xfer_format:=0 -p multi_topic:=0 -p data_src:=0 -p publish_freq:=10.0 -p frame_id:=livox_frame
+[INFO] [1755154462.842862510] [livox_lidar_publisher2]: Livox Ros Driver2 Version: 1.2.4
+[INFO] [1755154462.843743205] [livox_lidar_publisher2]: Data Source is raw lidar.
+[INFO] [1755154462.843813575] [livox_lidar_publisher2]: Config file : path_default
+LdsLidar *GetInstance
+parse summary info failed, can not open file: path_default
+[ERROR] [1755154462.844053517] [livox_lidar_publisher2]: Init lds lidar fail!
+
+
 
 
    
