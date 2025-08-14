@@ -251,47 +251,7 @@ ros2_ws/
             └── ExecuteTask.action
 
 ```
---- stderr: lio_sam                     
-In file included from /home/user/ros2_ws/src/lio_sam/src/imuPreintegration.cpp:1:
-/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
-   35 | #include <pcl_conversions/pcl_conversions.h>
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-compilation terminated.
-gmake[2]: *** [CMakeFiles/lio_sam_imuPreintegration.dir/build.make:76: CMakeFiles/lio_sam_imuPreintegration.dir/src/imuPreintegration.cpp.o] Error 1
-gmake[1]: *** [CMakeFiles/Makefile2:658: CMakeFiles/lio_sam_imuPreintegration.dir/all] Error 2
-gmake[1]: *** Waiting for unfinished jobs....
-In file included from /home/user/ros2_ws/src/lio_sam/src/simpleGpsOdom.cpp:18:
-/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
-   35 | #include <pcl_conversions/pcl_conversions.h>
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-compilation terminated.
-gmake[2]: *** [CMakeFiles/lio_sam_simpleGpsOdom.dir/build.make:76: CMakeFiles/lio_sam_simpleGpsOdom.dir/src/simpleGpsOdom.cpp.o] Error 1
-gmake[1]: *** [CMakeFiles/Makefile2:714: CMakeFiles/lio_sam_simpleGpsOdom.dir/all] Error 2
-In file included from /home/user/ros2_ws/src/lio_sam/src/imageProjection.cpp:1:
-/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
-   35 | #include <pcl_conversions/pcl_conversions.h>
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-compilation terminated.
-gmake[2]: *** [CMakeFiles/lio_sam_imageProjection.dir/build.make:76: CMakeFiles/lio_sam_imageProjection.dir/src/imageProjection.cpp.o] Error 1
-gmake[1]: *** [CMakeFiles/Makefile2:630: CMakeFiles/lio_sam_imageProjection.dir/all] Error 2
-In file included from /home/user/ros2_ws/src/lio_sam/src/featureExtraction.cpp:1:
-/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
-   35 | #include <pcl_conversions/pcl_conversions.h>
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-compilation terminated.
-gmake[2]: *** [CMakeFiles/lio_sam_featureExtraction.dir/build.make:76: CMakeFiles/lio_sam_featureExtraction.dir/src/featureExtraction.cpp.o] Error 1
-gmake[1]: *** [CMakeFiles/Makefile2:602: CMakeFiles/lio_sam_featureExtraction.dir/all] Error 2
-In file included from /home/user/ros2_ws/src/lio_sam/src/mapOptmization.cpp:1:
-/home/user/ros2_ws/src/lio_sam/include/lio_sam/utility.hpp:35:10: fatal error: pcl_conversions/pcl_conversions.h: No such file or directory
-   35 | #include <pcl_conversions/pcl_conversions.h>
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-compilation terminated.
-gmake[2]: *** [CMakeFiles/lio_sam_mapOptimization.dir/build.make:76: CMakeFiles/lio_sam_mapOptimization.dir/src/mapOptmization.cpp.o] Error 1
-gmake[1]: *** [CMakeFiles/Makefile2:686: CMakeFiles/lio_sam_mapOptimization.dir/all] Error 2
-gmake: *** [Makefile:146: all] Error 2
----
-Failed   <<< lio_sam [11.3s, exited with code 2]
-Aborted  <<< livox_custommsg_adapter [15.9s]       
-Aborted  <<< livox_ros_driver2 [26.9s] 
+
+```
 
 ```
