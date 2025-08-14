@@ -253,15 +253,19 @@ ros2_ws/
 ```
 
 ```
-
 root@lite3:/home/user/ros2_ws/src/livox_ros_driver2/launch_ROS2# ros2 launch msg_MID360_launch.py 
-[INFO] [launch]: All log files can be found below /root/.ros/log/2025-08-14-05-29-47-234668-lite3-5499
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-08-14-05-34-34-506421-lite3-6407
 [INFO] [launch]: Default logging verbosity is set to INFO
-[INFO] [livox_ros_driver2_node-1]: process started with pid [5500]
-[livox_ros_driver2_node-1] [INFO] [1755149387.359027802] [livox_lidar_publisher2]: Livox Ros Driver2 Version: 1.2.4
-[livox_ros_driver2_node-1] terminate called after throwing an instance of 'rclcpp::exceptions::InvalidParameterTypeException'
-[livox_ros_driver2_node-1]   what():  parameter 'output_data_type' has invalid type: Wrong parameter type, parameter {output_data_type} is of type {integer}, setting it to {string} is not allowed.
-[ERROR] [livox_ros_driver2_node-1]: process has died [pid 5500, exit code -6, cmd '/home/user/ros2_ws/install/livox_ros_driver2/lib/livox_ros_driver2/livox_ros_driver2_node --ros-args -r __node:=livox_lidar_publisher2 --params-file /tmp/launch_params_qmmco3wu'].
+[ERROR] [launch]: Caught exception in launch (see debug for traceback): Caught multiple exceptions when trying to load file of format [py]:
+ - TypeError: value='0' is not an instance of <class 'int'>
+ - InvalidFrontendLaunchFileError: The launch file may have a syntax error, or its format is unknown
+root@lite3:/home/user/ros2_ws/src/livox_ros_driver2/launch_ROS2# ros2 launch msg_MID360_launch.py 
+[INFO] [launch]: All log files can be found below /root/.ros/log/2025-08-14-05-34-42-552759-lite3-6420
+[INFO] [launch]: Default logging verbosity is set to INFO
+[ERROR] [launch]: Caught exception in launch (see debug for traceback): Caught multiple exceptions when trying to load file of format [py]:
+ - TypeError: value='0' is not an instance of <class 'int'>
+ - InvalidFrontendLaunchFileError: The launch file may have a syntax error, or its format is unknown
+
 
    
 ```
