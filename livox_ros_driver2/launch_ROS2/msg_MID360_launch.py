@@ -51,7 +51,7 @@ def generate_launch_description():
                 'multi_topic':       ParameterValue(multi_topic,     value_type=int),
                 'data_src':          ParameterValue(data_src,        value_type=int),
                 'publish_freq':      ParameterValue(publish_freq,    value_type=float),
-                'output_data_type':  ParameterValue(output_data_type,value_type=int),  # 기대값 0
+                'output_data_type':  ParameterValue(0 ,value_type=int),  # 기대값 0
                 'cmdline_str':       bd_list,
                 'cmdline_file_path': lvx_file_path,
                 'user_config_path':  os.path.join(get_package_share_directory('livox_ros_driver2'), 'config', 'MID360_config.json'),
@@ -76,7 +76,7 @@ def generate_launch_description():
                 'multi_topic':       ParameterValue(multi_topic,     value_type=int),
                 'data_src':          ParameterValue(data_src,        value_type=int),
                 'publish_freq':      ParameterValue(publish_freq,    value_type=float),
-                'output_data_type':  ParameterValue(output_data_type,value_type=int),  # 기대값 1
+                'output_data_type':  ParameterValue(1 ,value_type=int),  # 기대값 1
                 'cmdline_str':       bd_list,
                 'cmdline_file_path': lvx_file_path,
                 'user_config_path':  os.path.join(get_package_share_directory('livox_ros_driver2'), 'config', 'MID360_config.json'),
