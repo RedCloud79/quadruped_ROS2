@@ -253,20 +253,9 @@ ros2_ws/
 ```
 
 ```
-ros2 run livox_ros_driver2 livox_ros_driver2_node --ros-args -r __node:=livox_lidar_publisher2 \
-  -p output_data_type:=0 -p xfer_format:=0 -p multi_topic:=0 -p data_src:=0 -p publish_freq:=10.0 -p frame_id:=livox_frame
 
 
-root@lite3:/home/user/ros2_ws/src/livox_ros_driver2/launch_ROS2# ros2 run livox_ros_driver2 livox_ros_driver2_node --ros-args -r __node:=livox_lidar_publisher2   -p output_data_type:=0 -p xfer_format:=0 -p multi_topic:=0 -p data_src:=0 -p publish_freq:=10.0 -p frame_id:=livox_frame
-[INFO] [1755154462.842862510] [livox_lidar_publisher2]: Livox Ros Driver2 Version: 1.2.4
-[INFO] [1755154462.843743205] [livox_lidar_publisher2]: Data Source is raw lidar.
-[INFO] [1755154462.843813575] [livox_lidar_publisher2]: Config file : path_default
-LdsLidar *GetInstance
-parse summary info failed, can not open file: path_default
-[ERROR] [1755154462.844053517] [livox_lidar_publisher2]: Init lds lidar fail!
-
-
-
+[livox_custommsg_adapter-1] 2025-08-14 07:03:04.110 [RTPS_TRANSPORT_SHM Error] Failed init_port fastrtps_port7411: open_and_lock_file failed -> Function open_port_internal
 
    
 ```
