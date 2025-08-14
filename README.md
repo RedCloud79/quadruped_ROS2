@@ -275,5 +275,53 @@ ros2 run livox_ros_driver2 livox_ros_driver2_node --ros-args -r __node:=livox_li
   -p publish_freq:=10.0 \
   -p frame_id:=livox_frame
 
+
+root@lite3:/home/user/ros2_ws# ros2 param get /livox_lidar_publisher2 ouput_data_type
+2025-08-14 07:37:27.754 [RTPS_TRANSPORT_SHM Error] Failed init_port fastrtps_port7411: open_and_lock_file failed -> Function open_port_internal
+Parameter not set
+root@lite3:/home/user/ros2_ws# ros2 param get /livox_lidar_publisher2 xfer_format
+2025-08-14 07:37:37.601 [RTPS_TRANSPORT_SHM Error] Failed init_port fastrtps_port7411: open_and_lock_file failed -> Function open_port_internal
+Integer value is: 0
+root@lite3:/home/user/ros2_ws# ros2 param get /livox_lidar_publisher2 user_config_path
+2025-08-14 07:37:48.856 [RTPS_TRANSPORT_SHM Error] Failed init_port fastrtps_port7411: open_and_lock_file failed -> Function open_port_internal
+String value is: /home/user/ros2_ws/install/livox_ros_driver2/share/livox_ros_driver2/config/MID360_config.json
+
+
+oot@lite3:/home/user/ros2_ws# ros2 topic info -v /livox/lidar
+Type: ['livox_interfaces/msg/CustomMsg', 'sensor_msgs/msg/PointCloud2']
+
+Publisher count: 1
+
+Node name: livox_lidar_publisher2
+Node namespace: /
+Topic type: sensor_msgs/msg/PointCloud2
+Endpoint type: PUBLISHER
+GID: 01.0f.52.fc.9b.3d.0c.b5.00.00.00.00.00.00.13.03.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 1
+
+Node name: livox_custommsg_adapter
+Node namespace: /
+Topic type: livox_interfaces/msg/CustomMsg
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.52.fc.af.3d.a4.b3.00.00.00.00.00.00.12.04.00.00.00.00.00.00.00.00
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+
    
 ```
