@@ -251,32 +251,96 @@ ros2_ws/
             └── ExecuteTask.action
 
 ```
---- stderr: lio_sam                   
-CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
-  Compatibility with CMake < 2.8.12 will be removed from a future version of
-  CMake.
+tep 11/12 : RUN ./build.sh humble
+ ---> Running in a79234366a12
+Working Path: /home/user/ros2_ws/src/livox_ros_driver2
+ROS version is: ROS2
+Starting >>> livox_ros_driver2
+Starting >>> livox_sdk2
+--- stderr: livox_ros_driver2
+CMake Error at CMakeLists.txt:224 (find_package):
+  By not providing "Findament_cmake_auto.cmake" in CMAKE_MODULE_PATH this
+  project has asked CMake to find a package configuration file provided by
+  "ament_cmake_auto", but CMake did not find one.
 
-  Update the VERSION argument <min> value or use a ...<max> suffix to tell
-  CMake that the project does not need compatibility with older versions.
+  Could not find a package configuration file provided by "ament_cmake_auto"
+  with any of the following names:
 
+    ament_cmake_autoConfig.cmake
+    ament_cmake_auto-config.cmake
 
-CMake Error at CMakeLists.txt:9 (find_package):
-  By not providing "Findcatkin.cmake" in CMAKE_MODULE_PATH this project has
-  asked CMake to find a package configuration file provided by "catkin", but
-  CMake did not find one.
-
-  Could not find a package configuration file provided by "catkin" with any
-  of the following names:
-
-    catkinConfig.cmake
-    catkin-config.cmake
-
-  Add the installation prefix of "catkin" to CMAKE_PREFIX_PATH or set
-  "catkin_DIR" to a directory containing one of the above files.  If "catkin"
-  provides a separate development package or SDK, be sure it has been
-  installed.
+  Add the installation prefix of "ament_cmake_auto" to CMAKE_PREFIX_PATH or
+  set "ament_cmake_auto_DIR" to a directory containing one of the above
+  files.  If "ament_cmake_auto" provides a separate development package or
+  SDK, be sure it has been installed.
 
 
+---
+Failed   <<< livox_ros_driver2 [0.63s, exited with code 1]
+Aborted  <<< livox_sdk2 [0.62s]
 
+Summary: 0 packages finished [1.02s]
+  1 package failed: livox_ros_driver2
+  1 package aborted: livox_sdk2
+  2 packages had stderr output: livox_ros_driver2 livox_sdk2
+ ---> Removed intermediate container a79234366a12
+ ---> 3d35a991c692
+Step 12/12 : RUN echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc &&     echo 'source /home/user/ros2_ws/install/setup.bash' >> ~/.bashrc
+
+
+
+
+```
+```
+FROM arm64v8/ros:humble
+
+RUN apt update && apt install -y \
+    software-properties-common \
+    sudo \
+    git \
+    curl \
+    wget \
+    build-essential \
+    cmake \
+    python3-colcon-common-extensions \
+    python3-pip \
+    libpcap-dev \
+    ros-humble-navigation2 \
+    ros-humble-nav2-bringup \
+    ros-humble-rviz2 \
+    ros-humble-tf2-geometry-msgs \
+    ros-humble-realsense2-camera \
+    ros-humble-perception-pcl \
+    ros-humble-pcl-msgs \
+    ros-humble-vision-opencv \
+    ros-humble-xacro \
+    ros-humble-topic-tools\
+    ros-humble-pointcloud-to-laserscan\
+    ros-humble-ament-cmake-auto \
+    ros-humble-rqt-tf-tree \
+    nano \
+    x11-apps\
+    && rm -rf /var/lib/apt/lists/*
+
+RUN add-apt-repository -y ppa:borglab/gtsam-release-4.1 && \
+    apt update && apt install -y \
+    libgtsam-dev \
+    libgtsam-unstable-dev
+    
+# Livox-SDK2 Download
+WORKDIR /home/user/ros2_ws/src
+RUN git clone https://github.com/Livox-SDK/Livox-SDK2.git
+
+WORKDIR /home/user/ros2_ws/src/Livox-SDK2
+RUN mkdir build && cd build && cmake .. && make -j$(nproc) && make install
+
+COPY ./ros2_ws/src/livox_ros_driver2 /home/user/ros2_ws/src/livox_ros_driver2
+SHELL ["/bin/bash", "-lc"]
+# build livox_lidar2
+WORKDIR /home/user/ros2_ws/src/livox_ros_driver2
+RUN ./build.sh humble
+
+RUN echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc && \
+    echo 'source /home/user/ros2_ws/install/setup.bash' >> ~/.bashrc
 
 ```
