@@ -253,5 +253,19 @@ ros2_ws/
 ```
 
 ```
+/home/user/ros2_ws/src/livox_custommsg_adapter/src/adapter.cpp: In member function ‘void livox_custommsg_adapter::AdapterNode::cb(livox_interfaces::msg::CustomMsg_<std::allocator<void> >::SharedPtr)’:
+/home/user/ros2_ws/src/livox_custommsg_adapter/src/adapter.cpp:32:45: error: operands to ‘?:’ have different types ‘std_msgs::msg::Header_<std::allocator<void> >::_stamp_type’ {aka ‘builtin_interfaces::msg::Time_<std::allocator<void> >’} and ‘rclcpp::Time’
+   32 | cloud.header.stamp = use_msg_header_time_ ? msg->header.stamp : this->now();
+      |                      ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+/home/user/ros2_ws/src/livox_custommsg_adapter/src/adapter.cpp:32:45: note:   and each type can be converted to the other
+/home/user/ros2_ws/src/livox_custommsg_adapter/src/adapter.cpp:54:27: error: ‘class sensor_msgs::PointCloud2Modifier’ has no member named ‘getPointSize’
+   54 |   ring_field.offset = mod.getPointSize();
+      |                           ^~~~~~~~~~~~
+gmake[2]: *** [CMakeFiles/adapter_node.dir/build.make:76: CMakeFiles/adapter_node.dir/src/adapter.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/adapter_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
+---
+Failed   <<< livox_custommsg_adapter [13.3s, exited with code 2]
+Aborted  <<< lio_sam [3min 3s]        
 ```
