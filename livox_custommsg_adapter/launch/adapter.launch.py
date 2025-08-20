@@ -10,7 +10,6 @@ def generate_launch_description():
         DeclareLaunchArgument('out_topic', default_value='/lio_sam/points'),
         DeclareLaunchArgument('frame_id', default_value='livox_frame'),
         DeclareLaunchArgument('time_scale', default_value='1e-6'),  # µs → s
-        DeclareLaunchArgument('use_msg_header_time', default_value='true'),
 
         Node(
             package='livox_custommsg_adapter',
@@ -21,7 +20,8 @@ def generate_launch_description():
                 'out_topic': LaunchConfiguration('out_topic'),
                 'frame_id': LaunchConfiguration('frame_id'),
                 'time_scale': LaunchConfiguration('time_scale'),
-                'use_msg_header_time': LaunchConfiguration('use_msg_header_time'),
+                # use_msg_header_time 은 bool 로 직접 설정
+                'use_msg_header_time': True,
             }],
             output='screen')
     ])
