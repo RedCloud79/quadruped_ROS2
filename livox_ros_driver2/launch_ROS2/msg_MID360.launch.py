@@ -66,32 +66,32 @@ def generate_launch_description():
             }],
         ),
 
-        Node(
-            package='livox_ros_driver2',
-            executable='livox_ros_driver2_node',
-            name='livox_lidar_publisher2_pc2',
-            output='screen',
-            condition=IfCondition(PythonExpression([
-                "int(", output_data_type, ") == 1"
-            ])),
-            parameters=[{
-                'xfer_format':       ParameterValue(xfer_format,     value_type=int),
-                'multi_topic':       ParameterValue(multi_topic,     value_type=int),
-                'data_src':          ParameterValue(data_src,        value_type=int),
-                'publish_freq':      ParameterValue(publish_freq,    value_type=float),
-                'output_data_type':  ParameterValue(1,               value_type=int),
-                'cmdline_str':       bd_list,
-                'cmdline_file_path': lvx_file_path,
-                'user_config_path':  user_config_path,
-                'frame_id':          msg_frame_id,
-                'enable_lidar_bag':  ParameterValue(lidar_bag, value_type=bool),
-                'enable_imu_bag':    ParameterValue(imu_bag,   value_type=bool),
-                'use_ros_time':      True,
-                'ros_time_override': True,
-            }],
-            remappings=[
-                ('livox/lidar', pc2_topic),
-                ('/livox/lidar', pc2_topic),
-            ],
-        ),
+        # Node(
+        #     package='livox_ros_driver2',
+        #     executable='livox_ros_driver2_node',
+        #     name='livox_lidar_publisher2_pc2',
+        #     output='screen',
+        #     condition=IfCondition(PythonExpression([
+        #         "int(", output_data_type, ") == 1"
+        #     ])),
+        #     parameters=[{
+        #         'xfer_format':       ParameterValue(xfer_format,     value_type=int),
+        #         'multi_topic':       ParameterValue(multi_topic,     value_type=int),
+        #         'data_src':          ParameterValue(data_src,        value_type=int),
+        #         'publish_freq':      ParameterValue(publish_freq,    value_type=float),
+        #         'output_data_type':  ParameterValue(1,               value_type=int),
+        #         'cmdline_str':       bd_list,
+        #         'cmdline_file_path': lvx_file_path,
+        #         'user_config_path':  user_config_path,
+        #         'frame_id':          msg_frame_id,
+        #         'enable_lidar_bag':  ParameterValue(lidar_bag, value_type=bool),
+        #         'enable_imu_bag':    ParameterValue(imu_bag,   value_type=bool),
+        #         'use_ros_time':      True,
+        #         'ros_time_override': True,
+        #     }],
+        #     remappings=[
+        #         ('livox/lidar', pc2_topic),
+        #         ('/livox/lidar', pc2_topic),
+        #     ],
+        # ),
     ])
