@@ -29,7 +29,7 @@ AdapterNode::AdapterNode(const rclcpp::NodeOptions &options)
   // 퍼블: RELIABLE
   rclcpp::QoS pub_qos(rclcpp::KeepLast(10));
   pub_qos.reliable();
-  pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>(out_topic_, pub_qos);
+  // pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>(out_topic_, pub_qos);
 
   RCLCPP_INFO(get_logger(), "Adapter started. in: %s → out: %s, frame: %s, time_scale: %.3e",
               in_topic.c_str(), out_topic_.c_str(), frame_id_.c_str(), time_scale_);
@@ -81,7 +81,7 @@ void AdapterNode::cb(const livox_interfaces::msg::CustomMsg::SharedPtr msg) {
     *iring = static_cast<uint16_t>(p.line);
   }
 
-  pub_->publish(cloud);
+  // pub_->publish(cloud);
 }
 
 } // namespace livox_custommsg_adapter
