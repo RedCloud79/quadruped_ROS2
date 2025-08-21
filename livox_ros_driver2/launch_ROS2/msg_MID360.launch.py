@@ -2,9 +2,9 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.conditions import IfCondition, UnlessCondition
+from launch.conditions import LaunchConfigurationEquals
 from launch_ros.actions import Node
-from launch.substitutions import LaunchConfiguration, PythonExpression
+from launch.substitutions import LaunchConfiguration
 from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
@@ -41,21 +41,19 @@ def generate_launch_description():
             )
         ),
 
-        # CustomMsg 노드 (output_data_type == 0)
+        # CustomMsg 모드 (output_data_type == 0)
         Node(
             package='livox_ros_driver2',
             executable='livox_ros_driver2_node',
             name='livox_lidar_publisher2',
             output='screen',
-            condition=UnlessCondition(PythonExpression([
-                "int(", output_data_type, ") == 1"
-            ])),
+            condition=LaunchConfigurationEquals('output_data_type', '0'),
             parameters=[{
                 'xfer_format':       ParameterValue(xfer_format,     value_type=int),
                 'multi_topic':       ParameterValue(multi_topic,     value_type=int),
                 'data_src':          ParameterValue(data_src,        value_type=int),
                 'publish_freq':      ParameterValue(publish_freq,    value_type=float),
-                'output_data_type':  ParameterValue(output_data_type, value_type=int),  # 수정됨
+                'output_data_type':  ParameterValue(output_data_type, value_type=int),
                 'cmdline_str':       bd_list,
                 'cmdline_file_path': lvx_file_path,
                 'user_config_path':  user_config_path,
@@ -67,21 +65,19 @@ def generate_launch_description():
             }],
         ),
 
-        # PointCloud2 노드 (output_data_type == 1)
+        # PointCloud2 모드 (output_data_type == 1)
         Node(
             package='livox_ros_driver2',
             executable='livox_ros_driver2_node',
             name='livox_lidar_publisher2_pc2',
             output='screen',
-            condition=IfCondition(PythonExpression([
-                "int(", output_data_type, ") == 1"
-            ])),
+            condition=LaunchConfigurationEquals('output_data_type', '1'),
             parameters=[{
                 'xfer_format':       ParameterValue(xfer_format,     value_type=int),
                 'multi_topic':       ParameterValue(multi_topic,     value_type=int),
                 'data_src':          ParameterValue(data_src,        value_type=int),
                 'publish_freq':      ParameterValue(publish_freq,    value_type=float),
-                'output_data_type':  ParameterValue(output_data_type, value_type=int),  # 수정됨
+                'output_data_type':  ParameterValue(output_data_type, value_type=int),
                 'cmdline_str':       bd_list,
                 'cmdline_file_path': lvx_file_path,
                 'user_config_path':  user_config_path,
