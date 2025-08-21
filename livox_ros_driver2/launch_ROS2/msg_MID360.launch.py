@@ -24,11 +24,11 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('lvx_file_path', default_value='livox_test.lvx'),
         DeclareLaunchArgument('bd_list',       default_value='100000000000000'),
-        DeclareLaunchArgument('xfer_format',   default_value='0'),   # 0: Livox Custom
+        DeclareLaunchArgument('xfer_format',   default_value='0'),
         DeclareLaunchArgument('multi_topic',   default_value='0'),
-        DeclareLaunchArgument('data_src',      default_value='0'),   # 0: LiDAR 실시간, 1: LVX 파일
+        DeclareLaunchArgument('data_src',      default_value='0'),
         DeclareLaunchArgument('publish_freq',  default_value='10.0'),
-        DeclareLaunchArgument('output_data_type', default_value='0'),  # 기본은 CustomMsg
+        DeclareLaunchArgument('output_data_type', default_value='0'),
         DeclareLaunchArgument('msg_frame_id',     default_value='livox_frame'),
         DeclareLaunchArgument('lidar_bag',        default_value='true'),
         DeclareLaunchArgument('imu_bag',          default_value='true'),
@@ -41,6 +41,7 @@ def generate_launch_description():
             )
         ),
 
+        # CustomMsg 노드 (output_data_type == 0)
         Node(
             package='livox_ros_driver2',
             executable='livox_ros_driver2_node',
@@ -54,7 +55,7 @@ def generate_launch_description():
                 'multi_topic':       ParameterValue(multi_topic,     value_type=int),
                 'data_src':          ParameterValue(data_src,        value_type=int),
                 'publish_freq':      ParameterValue(publish_freq,    value_type=float),
-                'output_data_type':  ParameterValue(0,               value_type=int),
+                'output_data_type':  ParameterValue(output_data_type, value_type=int),  # 수정됨
                 'cmdline_str':       bd_list,
                 'cmdline_file_path': lvx_file_path,
                 'user_config_path':  user_config_path,
@@ -66,6 +67,7 @@ def generate_launch_description():
             }],
         ),
 
+        # PointCloud2 노드 (output_data_type == 1)
         Node(
             package='livox_ros_driver2',
             executable='livox_ros_driver2_node',
@@ -79,7 +81,7 @@ def generate_launch_description():
                 'multi_topic':       ParameterValue(multi_topic,     value_type=int),
                 'data_src':          ParameterValue(data_src,        value_type=int),
                 'publish_freq':      ParameterValue(publish_freq,    value_type=float),
-                'output_data_type':  ParameterValue(1,               value_type=int),
+                'output_data_type':  ParameterValue(output_data_type, value_type=int),  # 수정됨
                 'cmdline_str':       bd_list,
                 'cmdline_file_path': lvx_file_path,
                 'user_config_path':  user_config_path,
