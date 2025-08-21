@@ -19,9 +19,9 @@ AdapterNode::AdapterNode(const rclcpp::NodeOptions &options)
 
   auto in_topic = this->declare_parameter<std::string>("in_topic", "/livox/lidar");
 
-  // 구독: RELIABLE
+  // 구독: best_effort
   rclcpp::QoS sub_qos(rclcpp::KeepLast(100));
-  sub_qos.reliable();
+  sub_qos.best_effort();
   sub_ = this->create_subscription<livox_interfaces::msg::CustomMsg>(
       in_topic, sub_qos,
       std::bind(&AdapterNode::cb, this, std::placeholders::_1));
@@ -29,7 +29,7 @@ AdapterNode::AdapterNode(const rclcpp::NodeOptions &options)
   // 퍼블: RELIABLE
   rclcpp::QoS pub_qos(rclcpp::KeepLast(10));
   pub_qos.reliable();
-  // pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>(out_topic_, pub_qos);
+  pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>(out_topic_, pub_qos);
 
   RCLCPP_INFO(get_logger(), "Adapter started. in: %s → out: %s, frame: %s, time_scale: %.3e",
               in_topic.c_str(), out_topic_.c_str(), frame_id_.c_str(), time_scale_);
@@ -81,7 +81,7 @@ void AdapterNode::cb(const livox_interfaces::msg::CustomMsg::SharedPtr msg) {
     *iring = static_cast<uint16_t>(p.line);
   }
 
-  // pub_->publish(cloud);
+  pub_->publish(cloud);
 }
 
 } // namespace livox_custommsg_adapter
