@@ -1,7 +1,0 @@
-vlivox_custommsg_adapter:
-  ros__parameters:
-    in_topic: "/livox/lidar"
-    out_topic: "/lio_sam/points"
-    frame_id: "livox_frame"
-    time_scale: 1.0e-6   # Livox offset_time가 µs일 때. ns면 1.0e-9로 변경
-    use_msg_header_time: true
