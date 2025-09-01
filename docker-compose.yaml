@@ -1,0 +1,20 @@
+version: '3'
+services:
+  ros2:
+    build:
+      context: .
+      dockerfile: ros-humble-dev.Dockerfile
+    container_name: ros2_humble_dev
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./ros2_ws:/home/user/ros2_ws
+      - $HOME/.Xauthority:/root/.Xauthority
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+    network_mode: "host"
+    stdin_open: true
+    tty: true
+    command: tail -f /dev/null
+    restart: unless-stopped
+
