@@ -85,7 +85,11 @@ git clone --recursive https://github.com/Ericsii/FAST_LIO.git fast_lio
 
 
 ```
+cd <ros2_ws>
+. install/setup.bash # use setup.zsh if use zsh
+ros2 launch fast_lio mapping.launch.py config_file:=avia.yaml
 
+ros2 launch livox_ros_driver2 msg_MID360_launch.py
 
 
 ```
