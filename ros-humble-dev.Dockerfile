@@ -14,6 +14,7 @@ RUN apt update && apt install -y \
     libpcl-dev \
     ros-humble-navigation2 \
     ros-humble-nav2-bringup \
+    ros-humble-slam-toolbox \
     ros-humble-rviz2 \
     ros-humble-tf2-geometry-msgs \
     ros-humble-realsense2-camera \
