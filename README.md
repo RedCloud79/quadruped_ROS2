@@ -227,3 +227,22 @@ ros2_ws/
             └── ExecuteTask.action
 
 ```
+
+```
+In file included from /home/user/ros2_ws/src/transfer/src/Jetson2App.cpp:9:
+/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2: warning: #warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [-Wcpp]
+   35 | #warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+      |  ^~~~~~~
+In file included from /opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:37,
+                 from /home/user/ros2_ws/src/transfer/src/Jetson2App.cpp:9:
+/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.hpp:60:10: fatal error: tf2_ros/buffer_interface.hpp: No such file or directory
+   60 | #include "tf2_ros/buffer_interface.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/jetson2app.dir/build.make:76: CMakeFiles/jetson2app.dir/src/Jetson2App.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:141: CMakeFiles/jetson2app.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
+---
+Failed   <<< transfer [4.38s, exited with code 2]
+
+```
