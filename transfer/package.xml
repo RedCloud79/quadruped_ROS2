@@ -15,6 +15,8 @@
     <depend>rosidl_interface_packages</depend>
     <depend>transfer_interfaces</depend>
     <depend>tf2_geometry_msgs</depend>
+    <depend>tf2</depend>
+    <depend>tf2_ros</depend>
 
     <member_of_group>rosidl_interface_packages</member_of_group>
 

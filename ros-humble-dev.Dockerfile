@@ -1,35 +1,20 @@
 FROM arm64v8/ros:humble
 
 RUN apt update && apt install -y \
-    software-properties-common \
-    sudo \
-    git \
-    curl \
-    wget \
-    build-essential \
-    cmake \
-    python3-colcon-common-extensions \
-    python3-pip \
-    libpcap-dev \
-    libpcl-dev \
-    ros-humble-navigation2 \
-    ros-humble-nav2-bringup \
+    software-properties-common sudo git curl wget build-essential cmake \
+    python3-colcon-common-extensions python3-pip \
+    libpcap-dev libpcl-dev \
+    ros-humble-navigation2 ros-humble-nav2-bringup \
     ros-humble-slam-toolbox \
     ros-humble-rviz2 \
-    ros-humble-tf2-geometry-msgs \
+    ros-humble-tf2 ros-humble-tf2-ros ros-humble-tf2-geometry-msgs \
     ros-humble-realsense2-camera \
-    ros-humble-perception-pcl \
-    ros-humble-pcl-msgs \
-    ros-humble-pcl-conversions \
-    ros-humble-vision-opencv \
-    ros-humble-xacro \
-    ros-humble-topic-tools\
-    ros-humble-pointcloud-to-laserscan\
-    ros-humble-ament-cmake-auto \
-    ros-humble-rqt-tf-tree \
-    nano \
-    x11-apps\
-    && rm -rf /var/lib/apt/lists/*
+    ros-humble-perception-pcl ros-humble-pcl-msgs ros-humble-pcl-conversions \
+    ros-humble-vision-opencv ros-humble-xacro \
+    ros-humble-topic-tools ros-humble-pointcloud-to-laserscan \
+    ros-humble-ament-cmake-auto ros-humble-rqt-tf-tree \
+    nano x11-apps && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN add-apt-repository -y ppa:borglab/gtsam-release-4.1 && \
     apt update && apt install -y \
