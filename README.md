@@ -68,31 +68,17 @@ colcon build --symlink-install
 
 
 
-### lio-sam-ros2 설치 진행
+### Fast_lio2 설치 진행
 
 
 
-참고 : https://github.com/TixiaoShan/LIO-SAM/tree/ros2
+참고 : https://github.com/hku-mars/FAST_LIO/tree/ROS2
 
 
 
 ```
 
-sudo apt install ros-<ros2-version>-perception-pcl \
 
-  	   ros-<ros2-version>-pcl-msgs \
-
-  	   ros-<ros2-version>-vision-opencv \
-
-  	   ros-<ros2-version>-xacro
-
-
-
-# Add GTSAM-PPA
-
-sudo add-apt-repository ppa:borglab/gtsam-release-4.1
-
-sudo apt install libgtsam-dev libgtsam-unstable-dev
 
 ```
 
@@ -100,17 +86,7 @@ sudo apt install libgtsam-dev libgtsam-unstable-dev
 
 ```
 
-cd ~/ros2_ws/src
 
-git clone https://github.com/TixiaoShan/LIO-SAM.git
-
-cd lio-sam
-
-git checkout ros2
-
-cd ..
-
-colcon build
 
 ```
 
