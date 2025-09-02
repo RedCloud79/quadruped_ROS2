@@ -125,6 +125,22 @@ sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup ros-humble-slam-
 * Footstep Planner (optional): 4족 보행 로봇의 발 디딜 좌표까지 계획 → Kinova Gen2 arm까지 연동하면 “계단 잡고 오르기”도 가능
 
 
+## 주행 구성 예상 순서
+
+🔹 실행 흐름
+
+  1. FAST-LIO2: /lio/odom (odometry)
+
+  2. NDT: /ndt_pose (global localization)
+
+  3. EKF: /odometry/filtered
+
+  4. Elevation Map: /elevation_map (LiDAR 기반 높이지도)
+
+  5. Nav2: 전역 경로는 평면 경로, 로컬 costmap은 elevation 정보로 보정 → 계단/경사로 주행 허용
+
+  6. Locomotion Controller: 4족 로봇의 실제 보행 제어기 (ROS2 Control + custom gait controller)
+
 ## file WorkSpace
 
 
