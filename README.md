@@ -108,6 +108,21 @@ sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup ros-humble-slam-
 
 ```
 
+* Localization: ndt_scan_matcher (전역 맵 기반)
+
+* Navigation: nav2 (전역/지역 경로 계획 프레임워크)
+
+ - Global Planner: SmacPlanner2D/Hybrid-A*
+
+ - Local Planner: DWB (단순) or TEB (복잡 장애물 대응)
+
+* Elevation Mapping: elevation_mapping_cupy
+
+ - LiDAR 포인트 클라우드 → 2.5D height map
+
+ - Nav2 costmap layer로 연동 (경사·계단을 traversable vs not 구분)
+
+* Footstep Planner (optional): 4족 보행 로봇의 발 디딜 좌표까지 계획 → Kinova Gen2 arm까지 연동하면 “계단 잡고 오르기”도 가능
 
 
 ## file WorkSpace
