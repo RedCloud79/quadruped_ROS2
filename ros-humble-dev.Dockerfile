@@ -12,6 +12,8 @@ RUN apt update && apt install -y \
     ros-humble-perception-pcl ros-humble-pcl-msgs ros-humble-pcl-conversions \
     ros-humble-vision-opencv ros-humble-xacro \
     ros-humble-topic-tools ros-humble-pointcloud-to-laserscan \
+    ros-humble-cv-bridge ros-humble-robot-state-publisher \
+    ros-humble-image-transport ros-humble-image-transport-plugins ros-humble-pcl-ros \
     ros-humble-ament-cmake-auto ros-humble-rqt-tf-tree \
     nano x11-apps && \
     rm -rf /var/lib/apt/lists/*
