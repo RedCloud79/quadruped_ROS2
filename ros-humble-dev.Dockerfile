@@ -19,7 +19,6 @@ RUN apt update && apt install -y \
     ros-humble-cv-bridge ros-humble-robot-state-publisher \
     ros-humble-image-transport ros-humble-image-transport-plugins ros-humble-pcl-ros \
     ros-humble-ament-cmake-auto ros-humble-rqt-tf-tree \
-    ros-humble-autoware-common \
     geographiclib-tools \
     nano x11-apps && \
     rm -rf /var/lib/apt/lists/*
