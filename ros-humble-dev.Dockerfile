@@ -24,6 +24,7 @@ RUN add-apt-repository -y ppa:borglab/gtsam-release-4.1 && \
     libgtsam-dev \
     libgtsam-unstable-dev
 
+COPY ./ros2_ws/src/autoware.universe /home/user/ros2_ws/src/autoware.universe
 WORKDIR /home/user/ros2_ws/src/autoware.universe
 RUN rosdep init || true && rosdep update
 RUN vcs import src < src/autoware.universe/build_depends_humble.repos
