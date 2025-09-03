@@ -15,6 +15,7 @@ RUN apt update && apt install -y \
     ros-humble-cv-bridge ros-humble-robot-state-publisher \
     ros-humble-image-transport ros-humble-image-transport-plugins ros-humble-pcl-ros \
     ros-humble-ament-cmake-auto ros-humble-rqt-tf-tree \
+    ros-humble-autoware-common \
     nano x11-apps && \
     rm -rf /var/lib/apt/lists/*
 
@@ -22,7 +23,11 @@ RUN add-apt-repository -y ppa:borglab/gtsam-release-4.1 && \
     apt update && apt install -y \
     libgtsam-dev \
     libgtsam-unstable-dev
-    
+
+WORKDIR /home/user/ros2_ws/src/autoware.universe
+RUN rosdep init || true && rosdep update
+RUN vcs import src < src/autoware.universe/build_depends_humble.repos
+
 # Livox-SDK2 Download
 WORKDIR /home/user/ros2_ws/src
 RUN git clone https://github.com/Livox-SDK/Livox-SDK2.git
