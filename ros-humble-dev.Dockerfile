@@ -17,7 +17,7 @@ RUN apt update && apt install -y \
     ros-humble-ament-cmake-auto ros-humble-rqt-tf-tree \
     ros-humble-autoware-ndt-scan-matcher \
     ros-humble-autoware-ekf-localizer \
-    ros-humble-autoware-map-loader
+    ros-humble-autoware-map-loader \
     nano x11-apps && \
     rm -rf /var/lib/apt/lists/*
 
