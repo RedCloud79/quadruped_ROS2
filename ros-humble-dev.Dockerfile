@@ -18,6 +18,8 @@ RUN apt update && apt install -y \
     ros-humble-autoware-ndt-scan-matcher \
     ros-humble-autoware-ekf-localizer \
     ros-humble-autoware-map-loader \
+    ros-humble-autoware-lint-common \
+    ros-humble-autoware-cmake \
     nano x11-apps && \
     rm -rf /var/lib/apt/lists/*
 
@@ -25,10 +27,6 @@ RUN add-apt-repository -y ppa:borglab/gtsam-release-4.1 && \
     apt update && apt install -y \
     libgtsam-dev \
     libgtsam-unstable-dev
-
-WORKDIR /home/user/ros2_ws/src/autoware.universe
-RUN rosdep init || true && rosdep update
-RUN vcs import src < src/autoware.universe/build_depends_humble.repos
 
 # Livox-SDK2 Download
 WORKDIR /home/user/ros2_ws/src
