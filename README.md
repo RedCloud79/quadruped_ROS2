@@ -1,6 +1,6 @@
 # quadruped_ROS2
 
- 
+ - Orin Nx (jetpack 5.1.2)
 
 ## humble 버전 설치 리스트
 
