@@ -21,7 +21,8 @@ RUN apt update && apt install -y \
     ros-humble-autoware-lint-common \
     ros-humble-autoware-cmake \
     ros-humble-test-msgs ros-humble-tf2-sensor-msgs \
-    nano x11-apps && \
+    nano x11-apps \
+    libopencv-dev python3-opencv && \
     rm -rf /var/lib/apt/lists/*
 
 RUN add-apt-repository -y ppa:borglab/gtsam-release-4.1 && \

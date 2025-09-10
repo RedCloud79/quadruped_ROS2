@@ -7,7 +7,7 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
     bringup_dir = get_package_share_directory('nav2_bringup')
-    my_dir = get_package_share_directory('my_robot_bringup')
+    my_dir = get_package_share_directory('quadruped_bringup')
 
     return LaunchDescription([
         # EKF (robot_localization)
