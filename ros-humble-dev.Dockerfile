@@ -3,7 +3,7 @@ FROM arm64v8/ros:humble
 RUN apt update && apt install -y \
     software-properties-common sudo git curl wget build-essential cmake \
     python3-colcon-common-extensions python3-pip \
-    libpcap-dev libpcl-dev libg2o-dev \
+    libpcap-dev libpcl-dev \
     ros-humble-navigation2 ros-humble-nav2-bringup \
     ros-humble-slam-toolbox \
     ros-humble-rviz2 \
@@ -22,15 +22,27 @@ RUN apt update && apt install -y \
     ros-humble-autoware-cmake \
     ros-humble-test-msgs ros-humble-tf2-sensor-msgs \
     nano x11-apps \
-    libopencv-dev python3-opencv && \
+    libopencv-dev python3-opencv \
+    libsuitesparse-dev libeigen3-dev \
+    qtdeclarative5-dev qt5-qmake qtbase5-dev && \
     rm -rf /var/lib/apt/lists/*
 
 RUN add-apt-repository -y ppa:borglab/gtsam-release-4.1 && \
     apt update && apt install -y \
     libgtsam-dev \
-    libgtsam-unstable-dev
+    libgtsam-unstable-dev && \
+    rm -rf /var/lib/apt/lists/*
 
-# Livox-SDK2 Download
+WORKDIR /tmp
+RUN git clone https://github.com/RainerKuemmerle/g2o.git && \
+    cd g2o && mkdir build && cd build && \
+    cmake .. -DCMAKE_BUILD_TYPE=Release \
+             -DBUILD_WITH_MARCH_NATIVE=OFF \
+             -DG2O_BUILD_APPS=OFF \
+             -DG2O_BUILD_EXAMPLES=OFF && \
+    make -j$(nproc) && make install && \
+    cd /tmp && rm -rf g2o
+
 WORKDIR /home/user/ros2_ws/src
 RUN git clone https://github.com/Livox-SDK/Livox-SDK2.git
 
@@ -39,7 +51,7 @@ RUN mkdir build && cd build && cmake .. && make -j$(nproc) && make install
 
 COPY ./ros2_ws/src/livox_ros_driver2 /home/user/ros2_ws/src/livox_ros_driver2
 SHELL ["/bin/bash", "-lc"]
-# build livox_lidar2
+
 WORKDIR /home/user/ros2_ws/src/livox_ros_driver2
 RUN source /opt/ros/humble/setup.bash && ./build.sh humble
 
