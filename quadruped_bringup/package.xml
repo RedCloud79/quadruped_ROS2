@@ -19,9 +19,4 @@
 
   <!-- Optional: if you use RViz or other tools -->
   <exec_depend>rviz2</exec_depend>
-
-  <!-- Export build type -->
-  <export>
-    <build_type>ament_python</build_type>
-  </export>
 </package>

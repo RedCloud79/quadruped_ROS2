@@ -41,6 +41,8 @@ set(dependencies
 
 include_directories(
   include
+  /opt/ros/humble/include/cv_bridge
+  /opt/ros/humble/include/cv_bridge/cv_bridge
 )
 
 add_library(costmap_converter SHARED
