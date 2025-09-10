@@ -3,7 +3,7 @@ FROM arm64v8/ros:humble
 RUN apt update && apt install -y \
     software-properties-common sudo git curl wget build-essential cmake \
     python3-colcon-common-extensions python3-pip \
-    libpcap-dev libpcl-dev \
+    libpcap-dev libpcl-dev libg2o-dev \
     ros-humble-navigation2 ros-humble-nav2-bringup \
     ros-humble-slam-toolbox \
     ros-humble-rviz2 \
