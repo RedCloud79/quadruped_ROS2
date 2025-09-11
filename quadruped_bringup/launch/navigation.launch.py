@@ -1,72 +1,53 @@
-from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
-from launch.launch_description_sources import AnyLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
 import os
-
+from launch import LaunchDescription
+from launch.frontend import Parser
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch_ros.actions import Node
+from ament_index_python.packages import get_package_share_directory
+from launch.launch_description_sources import FrontendLaunchDescriptionSource
 
 def generate_launch_description():
-    from ament_index_python.packages import get_package_share_directory
-    tier4_localization_launch = get_package_share_directory('tier4_localization_launch')
-
-    config_path = os.path.join(tier4_localization_launch, 'config')
-
-    # 필요 argument 선언 (실제 XML에서 요구하는 이름 그대로!)
-    lidar_marker_param = DeclareLaunchArgument(
-        'lidar_marker_localizer/lidar_marker_localizer_param_path',
-        default_value=os.path.join(config_path, 'lidar_marker_localizer.param.yaml'),
-        description='Param file for lidar marker localizer'
-    )
-
-    crop_box_param = DeclareLaunchArgument(
-        'lidar_marker_localizer/pointcloud_preprocessor/crop_box_filter_measurement_range_param_path',
-        default_value=os.path.join(config_path, 'crop_box_filter.param.yaml'),
-        description='Param file for crop box filter'
-    )
-
-    lidar_container = DeclareLaunchArgument(
-        'lidar_container_name',
-        default_value='lidar_container',
-        description='Name of the lidar container node'
-    )
-
-    input_pointcloud = DeclareLaunchArgument(
-        'input_pointcloud',
-        default_value='/sensing/lidar/pointcloud',
-        description='Input raw pointcloud topic'
-    )
-
-    # Include 개별 launch.xml
-    lidar_marker_localizer = IncludeLaunchDescription(
-        AnyLaunchDescriptionSource(
-            os.path.join(tier4_localization_launch, 'launch', 'pose_twist_estimator', 'lidar_marker_localizer.launch.xml')
-        ),
-        launch_arguments={
-            'lidar_marker_localizer/lidar_marker_localizer_param_path': LaunchConfiguration('lidar_marker_localizer/lidar_marker_localizer_param_path'),
-            'lidar_marker_localizer/pointcloud_preprocessor/crop_box_filter_measurement_range_param_path': LaunchConfiguration('lidar_marker_localizer/pointcloud_preprocessor/crop_box_filter_measurement_range_param_path'),
-            'lidar_container_name': LaunchConfiguration('lidar_container_name'),
-            'input_pointcloud': LaunchConfiguration('input_pointcloud')
-        }.items()
-    )
-
-    ndt_scan_matcher = IncludeLaunchDescription(
-        AnyLaunchDescriptionSource(
-            os.path.join(tier4_localization_launch, 'launch', 'pose_twist_estimator', 'ndt_scan_matcher.launch.xml')
-        )
-    )
-
-    pose_twist_estimator = IncludeLaunchDescription(
-        AnyLaunchDescriptionSource(
-            os.path.join(tier4_localization_launch, 'launch', 'pose_twist_estimator', 'pose_twist_estimator.launch.xml')
-        )
-    )
+    bringup_dir = get_package_share_directory('nav2_bringup')
+    my_dir = get_package_share_directory('quadruped_bringup')
 
     return LaunchDescription([
-        lidar_marker_param,
-        crop_box_param,
-        lidar_container,
-        input_pointcloud,
-        lidar_marker_localizer,
-        ndt_scan_matcher,
-        pose_twist_estimator
+        # EKF (robot_localization)
+        # Node(
+        #     package='robot_localization',
+        #     executable='ekf_localization_node',
+        #     name='ekf_filter_node',
+        #     output='screen',
+        #     parameters=[os.path.join(my_dir, 'config', 'ekf_nav2.yaml')]
+        # ),
+
+        # Fast-LIO (odometry)
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                os.path.join(
+                    get_package_share_directory('fast_lio'),
+                    'launch', 'odom_slam.launch.py'
+                )
+            ])
+        ),
+
+        IncludeLaunchDescription(
+            FrontendLaunchDescriptionSource(
+                os.path.join(
+                    get_package_share_directory('tier4_localization_launch'),
+                    'launch', 'localization.launch.xml'
+                )
+            )
+        ),
+
+        # Nav2 bringup
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                os.path.join(bringup_dir, 'launch', 'bringup_launch.py')
+            ]),
+            launch_arguments={
+                'params_file': os.path.join(my_dir, 'config', 'nav2_params.yaml'),
+                'use_sim_time': 'false'
+            }.items(),
+        ),
     ])
