@@ -40,7 +40,22 @@ def generate_launch_description():
                 )
             ),
             launch_arguments={
-                'pose_source': 'ndt'   # 또는 ndt_yabloc, ndt_eagleye 등 원하는 모드
+                'pose_source': 'ndt',
+                'twist_source': 'ndt',
+                'initial_pose': '0.0 0.0 0.0 0.0',
+                'system_run_mode': 'localization',
+                'ndt_scan_matcher/pointcloud_preprocessor/crop_box_filter_measurement_range_param_path':
+                    os.path.join(get_package_share_directory('tier4_localization_launch'),
+                                'config/ndt_scan_matcher/crop_box_filter_measurement_range.param.yaml'),
+                'ndt_scan_matcher/pointcloud_preprocessor/voxel_grid_downsample_filter_param_path':
+                    os.path.join(get_package_share_directory('tier4_localization_launch'),
+                                'config/ndt_scan_matcher/voxel_grid_downsample_filter.param.yaml'),
+                'ndt_scan_matcher/pointcloud_preprocessor/random_downsample_filter_param_path':
+                    os.path.join(get_package_share_directory('tier4_localization_launch'),
+                                'config/ndt_scan_matcher/random_downsample_filter.param.yaml'),
+                'ndt_scan_matcher/ndt_scan_matcher_param_path':
+                    os.path.join(get_package_share_directory('tier4_localization_launch'),
+                                'config/ndt_scan_matcher/ndt_scan_matcher.param.yaml'),
             }.items(),
         ),
 
