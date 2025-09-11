@@ -131,9 +131,7 @@ sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup ros-humble-slam-
 
   1. FAST-LIO2: /lio/odom (odometry)
 
-  2. NDT: /ndt_pose (global localization)
-
-  3. EKF: /odometry/filtered
+  2. autoware: localization
 
   4. Elevation Map: /elevation_map (LiDAR 기반 높이지도)
 
