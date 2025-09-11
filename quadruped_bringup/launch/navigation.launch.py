@@ -44,6 +44,8 @@ def generate_launch_description():
                 'twist_source': 'ndt',
                 'initial_pose': '0.0 0.0 0.0 0.0',
                 'system_run_mode': 'localization',
+
+                # ndt scan matcher params
                 'ndt_scan_matcher/pointcloud_preprocessor/crop_box_filter_measurement_range_param_path':
                     os.path.join(get_package_share_directory('tier4_localization_launch'),
                                 'config/ndt_scan_matcher/crop_box_filter_measurement_range.param.yaml'),
@@ -56,6 +58,29 @@ def generate_launch_description():
                 'ndt_scan_matcher/ndt_scan_matcher_param_path':
                     os.path.join(get_package_share_directory('tier4_localization_launch'),
                                 'config/ndt_scan_matcher/ndt_scan_matcher.param.yaml'),
+
+                # other modules
+                'localization_error_monitor_param_path':
+                    os.path.join(get_package_share_directory('tier4_localization_launch'),
+                                'config/localization_error_monitor/localization_error_monitor.param.yaml'),
+                'ekf_localizer_param_path':
+                    os.path.join(get_package_share_directory('tier4_localization_launch'),
+                                'config/ekf_localizer/ekf_localizer.param.yaml'),
+                'stop_filter_param_path':
+                    os.path.join(get_package_share_directory('tier4_localization_launch'),
+                                'config/stop_filter/stop_filter.param.yaml'),
+                'pose_instability_detector_param_path':
+                    os.path.join(get_package_share_directory('tier4_localization_launch'),
+                                'config/pose_instability_detector/pose_instability_detector.param.yaml'),
+                'pose_initializer_param_path':
+                    os.path.join(get_package_share_directory('tier4_localization_launch'),
+                                'config/pose_initializer/pose_initializer.param.yaml'),
+                'eagleye_param_path':
+                    os.path.join(get_package_share_directory('tier4_localization_launch'),
+                                'config/eagleye/eagleye.param.yaml'),
+                'ar_tag_based_localizer_param_path':
+                    os.path.join(get_package_share_directory('tier4_localization_launch'),
+                                'config/ar_tag_based_localizer/ar_tag_based_localizer.param.yaml'),
             }.items(),
         ),
 
