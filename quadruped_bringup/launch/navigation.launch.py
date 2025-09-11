@@ -31,13 +31,17 @@ def generate_launch_description():
             ])
         ),
 
+        # Autoware Localization
         IncludeLaunchDescription(
             FrontendLaunchDescriptionSource(
                 os.path.join(
                     get_package_share_directory('tier4_localization_launch'),
                     'launch', 'localization.launch.xml'
                 )
-            )
+            ),
+            launch_arguments={
+                'pose_source': 'ndt'   # 또는 ndt_yabloc, ndt_eagleye 등 원하는 모드
+            }.items(),
         ),
 
         # Nav2 bringup
