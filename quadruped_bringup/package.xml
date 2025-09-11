@@ -12,6 +12,7 @@
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <!-- Runtime dependencies -->
+  <exec_depend>ament_cmake</exec_depend>
   <exec_depend>nav2_bringup</exec_depend>
   <exec_depend>fast_lio</exec_depend>
   <exec_depend>tier4_localization_launch</exec_depend>
@@ -19,4 +20,7 @@
 
   <!-- Optional: if you use RViz or other tools -->
   <exec_depend>rviz2</exec_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>
