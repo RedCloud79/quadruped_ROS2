@@ -1,6 +1,6 @@
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
-from launch.launch_description_sources import PythonLaunchDescriptionSource, AnyLaunchDescriptionSource
+from launch.launch_description_sources import AnyLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 import os
 
@@ -26,14 +26,21 @@ def generate_launch_description():
         description='Param file for crop box filter'
     )
 
-    # Include 개별 launch.xml (경로 수정 완료 ✅)
+    lidar_container = DeclareLaunchArgument(
+        'lidar_container_name',
+        default_value='lidar_container',
+        description='Name of the lidar container node'
+    )
+
+    # Include 개별 launch.xml
     lidar_marker_localizer = IncludeLaunchDescription(
         AnyLaunchDescriptionSource(
             os.path.join(tier4_localization_launch, 'launch', 'pose_twist_estimator', 'lidar_marker_localizer.launch.xml')
         ),
         launch_arguments={
             'lidar_marker_localizer_param_path': LaunchConfiguration('lidar_marker_localizer_param_path'),
-            'crop_box_filter_measurement_range_param_path': LaunchConfiguration('crop_box_filter_measurement_range_param_path')
+            'crop_box_filter_measurement_range_param_path': LaunchConfiguration('crop_box_filter_measurement_range_param_path'),
+            'lidar_container_name': LaunchConfiguration('lidar_container_name')
         }.items()
     )
 
@@ -53,6 +60,7 @@ def generate_launch_description():
     return LaunchDescription([
         lidar_marker_param,
         crop_box_param,
+        lidar_container,
         lidar_marker_localizer,
         ndt_scan_matcher,
         pose_twist_estimator
