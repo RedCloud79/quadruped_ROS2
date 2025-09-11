@@ -4,6 +4,7 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
+from launch.launch_description_sources import PythonLaunchDescriptionSource, XMLLaunchDescriptionSource
 
 def generate_launch_description():
     bringup_dir = get_package_share_directory('nav2_bringup')
@@ -11,13 +12,13 @@ def generate_launch_description():
 
     return LaunchDescription([
         # EKF (robot_localization)
-        Node(
-            package='robot_localization',
-            executable='ekf_localization_node',
-            name='ekf_filter_node',
-            output='screen',
-            parameters=[os.path.join(my_dir, 'config', 'ekf_nav2.yaml')]
-        ),
+        # Node(
+        #     package='robot_localization',
+        #     executable='ekf_localization_node',
+        #     name='ekf_filter_node',
+        #     output='screen',
+        #     parameters=[os.path.join(my_dir, 'config', 'ekf_nav2.yaml')]
+        # ),
 
         # Fast-LIO (odometry)
         IncludeLaunchDescription(
@@ -31,7 +32,7 @@ def generate_launch_description():
 
         # Autoware Localization
         IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([
+            XMLLaunchDescriptionSource([
                 os.path.join(
                     get_package_share_directory('tier4_localization_launch'),
                     'launch', 'localization.launch.xml'
