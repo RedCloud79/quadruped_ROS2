@@ -24,7 +24,7 @@ def generate_launch_description():
             PythonLaunchDescriptionSource([
                 os.path.join(
                     get_package_share_directory('fast_lio'),
-                    'launch', 'odom.launch.py'
+                    'launch', 'odom_slam.launch.py'
                 )
             ])
         ),
