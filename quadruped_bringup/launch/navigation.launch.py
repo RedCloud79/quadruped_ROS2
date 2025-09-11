@@ -4,6 +4,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource, Any
 from launch.substitutions import LaunchConfiguration
 import os
 
+
 def generate_launch_description():
     # 패키지 경로
     from ament_index_python.packages import get_package_share_directory
@@ -25,10 +26,10 @@ def generate_launch_description():
         description='Param file for crop box filter'
     )
 
-    # Include 개별 launch.xml
+    # Include 개별 launch.xml (경로 수정 완료 ✅)
     lidar_marker_localizer = IncludeLaunchDescription(
         AnyLaunchDescriptionSource(
-            os.path.join(tier4_localization_launch, 'launch', 'lidar_marker_localizer.launch.xml')
+            os.path.join(tier4_localization_launch, 'launch', 'pose_twist_estimator', 'lidar_marker_localizer.launch.xml')
         ),
         launch_arguments={
             'lidar_marker_localizer_param_path': LaunchConfiguration('lidar_marker_localizer_param_path'),
@@ -38,13 +39,13 @@ def generate_launch_description():
 
     ndt_scan_matcher = IncludeLaunchDescription(
         AnyLaunchDescriptionSource(
-            os.path.join(tier4_localization_launch, 'launch', 'ndt_scan_matcher.launch.xml')
+            os.path.join(tier4_localization_launch, 'launch', 'pose_twist_estimator', 'ndt_scan_matcher.launch.xml')
         )
     )
 
     pose_twist_estimator = IncludeLaunchDescription(
         AnyLaunchDescriptionSource(
-            os.path.join(tier4_localization_launch, 'launch', 'pose_twist_estimator.launch.xml')
+            os.path.join(tier4_localization_launch, 'launch', 'pose_twist_estimator', 'pose_twist_estimator.launch.xml')
         )
     )
 
