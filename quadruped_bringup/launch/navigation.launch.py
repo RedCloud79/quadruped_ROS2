@@ -6,22 +6,20 @@ import os
 
 
 def generate_launch_description():
-    # 패키지 경로
     from ament_index_python.packages import get_package_share_directory
     tier4_localization_launch = get_package_share_directory('tier4_localization_launch')
 
-    # 공통 config path
     config_path = os.path.join(tier4_localization_launch, 'config')
 
-    # 필요 argument 선언
+    # 필요 argument 선언 (실제 XML에서 요구하는 이름 그대로!)
     lidar_marker_param = DeclareLaunchArgument(
-        'lidar_marker_localizer_param_path',
+        'lidar_marker_localizer/lidar_marker_localizer_param_path',
         default_value=os.path.join(config_path, 'lidar_marker_localizer.param.yaml'),
         description='Param file for lidar marker localizer'
     )
 
     crop_box_param = DeclareLaunchArgument(
-        'crop_box_filter_measurement_range_param_path',
+        'lidar_marker_localizer/pointcloud_preprocessor/crop_box_filter_measurement_range_param_path',
         default_value=os.path.join(config_path, 'crop_box_filter.param.yaml'),
         description='Param file for crop box filter'
     )
@@ -44,8 +42,8 @@ def generate_launch_description():
             os.path.join(tier4_localization_launch, 'launch', 'pose_twist_estimator', 'lidar_marker_localizer.launch.xml')
         ),
         launch_arguments={
-            'lidar_marker_localizer_param_path': LaunchConfiguration('lidar_marker_localizer_param_path'),
-            'crop_box_filter_measurement_range_param_path': LaunchConfiguration('crop_box_filter_measurement_range_param_path'),
+            'lidar_marker_localizer/lidar_marker_localizer_param_path': LaunchConfiguration('lidar_marker_localizer/lidar_marker_localizer_param_path'),
+            'lidar_marker_localizer/pointcloud_preprocessor/crop_box_filter_measurement_range_param_path': LaunchConfiguration('lidar_marker_localizer/pointcloud_preprocessor/crop_box_filter_measurement_range_param_path'),
             'lidar_container_name': LaunchConfiguration('lidar_container_name'),
             'input_pointcloud': LaunchConfiguration('input_pointcloud')
         }.items()
@@ -63,7 +61,6 @@ def generate_launch_description():
         )
     )
 
-    # 전체 launch description 반환
     return LaunchDescription([
         lidar_marker_param,
         crop_box_param,
