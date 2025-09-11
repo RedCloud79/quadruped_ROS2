@@ -1,10 +1,11 @@
 import os
 from launch import LaunchDescription
+from launch.frontend import Parser
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
-from launch.launch_description_sources import PythonLaunchDescriptionSource, XMLLaunchDescriptionSource
+from launch.launch_description_sources import FrontendLaunchDescriptionSource
 
 def generate_launch_description():
     bringup_dir = get_package_share_directory('nav2_bringup')
@@ -30,14 +31,13 @@ def generate_launch_description():
             ])
         ),
 
-        # Autoware Localization
         IncludeLaunchDescription(
-            XMLLaunchDescriptionSource([
+            FrontendLaunchDescriptionSource(
                 os.path.join(
                     get_package_share_directory('tier4_localization_launch'),
                     'launch', 'localization.launch.xml'
                 )
-            ])
+            )
         ),
 
         # Nav2 bringup
