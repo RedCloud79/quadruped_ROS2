@@ -32,6 +32,12 @@ def generate_launch_description():
         description='Name of the lidar container node'
     )
 
+    input_pointcloud = DeclareLaunchArgument(
+        'input_pointcloud',
+        default_value='/sensing/lidar/pointcloud',
+        description='Input raw pointcloud topic'
+    )
+
     # Include 개별 launch.xml
     lidar_marker_localizer = IncludeLaunchDescription(
         AnyLaunchDescriptionSource(
@@ -40,7 +46,8 @@ def generate_launch_description():
         launch_arguments={
             'lidar_marker_localizer_param_path': LaunchConfiguration('lidar_marker_localizer_param_path'),
             'crop_box_filter_measurement_range_param_path': LaunchConfiguration('crop_box_filter_measurement_range_param_path'),
-            'lidar_container_name': LaunchConfiguration('lidar_container_name')
+            'lidar_container_name': LaunchConfiguration('lidar_container_name'),
+            'input_pointcloud': LaunchConfiguration('input_pointcloud')
         }.items()
     )
 
@@ -61,6 +68,7 @@ def generate_launch_description():
         lidar_marker_param,
         crop_box_param,
         lidar_container,
+        input_pointcloud,
         lidar_marker_localizer,
         ndt_scan_matcher,
         pose_twist_estimator
