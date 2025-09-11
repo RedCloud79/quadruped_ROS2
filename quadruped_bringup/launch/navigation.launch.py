@@ -1,100 +1,58 @@
-import os
 from launch import LaunchDescription
-from launch.frontend import Parser
-from launch.actions import IncludeLaunchDescription
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch_ros.actions import Node
-from ament_index_python.packages import get_package_share_directory
-from launch.launch_description_sources import FrontendLaunchDescriptionSource
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.launch_description_sources import PythonLaunchDescriptionSource, AnyLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration
+import os
 
 def generate_launch_description():
-    bringup_dir = get_package_share_directory('nav2_bringup')
-    my_dir = get_package_share_directory('quadruped_bringup')
+    # 패키지 경로
+    from ament_index_python.packages import get_package_share_directory
+    tier4_localization_launch = get_package_share_directory('tier4_localization_launch')
 
+    # 공통 config path
+    config_path = os.path.join(tier4_localization_launch, 'config')
+
+    # 필요 argument 선언
+    lidar_marker_param = DeclareLaunchArgument(
+        'lidar_marker_localizer_param_path',
+        default_value=os.path.join(config_path, 'lidar_marker_localizer.param.yaml'),
+        description='Param file for lidar marker localizer'
+    )
+
+    crop_box_param = DeclareLaunchArgument(
+        'crop_box_filter_measurement_range_param_path',
+        default_value=os.path.join(config_path, 'crop_box_filter.param.yaml'),
+        description='Param file for crop box filter'
+    )
+
+    # Include 개별 launch.xml
+    lidar_marker_localizer = IncludeLaunchDescription(
+        AnyLaunchDescriptionSource(
+            os.path.join(tier4_localization_launch, 'launch', 'lidar_marker_localizer.launch.xml')
+        ),
+        launch_arguments={
+            'lidar_marker_localizer_param_path': LaunchConfiguration('lidar_marker_localizer_param_path'),
+            'crop_box_filter_measurement_range_param_path': LaunchConfiguration('crop_box_filter_measurement_range_param_path')
+        }.items()
+    )
+
+    ndt_scan_matcher = IncludeLaunchDescription(
+        AnyLaunchDescriptionSource(
+            os.path.join(tier4_localization_launch, 'launch', 'ndt_scan_matcher.launch.xml')
+        )
+    )
+
+    pose_twist_estimator = IncludeLaunchDescription(
+        AnyLaunchDescriptionSource(
+            os.path.join(tier4_localization_launch, 'launch', 'pose_twist_estimator.launch.xml')
+        )
+    )
+
+    # 전체 launch description 반환
     return LaunchDescription([
-        # EKF (robot_localization)
-        # Node(
-        #     package='robot_localization',
-        #     executable='ekf_localization_node',
-        #     name='ekf_filter_node',
-        #     output='screen',
-        #     parameters=[os.path.join(my_dir, 'config', 'ekf_nav2.yaml')]
-        # ),
-
-        # Fast-LIO (odometry)
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([
-                os.path.join(
-                    get_package_share_directory('fast_lio'),
-                    'launch', 'odom_slam.launch.py'
-                )
-            ])
-        ),
-
-        # Autoware Localization
-        IncludeLaunchDescription(
-            FrontendLaunchDescriptionSource(
-                os.path.join(
-                    get_package_share_directory('tier4_localization_launch'),
-                    'launch', 'localization.launch.xml'
-                )
-            ),
-            launch_arguments={
-                'pose_source': 'ndt',
-                'twist_source': 'ndt',
-                'initial_pose': '0.0 0.0 0.0 0.0',
-                'system_run_mode': 'localization',
-
-                # ndt scan matcher params
-                'ndt_scan_matcher/pointcloud_preprocessor/crop_box_filter_measurement_range_param_path':
-                    os.path.join(get_package_share_directory('tier4_localization_launch'),
-                                'config/ndt_scan_matcher/crop_box_filter_measurement_range.param.yaml'),
-                'ndt_scan_matcher/pointcloud_preprocessor/voxel_grid_downsample_filter_param_path':
-                    os.path.join(get_package_share_directory('tier4_localization_launch'),
-                                'config/ndt_scan_matcher/voxel_grid_downsample_filter.param.yaml'),
-                'ndt_scan_matcher/pointcloud_preprocessor/random_downsample_filter_param_path':
-                    os.path.join(get_package_share_directory('tier4_localization_launch'),
-                                'config/ndt_scan_matcher/random_downsample_filter.param.yaml'),
-                'ndt_scan_matcher/ndt_scan_matcher_param_path':
-                    os.path.join(get_package_share_directory('tier4_localization_launch'),
-                                'config/ndt_scan_matcher/ndt_scan_matcher.param.yaml'),
-
-                # error monitor, ekf, etc
-                'localization_error_monitor_param_path':
-                    os.path.join(get_package_share_directory('tier4_localization_launch'),
-                                'config/localization_error_monitor/localization_error_monitor.param.yaml'),
-                'ekf_localizer_param_path':
-                    os.path.join(get_package_share_directory('tier4_localization_launch'),
-                                'config/ekf_localizer/ekf_localizer.param.yaml'),
-                'stop_filter_param_path':
-                    os.path.join(get_package_share_directory('tier4_localization_launch'),
-                                'config/stop_filter/stop_filter.param.yaml'),
-                'pose_instability_detector_param_path':
-                    os.path.join(get_package_share_directory('tier4_localization_launch'),
-                                'config/pose_instability_detector/pose_instability_detector.param.yaml'),
-                'pose_initializer_param_path':
-                    os.path.join(get_package_share_directory('tier4_localization_launch'),
-                                'config/pose_initializer/pose_initializer.param.yaml'),
-                'eagleye_param_path':
-                    os.path.join(get_package_share_directory('tier4_localization_launch'),
-                                'config/eagleye/eagleye.param.yaml'),
-                'ar_tag_based_localizer_param_path':
-                    os.path.join(get_package_share_directory('tier4_localization_launch'),
-                                'config/ar_tag_based_localizer/ar_tag_based_localizer.param.yaml'),
-                'lidar_marker_localizer/lidar_marker_localizer_param_path':
-                    os.path.join(get_package_share_directory('tier4_localization_launch'),
-                                'config/lidar_marker_localizer/lidar_marker_localizer.param.yaml'),
-            }.items(),
-        ),
-
-        # Nav2 bringup
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([
-                os.path.join(bringup_dir, 'launch', 'bringup_launch.py')
-            ]),
-            launch_arguments={
-                'params_file': os.path.join(my_dir, 'config', 'nav2_params.yaml'),
-                'use_sim_time': 'false'
-            }.items(),
-        ),
+        lidar_marker_param,
+        crop_box_param,
+        lidar_marker_localizer,
+        ndt_scan_matcher,
+        pose_twist_estimator
     ])
