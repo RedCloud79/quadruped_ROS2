@@ -59,7 +59,7 @@ def generate_launch_description():
                     os.path.join(get_package_share_directory('tier4_localization_launch'),
                                 'config/ndt_scan_matcher/ndt_scan_matcher.param.yaml'),
 
-                # other modules
+                # error monitor, ekf, etc
                 'localization_error_monitor_param_path':
                     os.path.join(get_package_share_directory('tier4_localization_launch'),
                                 'config/localization_error_monitor/localization_error_monitor.param.yaml'),
@@ -81,6 +81,9 @@ def generate_launch_description():
                 'ar_tag_based_localizer_param_path':
                     os.path.join(get_package_share_directory('tier4_localization_launch'),
                                 'config/ar_tag_based_localizer/ar_tag_based_localizer.param.yaml'),
+                'lidar_marker_localizer/lidar_marker_localizer_param_path':
+                    os.path.join(get_package_share_directory('tier4_localization_launch'),
+                                'config/lidar_marker_localizer/lidar_marker_localizer.param.yaml'),
             }.items(),
         ),
 
