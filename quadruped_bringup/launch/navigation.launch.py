@@ -15,17 +15,21 @@ def generate_launch_description():
         ])
     )
 
-    # NDT Scan Matcher 실행
     ndt_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(get_package_share_directory('autoware_ndt_scan_matcher'), 'launch', 'ndt_scan_matcher.launch.py')
+            os.path.join(
+                get_package_share_directory('autoware_ndt_scan_matcher'),
+                'launch', 'ndt_scan_matcher.launch.py'
+            )
         ])
     )
 
-    # EKF Localizer 실행 (선택)
     ekf_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(get_package_share_directory('autoware_ekf_localizer'), 'launch', 'ekf_localizer.launch.py')
+            os.path.join(
+                get_package_share_directory('autoware_ekf_localizer'),
+                'launch', 'ekf_localizer.launch.py'
+            )
         ])
     )
 

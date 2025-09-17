@@ -2,25 +2,19 @@
 <package format="3">
   <name>quadruped_bringup</name>
   <version>0.0.1</version>
-  <description>
-    Bringup package for my robot integrating Nav2, Fast-LIO, and Autoware localization.
-  </description>
-  <maintainer email="your@email.com">Your Name</maintainer>
+  <description>Bringup launch files for quadruped robot</description>
+
+  <maintainer email="you@example.com">Your Name</maintainer>
   <license>Apache-2.0</license>
 
-  <!-- Build tools -->
+  <!-- Build tool -->
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <!-- Runtime dependencies -->
-  <exec_depend>ament_cmake</exec_depend>
+  <!-- Dependencies -->
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
   <exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>autoware_ndt_scan_matcher</exec_depend>
+  <exec_depend>autoware_ekf_localizer</exec_depend>
   <exec_depend>fast_lio</exec_depend>
-  <exec_depend>tier4_localization_launch</exec_depend>
-  <exec_depend>robot_localization</exec_depend>
-
-  <!-- Optional: if you use RViz or other tools -->
-  <exec_depend>rviz2</exec_depend>
-  <export>
-    <build_type>ament_cmake</build_type>
-  </export>
 </package>
