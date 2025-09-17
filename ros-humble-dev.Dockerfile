@@ -21,6 +21,7 @@ RUN apt update && apt install -y \
     ros-humble-autoware-lint-common \
     ros-humble-autoware-cmake \
     ros-humble-test-msgs ros-humble-tf2-sensor-msgs \
+    ros-humble-launch-testing-ament-cmake \
     nano x11-apps \
     libopencv-dev python3-opencv \
     libsuitesparse-dev libeigen3-dev \
