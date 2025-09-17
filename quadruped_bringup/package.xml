@@ -1,20 +1,22 @@
 <?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>quadruped_bringup</name>
-  <version>0.0.1</version>
-  <description>Bringup launch files for quadruped robot</description>
+    <name>quadruped_bringup</name>
+    <version>0.0.0</version>
+    <description>TODO: Package description</description>
+    <maintainer email="your@email.com">zh</maintainer>
+    <license>TODO: License declaration</license>
 
-  <maintainer email="you@example.com">Your Name</maintainer>
-  <license>Apache-2.0</license>
+    <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <!-- Build tool -->
-  <buildtool_depend>ament_cmake</buildtool_depend>
+    <depend>launch</depend>
+    <depend>launch_ros</depend>
+    <depend>nav2_bringup</depend>
+    <depend>autoware_ndt_scan_matcher</depend>
+    <depend>autoware_ekf_localizer</depend>
+    <depend>fast_lio</depend>
 
-  <!-- Dependencies -->
-  <exec_depend>launch</exec_depend>
-  <exec_depend>launch_ros</exec_depend>
-  <exec_depend>nav2_bringup</exec_depend>
-  <exec_depend>autoware_ndt_scan_matcher</exec_depend>
-  <exec_depend>autoware_ekf_localizer</exec_depend>
-  <exec_depend>fast_lio</exec_depend>
+    <export>
+        <build_type>ament_cmake</build_type>
+    </export>
 </package>
