@@ -2,8 +2,8 @@
   <arg name="param_file" default="$(find-pkg-share autoware_ndt_scan_matcher)/config/ndt_scan_matcher.param.yaml"/>
 
   <!-- Topics -->
-  <arg name="input_pointcloud" default="points_raw" description="Sensor points topic"/>
-  <arg name="input_initial_pose_topic" default="ekf_pose_with_covariance" description="Initial position topic to align"/>
+  <arg name="input_pointcloud" default="/livox/lidar" description="Sensor points topic"/>
+  <arg name="input_initial_pose_topic" default="/initialpose" description="Initial position topic to align"/>
   <arg name="input_regularization_pose_topic" default="regularization_pose_with_covariance" description="Regularization pose topic"/>
   <arg name="input_service_trigger_node" default="trigger_node" description="Trigger node service name"/>
 
