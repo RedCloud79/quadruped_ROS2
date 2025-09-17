@@ -1,9 +1,8 @@
 import os
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
-from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.launch_description_sources import PythonLaunchDescriptionSource, FrontendLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
-from launch.launch_description_sources import FrontendLaunchDescriptionSource
 
 def generate_launch_description():
     bringup_dir = get_package_share_directory('nav2_bringup')
@@ -17,18 +16,18 @@ def generate_launch_description():
     )
 
     ndt_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
+        FrontendLaunchDescriptionSource([
             os.path.join(
-                FrontendLaunchDescriptionSource('autoware_ndt_scan_matcher'),
+                get_package_share_directory('autoware_ndt_scan_matcher'),
                 'launch', 'ndt_scan_matcher.launch.xml'
             )
         ])
     )
 
     ekf_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
+        FrontendLaunchDescriptionSource([
             os.path.join(
-                FrontendLaunchDescriptionSource('autoware_ekf_localizer'),
+                get_package_share_directory('autoware_ekf_localizer'),
                 'launch', 'ekf_localizer.launch.xml'
             )
         ])
