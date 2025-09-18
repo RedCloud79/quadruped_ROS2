@@ -15,6 +15,22 @@ def generate_launch_description():
         ])
     )
 
+    # Map Loader 실행 (3D PCD Map)
+    map_loader_launch = IncludeLaunchDescription(
+        FrontendLaunchDescriptionSource([
+            os.path.join(
+                get_package_share_directory('autoware_map_loader'),
+                'launch', 'pointcloud_map_loader.launch.xml'
+            )
+        ]),
+        launch_arguments={
+            # 기본 맵 경로 (nav2_bringup/maps_3d 안에서 관리)
+            'pointcloud_map_path': os.path.join(bringup_dir, 'maps_3d', 'office.pcd'),
+            'pointcloud_map_metadata_path': os.path.join(bringup_dir, 'maps_3d', 'office_metadata.yaml'),
+        }.items()
+    )
+
+    # NDT Scan Matcher 실행
     ndt_launch = IncludeLaunchDescription(
         FrontendLaunchDescriptionSource([
             os.path.join(
@@ -24,6 +40,7 @@ def generate_launch_description():
         ])
     )
 
+    # EKF Localizer 실행
     ekf_launch = IncludeLaunchDescription(
         FrontendLaunchDescriptionSource([
             os.path.join(
@@ -36,7 +53,7 @@ def generate_launch_description():
     # Nav2 실행
     nav2_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(bringup_dir, 'launch', 'bringup_launch.py')
+            os.path.join(bringup_dir, 'launch', 'navigation_launch.py')
         ]),
         launch_arguments={
             'params_file': os.path.join(my_dir, 'config', 'nav2_params.yaml'),
@@ -47,6 +64,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         fast_lio_launch,
+        map_loader_launch,   # ✅ 맵 로더 먼저 실행
         ndt_launch,
         ekf_launch,
         nav2_launch
