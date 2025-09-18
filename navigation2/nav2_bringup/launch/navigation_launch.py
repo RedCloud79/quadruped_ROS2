@@ -19,9 +19,8 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, GroupAction, SetEnvironmentVariable
 from launch.conditions import IfCondition
-from launch.substitutions import LaunchConfiguration, PythonExpression
-from launch_ros.actions import LoadComposableNodes
-from launch_ros.actions import Node
+from launch.substitutions import LaunchConfiguration, PythonExpression, PathJoinSubstitution
+from launch_ros.actions import LoadComposableNodes, Node
 from launch_ros.descriptions import ComposableNode, ParameterFile
 from nav2_common.launch import RewrittenYaml
 
@@ -29,6 +28,7 @@ from nav2_common.launch import RewrittenYaml
 def generate_launch_description():
     # Get the launch directory
     bringup_dir = get_package_share_directory('nav2_bringup')
+    maps_2d_dir = os.path.join(bringup_dir, 'maps_2d')
 
     namespace = LaunchConfiguration('namespace')
     use_sim_time = LaunchConfiguration('use_sim_time')
@@ -39,6 +39,9 @@ def generate_launch_description():
     container_name_full = (namespace, '/', container_name)
     use_respawn = LaunchConfiguration('use_respawn')
     log_level = LaunchConfiguration('log_level')
+    map_name = LaunchConfiguration('map_name')
+
+    map_yaml_file = PathJoinSubstitution([maps_2d_dir, map_name + '.yaml'])
 
     lifecycle_nodes = ['controller_server',
                        'smoother_server',
@@ -48,16 +51,12 @@ def generate_launch_description():
                        'waypoint_follower',
                        'velocity_smoother']
 
-    # Map fully qualified names to relative ones so the node's namespace can be prepended.
-    # In case of the transforms (tf), currently, there doesn't seem to be a better alternative
-    # https://github.com/ros/geometry2/issues/32
-    # https://github.com/ros/robot_state_publisher/pull/30
-    # TODO(orduno) Substitute with `PushNodeRemapping`
-    #              https://github.com/ros2/launch_ros/issues/56
+    # map_server 포함 버전
+    lifecycle_nodes_with_map = lifecycle_nodes + ['map_server']
+
     remappings = [('/tf', 'tf'),
                   ('/tf_static', 'tf_static')]
 
-    # Create our own temporary YAML files that include substitutions
     param_substitutions = {
         'use_sim_time': use_sim_time,
         'autostart': autostart}
@@ -73,6 +72,7 @@ def generate_launch_description():
     stdout_linebuf_envvar = SetEnvironmentVariable(
         'RCUTILS_LOGGING_BUFFERED_STREAM', '1')
 
+    # --- Declare launch arguments ---
     declare_namespace_cmd = DeclareLaunchArgument(
         'namespace',
         default_value='',
@@ -108,6 +108,23 @@ def generate_launch_description():
         'log_level', default_value='info',
         description='log level')
 
+    declare_map_name_cmd = DeclareLaunchArgument(
+        'map_name',
+        default_value='map',
+        description='Name of the map file in maps_2d directory (without extension)'
+    )
+
+    # --- Map server node ---
+    map_server_node = Node(
+        package='nav2_map_server',
+        executable='map_server',
+        name='map_server',
+        output='screen',
+        parameters=[{'use_sim_time': use_sim_time,
+                     'yaml_filename': map_yaml_file}]
+    )
+
+    # --- Nav2 core nodes ---
     load_nodes = GroupAction(
         condition=IfCondition(PythonExpression(['not ', use_composition])),
         actions=[
@@ -189,7 +206,7 @@ def generate_launch_description():
                 arguments=['--ros-args', '--log-level', log_level],
                 parameters=[{'use_sim_time': use_sim_time},
                             {'autostart': autostart},
-                            {'node_names': lifecycle_nodes}]),
+                            {'node_names': lifecycle_nodes_with_map}]),
         ]
     )
 
@@ -246,17 +263,15 @@ def generate_launch_description():
                 name='lifecycle_manager_navigation',
                 parameters=[{'use_sim_time': use_sim_time,
                              'autostart': autostart,
-                             'node_names': lifecycle_nodes}]),
+                             'node_names': lifecycle_nodes_with_map}]),
         ],
     )
 
-    # Create the launch description and populate
+    # --- Launch Description ---
     ld = LaunchDescription()
 
-    # Set environment variables
     ld.add_action(stdout_linebuf_envvar)
 
-    # Declare the launch options
     ld.add_action(declare_namespace_cmd)
     ld.add_action(declare_use_sim_time_cmd)
     ld.add_action(declare_params_file_cmd)
@@ -265,7 +280,9 @@ def generate_launch_description():
     ld.add_action(declare_container_name_cmd)
     ld.add_action(declare_use_respawn_cmd)
     ld.add_action(declare_log_level_cmd)
-    # Add the actions to launch all of the navigation nodes
+    ld.add_action(declare_map_name_cmd)
+
+    ld.add_action(map_server_node)
     ld.add_action(load_nodes)
     ld.add_action(load_composable_nodes)
 
