@@ -3,17 +3,16 @@ from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
+from launch_ros.parameter_descriptions import ParameterValue
 import os
 
 
 def generate_launch_description():
-    # 기본 맵 경로 설정
     nav2_share_dir = get_package_share_directory('nav2_bringup')
 
     default_map_pcd = os.path.join(nav2_share_dir, 'maps_3d', 'map.pcd')
     default_map_metadata = os.path.join(nav2_share_dir, 'maps_2d', 'map.yaml')
 
-    # Launch arguments
     map_pcd = LaunchConfiguration('map_pcd')
     map_metadata = LaunchConfiguration('map_metadata')
 
@@ -29,13 +28,11 @@ def generate_launch_description():
         description='Path to pointcloud metadata yaml'
     )
 
-    # Autoware map loader param.yaml 경로
     param_path = os.path.join(
         get_package_share_directory('autoware_map_loader'),
         'config/pointcloud_map_loader.param.yaml'
     )
 
-    # Node 정의
     pointcloud_map_loader = Node(
         package='autoware_map_loader',
         executable='autoware_pointcloud_map_loader',
@@ -49,8 +46,8 @@ def generate_launch_description():
         parameters=[
             param_path,
             {
-                'pcd_paths_or_directory': [map_pcd],
-                'pcd_metadata_path': map_metadata
+                'pcd_paths_or_directory': [ParameterValue(map_pcd, value_type=str)],
+                'pcd_metadata_path': ParameterValue(map_metadata, value_type=str)
             }
         ]
     )
