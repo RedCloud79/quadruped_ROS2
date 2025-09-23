@@ -1,6 +1,6 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 import os
@@ -17,13 +17,13 @@ def generate_launch_description():
 
     declare_map_pcd = DeclareLaunchArgument(
         'map_pcd',
-        default_value=os.path.join(default_map_dir, 'office.pcd'),
+        default_value=os.path.join(default_map_dir, 'map.pcd'),
         description='Path to pointcloud map file'
     )
 
     declare_map_metadata = DeclareLaunchArgument(
         'map_metadata',
-        default_value=os.path.join(default_map_dir, 'office_metadata.yaml'),
+        default_value=os.path.join(default_map_dir, 'map.yaml'),
         description='Path to pointcloud metadata yaml'
     )
 
@@ -47,7 +47,8 @@ def generate_launch_description():
         parameters=[
             param_path,
             {
-                'pcd_paths_or_directory': [map_pcd],
+                # LaunchConfiguration -> string 변환 후 리스트로
+                'pcd_paths_or_directory': PythonExpression(['[ "', map_pcd, '" ]']),
                 'pcd_metadata_path': map_metadata
             }
         ]
