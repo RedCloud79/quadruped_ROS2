@@ -10,8 +10,8 @@ import os
 def generate_launch_description():
     nav2_share_dir = get_package_share_directory('nav2_bringup')
 
-    default_map_pcd = os.path.join(nav2_share_dir, 'maps_3d', 'map.pcd')
-    default_map_metadata = os.path.join(nav2_share_dir, 'maps_2d', 'map.yaml')
+    default_map_pcd = os.path.join(nav2_share_dir, 'maps_3d', 'map_pg.pcd')
+    default_map_metadata = os.path.join(nav2_share_dir, 'maps_2d', 'map_pg.yaml')
 
     map_pcd = LaunchConfiguration('map_pcd')
     map_metadata = LaunchConfiguration('map_metadata')

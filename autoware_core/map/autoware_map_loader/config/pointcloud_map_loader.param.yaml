@@ -1,4 +1,4 @@
-/**:
+pointcloud_map_loader:
   ros__parameters:
     enable_whole_load: true
     enable_downsampled_whole_load: false
@@ -6,4 +6,6 @@
     enable_selected_load: false
 
     # only used when downsample_whole_load enabled
-    leaf_size: 3.0 # downsample leaf size [m]
+    leaf_size: 3.0
+    pcd_paths_or_directory: []
+    pcd_metadata_path: ""
