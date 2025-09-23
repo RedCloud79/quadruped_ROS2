@@ -17,11 +17,8 @@ def generate_launch_description():
 
     # Map Loader 실행 (3D PCD Map)
     map_loader_launch = IncludeLaunchDescription(
-        FrontendLaunchDescriptionSource([
-            os.path.join(
-                get_package_share_directory('autoware_map_loader'),
-                'launch', 'pointcloud_map_loader.launch.xml'
-            )
+        PythonLaunchDescriptionSource([
+            os.path.join(get_package_share_directory('autoware_map_loader'), 'launch', 'pointcloud_map_loader.launch.py')
         ])
     )
 
