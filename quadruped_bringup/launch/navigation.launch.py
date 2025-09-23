@@ -1,6 +1,6 @@
 import os
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, ExecuteProcess
 from launch.launch_description_sources import PythonLaunchDescriptionSource, FrontendLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
 
@@ -16,7 +16,7 @@ def generate_launch_description():
         ])
     )
 
-    # Map Loader 실행 (3D PCD Map)
+    # Map Loader 실행
     map_loader_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(get_package_share_directory('autoware_map_loader'), 'launch', 'pointcloud_map_loader.launch.py')
@@ -33,7 +33,7 @@ def generate_launch_description():
         )
     )
 
-    # EKF Localizer 실행 (param_file 강제 지정)
+    # EKF Localizer 실행
     ekf_param_file = os.path.join(
         get_package_share_directory('autoware_ekf_localizer'),
         'config', 'ekf_localizer.param.yaml'
@@ -58,10 +58,21 @@ def generate_launch_description():
         ]),
     )
 
+    # 초기 Pose 발행
+    initial_pose_pub = ExecuteProcess(
+        cmd=[
+            'ros2', 'topic', 'pub', '--once', '/initialpose',
+            'geometry_msgs/PoseWithCovarianceStamped',
+            '{header: {frame_id: "map"}, pose: {pose: {position: {x: 0.0, y: 0.0, z: 0.0}, orientation: {z: 0.0, w: 1.0}}}}'
+        ],
+        output='screen'
+    )
+
     return LaunchDescription([
         fast_lio_launch,
         map_loader_launch,
         ndt_launch,
         ekf_launch,
-        nav2_launch
+        nav2_launch,
+        initial_pose_pub
     ])
