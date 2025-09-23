@@ -18,7 +18,7 @@ def generate_launch_description():
             name='pointcloud_map_loader',
             output='screen',
             parameters=[{
-                'pcd_paths_or_directory': pointcloud_map_path,
+                'pcd_paths_or_directory': [pointcloud_map_path],
                 'pcd_metadata_path': pointcloud_map_metadata_path
             }, param_path],
             remappings=[
