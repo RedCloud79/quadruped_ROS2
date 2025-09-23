@@ -7,5 +7,3 @@ pointcloud_map_loader:
 
     # only used when downsample_whole_load enabled
     leaf_size: 3.0
-    pcd_paths_or_directory: []
-    pcd_metadata_path: ""
