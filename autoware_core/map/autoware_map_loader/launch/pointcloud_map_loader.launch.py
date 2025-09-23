@@ -1,30 +1,56 @@
 from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 import os
 
 def generate_launch_description():
-    nav2_bringup_dir = get_package_share_directory('nav2_bringup')
-    autoware_map_loader_dir = get_package_share_directory('autoware_map_loader')
+    map_pcd = LaunchConfiguration('map_pcd')
+    map_metadata = LaunchConfiguration('map_metadata')
 
-    pointcloud_map_path = os.path.join(nav2_bringup_dir, 'maps_3d', 'office.pcd')
-    pointcloud_map_metadata_path = os.path.join(nav2_bringup_dir, 'maps_3d', 'office_metadata.yaml')
-    param_path = os.path.join(autoware_map_loader_dir, 'config', 'pointcloud_map_loader.param.yaml')
+    default_map_dir = os.path.join(
+        get_package_share_directory('nav2_bringup'), 'maps_3d'
+    )
+
+    declare_map_pcd = DeclareLaunchArgument(
+        'map_pcd',
+        default_value=os.path.join(default_map_dir, 'office.pcd'),
+        description='Path to pointcloud map file'
+    )
+
+    declare_map_metadata = DeclareLaunchArgument(
+        'map_metadata',
+        default_value=os.path.join(default_map_dir, 'office_metadata.yaml'),
+        description='Path to pointcloud metadata yaml'
+    )
+
+    param_path = os.path.join(
+        get_package_share_directory('autoware_map_loader'),
+        'config/pointcloud_map_loader.param.yaml'
+    )
+
+    pointcloud_map_loader = Node(
+        package='autoware_map_loader',
+        executable='autoware_pointcloud_map_loader',
+        name='pointcloud_map_loader',
+        output='screen',
+        remappings=[
+            ('output/pointcloud_map', '/map/pointcloud_map'),
+            ('service/get_partial_pcd_map', '/map/get_partial_pointcloud_map'),
+            ('service/get_selected_pcd_map', '/map/get_selected_pointcloud_map'),
+        ],
+        parameters=[
+            param_path,
+            {
+                'pcd_paths_or_directory': [map_pcd],
+                'pcd_metadata_path': map_metadata
+            }
+        ]
+    )
 
     return LaunchDescription([
-        Node(
-            package='autoware_map_loader',
-            executable='autoware_pointcloud_map_loader',
-            name='pointcloud_map_loader',
-            output='screen',
-            parameters=[{
-                'pcd_paths_or_directory': [pointcloud_map_path],
-                'pcd_metadata_path': pointcloud_map_metadata_path
-            }, param_path],
-            remappings=[
-                ('output/pointcloud_map', '/map/pointcloud_map'),
-                ('service/get_partial_pcd_map', '/map/get_partial_pointcloud_map'),
-                ('service/get_selected_pcd_map', '/map/get_selected_pointcloud_map'),
-            ]
-        )
+        declare_map_pcd,
+        declare_map_metadata,
+        pointcloud_map_loader
     ])
