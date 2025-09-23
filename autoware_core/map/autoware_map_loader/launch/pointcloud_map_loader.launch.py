@@ -5,7 +5,9 @@ from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 import os
 
+
 def generate_launch_description():
+    # Arguments
     map_pcd = LaunchConfiguration('map_pcd')
     map_metadata = LaunchConfiguration('map_metadata')
 
@@ -25,11 +27,13 @@ def generate_launch_description():
         description='Path to pointcloud metadata yaml'
     )
 
+    # Param file path
     param_path = os.path.join(
         get_package_share_directory('autoware_map_loader'),
         'config/pointcloud_map_loader.param.yaml'
     )
 
+    # Node
     pointcloud_map_loader = Node(
         package='autoware_map_loader',
         executable='autoware_pointcloud_map_loader',
