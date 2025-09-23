@@ -35,24 +35,6 @@ RUN add-apt-repository -y ppa:borglab/gtsam-release-4.1 && \
     libgtsam-unstable-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# Install g2o (specific stable version with average_angle, sign, etc.)
-WORKDIR /tmp
-RUN git clone https://github.com/RainerKuemmerle/g2o.git && \
-    cd g2o && git checkout 20201223_git && \
-    mkdir build && cd build && \
-    cmake .. -DCMAKE_BUILD_TYPE=Release \
-             -DBUILD_WITH_MARCH_NATIVE=OFF \
-             -DBUILD_SHARED_LIBS=ON \
-             -DG2O_BUILD_APPS=OFF \
-             -DG2O_BUILD_EXAMPLES=OFF && \
-    make -j$(nproc) && make install && \
-    cd /tmp && rm -rf g2o
-
-# Environment for g2o
-ENV CMAKE_PREFIX_PATH=/usr/local:/usr/local/lib/cmake:$CMAKE_PREFIX_PATH
-ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-ENV PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
-
 # Livox SDK2
 WORKDIR /home/user/ros2_ws/src
 RUN git clone https://github.com/Livox-SDK/Livox-SDK2.git
