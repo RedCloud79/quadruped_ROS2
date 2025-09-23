@@ -1,6 +1,5 @@
 FROM arm64v8/ros:humble
 
-# === Dependencies ===
 RUN apt update && apt install -y \
     software-properties-common sudo git curl wget build-essential cmake \
     python3-colcon-common-extensions python3-pip \
@@ -29,14 +28,14 @@ RUN apt update && apt install -y \
     qtdeclarative5-dev qt5-qmake qtbase5-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# === GTSAM ===
+# Install GTSAM
 RUN add-apt-repository -y ppa:borglab/gtsam-release-4.1 && \
     apt update && apt install -y \
     libgtsam-dev \
     libgtsam-unstable-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# === g2o ===
+# Install g2o (specific stable version with average_angle, sign, etc.)
 WORKDIR /tmp
 RUN git clone https://github.com/RainerKuemmerle/g2o.git && \
     cd g2o && git checkout 20201223_git && \
@@ -49,24 +48,25 @@ RUN git clone https://github.com/RainerKuemmerle/g2o.git && \
     make -j$(nproc) && make install && \
     cd /tmp && rm -rf g2o
 
-# g2o 환경
+# Environment for g2o
 ENV CMAKE_PREFIX_PATH=/usr/local:/usr/local/lib/cmake:$CMAKE_PREFIX_PATH
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 ENV PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 
-
-WORKDIR /home/user/ros2_ws/src
 # Livox SDK2
+WORKDIR /home/user/ros2_ws/src
 RUN git clone https://github.com/Livox-SDK/Livox-SDK2.git
+
 WORKDIR /home/user/ros2_ws/src/Livox-SDK2
 RUN mkdir build && cd build && cmake .. && make -j$(nproc) && make install
 
+# Livox ROS Driver2
 COPY ./ros2_ws/src/livox_ros_driver2 /home/user/ros2_ws/src/livox_ros_driver2
+SHELL ["/bin/bash", "-lc"]
 
-WORKDIR /home/user/ros2_ws
-RUN . /opt/ros/humble/setup.sh && colcon build --symlink-install
+WORKDIR /home/user/ros2_ws/src/livox_ros_driver2
+RUN source /opt/ros/humble/setup.bash && ./build.sh humble
 
+# Source setup
 RUN echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc && \
     echo 'source /home/user/ros2_ws/install/setup.bash' >> ~/.bashrc
-
-SHELL ["/bin/bash", "-lc"]
