@@ -4,6 +4,7 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource, FrontendLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
 
+
 def generate_launch_description():
     bringup_dir = get_package_share_directory('nav2_bringup')
     my_dir = get_package_share_directory('quadruped_bringup')
@@ -32,14 +33,22 @@ def generate_launch_description():
         )
     )
 
-    # EKF Localizer 실행
+    # EKF Localizer 실행 (param_file 강제 지정)
+    ekf_param_file = os.path.join(
+        get_package_share_directory('autoware_ekf_localizer'),
+        'config', 'ekf_localizer.param.yaml'
+    )
+
     ekf_launch = IncludeLaunchDescription(
         FrontendLaunchDescriptionSource(
             os.path.join(
                 get_package_share_directory('autoware_ekf_localizer'),
                 'launch', 'ekf_localizer.launch.xml'
             )
-        )
+        ),
+        launch_arguments={
+            'param_file': ekf_param_file
+        }.items()
     )
 
     # Nav2 실행
