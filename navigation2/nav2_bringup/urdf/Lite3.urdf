@@ -12,7 +12,14 @@
         <box size="0.35 0.184 0.08"/> 
       </geometry> 
     </collision> 
-  </link> 
+  </link>
+
+  <link name="base_link"/>
+  <joint name="base_to_torso" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="TORSO"/>
+  </joint>
  
   <link name="INERTIA"> 
     <inertial> 
@@ -407,23 +414,24 @@
     <child link="HR_FOOT" /> 
   </joint> 
  
-  <link name="Lidar">
+  <link name="livox_frame">
     <inertial>
-      <origin xyz="-0.30507 0.00041299 -0.074912" />
-      <mass value="0.01" />
-      <inertia ixx="0.1632" ixy="-5.2136E-05" ixz="-0.00019406" iyy="0.40648" iyz="8.2679E-05" izz="0.52596" />
+      <origin xyz="-0.30507 0.00041299 -0.074912"/>
+      <mass value="0.01"/>
+      <inertia ixx="0.1632" ixy="-5.2136E-05" ixz="-0.00019406" iyy="0.40648" iyz="8.2679E-05" izz="0.52596"/>
     </inertial>
     <visual>
-      <origin xyz="0 0 0.03" />
+      <origin xyz="0 0 0.03"/>
       <geometry>
         <cylinder length="0.06" radius="0.04"/>
       </geometry>
     </visual>
   </link>
-  <joint name="Lidar_Joint" type="fixed">
-    <origin xyz="0.31 0 0.079" />
-    <parent link="TORSO" />
-    <child link="Lidar" />
+
+  <joint name="livox_joint" type="fixed">
+    <origin xyz="0.31 0 0.079"/>
+    <parent link="TORSO"/>
+    <child link="livox_frame"/>
   </joint>
 
   <link name="D435i">
