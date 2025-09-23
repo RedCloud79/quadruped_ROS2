@@ -1,11 +1,7 @@
 <launch>
-  <arg name="pointcloud_map_path" 
-       default="$(find-pkg-share nav2_bringup)/maps_3d/office.pcd"/>
-  <arg name="pointcloud_map_metadata_path" 
-       default="$(find-pkg-share nav2_bringup)/maps_3d/office_metadata.yaml"/>
-
-  <arg name="pointcloud_map_loader_param_path" 
-       default="$(find-pkg-share autoware_map_loader)/config/pointcloud_map_loader.param.yaml"/>
+  <launch-arg name="pointcloud_map_path" default="$(find-pkg-share nav2_bringup)/maps_3d/map.pcd"/>
+  <launch-arg name="pointcloud_map_metadata_path" default="$(find-pkg-share nav2_bringup)/maps_3d/map.yaml"/>
+  <launch-arg name="pointcloud_map_loader_param_path" default="$(find-pkg-share autoware_map_loader)/config/pointcloud_map_loader.param.yaml"/>
 
   <node pkg="autoware_map_loader" 
         exec="autoware_pointcloud_map_loader" 
