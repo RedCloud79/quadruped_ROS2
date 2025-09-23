@@ -24,22 +24,22 @@ def generate_launch_description():
 
     # NDT Scan Matcher 실행
     ndt_launch = IncludeLaunchDescription(
-        FrontendLaunchDescriptionSource([
+        FrontendLaunchDescriptionSource(
             os.path.join(
                 get_package_share_directory('autoware_ndt_scan_matcher'),
                 'launch', 'ndt_scan_matcher.launch.xml'
             )
-        ])
+        )
     )
 
     # EKF Localizer 실행
     ekf_launch = IncludeLaunchDescription(
-        FrontendLaunchDescriptionSource([
+        FrontendLaunchDescriptionSource(
             os.path.join(
                 get_package_share_directory('autoware_ekf_localizer'),
                 'launch', 'ekf_localizer.launch.xml'
             )
-        ])
+        )
     )
 
     # Nav2 실행

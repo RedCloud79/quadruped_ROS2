@@ -41,7 +41,7 @@ def generate_launch_description():
     log_level = LaunchConfiguration('log_level')
     map_name = LaunchConfiguration('map_name')
 
-    map_yaml_file = PathJoinSubstitution([maps_2d_dir, map_name + '.yaml'])
+    map_yaml_file = PathJoinSubstitution([maps_2d_dir, map_name])
 
     lifecycle_nodes = ['controller_server',
                        'smoother_server',
@@ -110,10 +110,9 @@ def generate_launch_description():
 
     declare_map_name_cmd = DeclareLaunchArgument(
         'map_name',
-        default_value='map',
-        description='Name of the map file in maps_2d directory (without extension)'
+        default_value='map_pg.yaml',
+        description='Name of the map file in maps_2d directory (with extension)'
     )
-
     # --- Map server node ---
     map_server_node = Node(
         package='nav2_map_server',
