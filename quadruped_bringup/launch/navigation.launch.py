@@ -1,6 +1,6 @@
 import os
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, ExecuteProcess
+from launch.actions import IncludeLaunchDescription, ExecuteProcess, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource, FrontendLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
 
@@ -59,13 +59,18 @@ def generate_launch_description():
     )
 
     # 초기 Pose 발행
-    initial_pose_pub = ExecuteProcess(
-        cmd=[
-            'ros2', 'topic', 'pub', '--once', '/initialpose',
-            'geometry_msgs/PoseWithCovarianceStamped',
-            '{header: {frame_id: "map"}, pose: {pose: {position: {x: 0.0, y: 0.0, z: 0.0}, orientation: {z: 0.0, w: 1.0}}}}'
-        ],
-        output='screen'
+    initial_pose_pub = TimerAction(
+        period=5.0,  # 5초 뒤 실행
+        actions=[
+            ExecuteProcess(
+                cmd=[
+                    'ros2', 'topic', 'pub', '--once', '/initialpose',
+                    'geometry_msgs/PoseWithCovarianceStamped',
+                    '{header: {frame_id: "map"}, pose: {pose: {position: {x: 0.0, y: 0.0, z: 0.0}, orientation: {z: 0.0, w: 1.0}}}}'
+                ],
+                output='screen'
+            )
+        ]
     )
 
     return LaunchDescription([
